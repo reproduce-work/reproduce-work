@@ -1,9 +1,0 @@
-project:
-  output-dir: _docs
-
-website:
-  title: "hteml"
-  site-url: "https://alexmill.github.io/hteml"
-  description: "Tooling and helper functions for estimating heterogeneous treatment effects from experiments and A/B tests using machine learning."
-  repo-branch: main
-  repo-url: "https://github.com/alexmill/hteml"
