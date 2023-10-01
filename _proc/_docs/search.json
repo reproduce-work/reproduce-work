@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "reproduce-work",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation."
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "reproduce-work",
+    "section": "Install",
+    "text": "Install\npip install reproduce_work"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "reproduce-work",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2"
+  },
+  {
+    "objectID": "build.html",
+    "href": "build.html",
+    "title": "build",
+    "section": "",
+    "text": "main\n\n main ()\n\n\n\n\nreplace_inserts_with_toml_data\n\n replace_inserts_with_toml_data (input_file, toml_file, output_file)\n\n\n\n\nread_base_config\n\n read_base_config ()\n\n\n#import os\n#os.listdir(Path(os.getcwd()))"
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "test_validate_base_config\n\n test_validate_base_config ()\n\n\n\n\nvalidate_base_config\n\n validate_base_config (base_config)\n\n\n\n\ngenerate_config\n\n generate_config ()\n\n\n\n\nread_base_config\n\n read_base_config ()\n\n\n#import os\n#os.listdir(os.getcwd())"
+  },
+  {
+    "objectID": "dynamic.html",
+    "href": "dynamic.html",
+    "title": "save dynamic data",
+    "section": "",
+    "text": "save\n\n save ()"
+  }
+]
