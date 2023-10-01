@@ -16,7 +16,6 @@ pip install reproduce_work
 Fill me in please! Don’t forget code examples:
 
 ``` python
-1+1
+import reproduce_work
+#reproduce_work.core.generate_config()
 ```
-
-    2

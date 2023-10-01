@@ -3,6 +3,7 @@
 .jupyter*
 .local/share/*
 *.DS_Store*
+.python_history
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
