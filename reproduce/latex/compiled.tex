@@ -1,0 +1,19 @@
+\documentclass[12pt]{article}\usepackage[english]{babel}\usepackage{xcolor}\usepackage[hmargin=1in,vmargin=1in]{geometry}\usepackage{amsmath}\usepackage{unicode-math}\usepackage[round,sort,comma]{natbib}\bibliographystyle{apa}\usepackage{setspace}\usepackage{graphicx}\usepackage{caption}\usepackage{subcaption}\usepackage[colorlinks=true, allcolors=blue]{hyperref}\usepackage{float}\usepackage{booktabs}\usepackage{titlesec}\newcommand{\addperiod}[1]{#1.$\;$}\titlespacing{\section}{0pt}{\parskip}{-\parskip}\titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{1em}{\addperiod}\titleformat{\subsubsection}[runin]{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{\addperiod}\titlespacing{\subsubsection}{14pt plus 4pt minus 2pt}{0pt}{0pt plus 2pt minus 2pt}\setlength{\parindent}{1em}\makeatletter\g@addto@macro \normalsize {\setlength\abovedisplayskip{3pt plus 5pt minus 2pt}\setlength\belowdisplayskip{3pt plus 5pt minus 2pt}}\makeatother\newcommand{\comment}[1]{}\begin{document}\pagenumbering{gobble}\begin{center}{\fontsize{16}{16}\selectfont\bfseries My Reproducible Work: Title goes here}\vspace{5mm}\begin{table}[!ht]\begin{center}\begin{tabular}{c c }\shortstack{ Alex P. Miller \\USC Marshall School of Business \\alex.miller@marshall.usc.edu }\end{tabular}\end{center}\end{table}\vspace{5mm}\emph{Last updated: \today}\vspace{4mm}\abstract{Abstract goes here.}\vspace{2cm}{\scriptsize \noindent Notes: }\vspace{10mm}\end{center}\newpage\doublespacing\pagenumbering{arabic}\setcounter{page}{1}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This sits within the broader context of ``reproducibility'' as as scientific  research, which is the idea that scientific results should be reproducible by other scientists.
+ An increasing number of journals 
+
+While some initiatives have emerged to facilitate computational reproduction, there is no standard for computational reproduction. 
+
+Lay readers may be surprised to learn that the results of many scientific papers are not reproducible to even the lowest degree. (We put forward the following standard as the first of computational reproducibility: ``More than one person verified that the results in the published paper match the results of the code and data provided by the authors.'') 
+
+This is because the data and code used to produce the results are not made available to the public. 
+
+such as the \href{https://rescience.github.io/}{ReScience journal} and \href{https://jupyterbook.org/en/stable/content/myst.html}{MyST Markdown}
+
+While many advocate for the value of peer review in scientific publishing, as of 2023, there no scientific standard exists for true computational reproducibility. 
+
+This is a problem because it means that the quality of peer review varies from journal to journal, and even from paper to paper. 
+\bibliography{latex/bibliography}\end{document}

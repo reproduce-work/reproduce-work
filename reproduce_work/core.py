@@ -114,7 +114,7 @@ def generate_config(inputs={}, version="reproduce.work/v1/default"):
     if repro_version in ["reproduce.work/v1/default"]:
         document_dir = reproduce_dir
         input_file = f"{document_dir}/main.md"
-        dynamic_file = f"{document_dir}/data.toml"
+        dynamic_file = f"{document_dir}/pubdata.toml"
         latex_template = f"{document_dir}/latex/template.tex"
         output_file =f"{document_dir}/latex/compiled.tex"
         watch_files = [input_file, dynamic_file, latex_template]
@@ -240,10 +240,10 @@ def test_validate_base_config():
         },
         'repro.files': {
             'input': 'document/main.md',
-            'dynamic': 'document/data.toml',
+            'dynamic': 'document/pubdata.toml',
             'latex_template': 'document/latex/template.tex',
             'output': 'document/latex/compiled.tex',
-            'watch': ['document/main.md', 'document/data.toml', 'document/latex/template.tex']
+            'watch': ['document/main.md', 'document/pubdata.toml', 'document/latex/template.tex']
         },
         'repro.stage.init': {
             'script': 'docker build -t {dev_image_tag} .\ndocker build -t tinytex {reproduce_dir}/Dockerfile.tinytex\ndocker build -t watcher {reproduce_dir}/Dockerfile.watch\n'
@@ -270,7 +270,7 @@ def test_validate_base_config():
         },
         'repro.files': {
             'input': 'document/main.md',
-            'dynamic': 'document/data.toml',
+            'dynamic': 'document/pubdata.toml',
             'latex_template': 'document/latex/template.tex',
             'output': 'document/latex/compiled.tex'
         },

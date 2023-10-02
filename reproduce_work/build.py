@@ -89,5 +89,5 @@ def main():
 
 
 # Example Usage
-#replace_inserts_with_toml_data('input.txt', 'data.toml', 'output.tex')
+#replace_inserts_with_toml_data('input.txt', 'pubdata.toml', 'output.tex')
 

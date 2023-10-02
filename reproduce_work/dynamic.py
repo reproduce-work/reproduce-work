@@ -272,10 +272,13 @@ class ReproduceWorkEncoder(toml.TomlEncoder):
 @requires_config
 def publish_data(content, name, metadata={}, watch=True):
     """
-    Save data to default data.toml file and register metadata.
+    Save data to default pubdata.toml file and register metadata.
     """
     # Capture metadata
     timestamp = datetime.datetime.now().isoformat()
+    inspect_filename = inspect.currentframe().f_back.f_code.co_filename
+    python_version = sys.version.strip().replace('\n', ' ')
+    platform_info = platform.platform()
 
     # generate cryptographic hash of file contents
     content_hash = hashlib.md5(str(content).encode('utf-8')).hexdigest()
@@ -286,13 +289,17 @@ def publish_data(content, name, metadata={}, watch=True):
         "type": "data",
         "timestamp": timestamp,
         "content_hash": content_hash,
-        "timed_hash": timed_hash
+        "timed_hash": timed_hash,
+        #"python_version": python_version,
+        #"platform_info": platform_info,
     }
     if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
-        metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/data.toml"
+        metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/pubdata.toml"
 
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
+    else:
+        metadata['generating_script'] = inspect_filename
 
     '''
     # detect if content var is of matplotlib or seaborn object type
@@ -318,15 +325,15 @@ def publish_data(content, name, metadata={}, watch=True):
 
     metadata['value'] = content
 
-    # Save content to the default data.toml file
-    #with open(Path(reproduce_dir, 'data.toml'), 'a') as file:
+    # Save content to the default pubdata.toml file
+    #with open(Path(reproduce_dir, 'pubdata.toml'), 'a') as file:
     #    file.write(f'\n[{name}]\n')
     #    file.write(toml.dumps(content, encoder=ReproduceWorkEncoder()))
 
 
     # For this demo, let's return the metadata (in practice, you might want to log it, save it to another file, etc.)
     if watch:
-        update_watched_files(add=[Path(reproduce_dir, 'data.toml').resolve().as_posix()])
+        update_watched_files(add=[Path(reproduce_dir, 'pubdata.toml').resolve().as_posix()])
 
     # check if dynamic file exists
     if not os.path.exists(Path(base_config['repro']['files']['dynamic'])):
@@ -352,8 +359,8 @@ def publish_file(filename, metadata={}, watch=True):
 
     # Capture metadata
     timestamp = datetime.datetime.now().isoformat()
-    script_filename = inspect.currentframe().f_back.f_code.co_filename
-    python_version = sys.version
+    inspect_filename = inspect.currentframe().f_back.f_code.co_filename
+    python_version = sys.version.strip().replace('\n', ' ')
     platform_info = platform.platform()
 
     # generate cryptographic hash of file contents
@@ -369,9 +376,8 @@ def publish_file(filename, metadata={}, watch=True):
     new_metadata = {
         "type": "file",
         "timestamp": timestamp,
-        "script_filename": script_filename,
-        "python_version": python_version,
-        "platform_info": platform_info,
+        #"python_version": python_version,
+        #"platform_info": platform_info,
         "content_hash": content_hash,
         "timed_hash": timed_hash,
         #"save_context": save_context,
@@ -386,6 +392,8 @@ def publish_file(filename, metadata={}, watch=True):
 
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         new_metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
+    else:
+        new_metadata['generating_script'] = inspect_filename
 
     base_config = read_base_config()
     #reproduce_work_watched_files = base_config['repro.files.watch']
@@ -402,13 +410,16 @@ def publish_file(filename, metadata={}, watch=True):
 
     with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
         dynamic_data = toml.load(file)
-        
+
     dynamic_data[filename] = metadata
 
     with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
         toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
 
-    return metadata
+    if 'verbosity' in base_config['repro'] and base_config['repro']['verbose']:
+        print(f"Added metadata for file {filename} to dynamic file {base_config['repro']['files']['dynamic']}")
+
+    #return metadata
 
 
 
@@ -453,7 +464,7 @@ def reproducible(var_assignment_func):
         metadata.update(VAR_REGISTRY[var_name])
         
         if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
-            metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/data.toml"
+            metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/pubdata.toml"
 
         if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
             metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
