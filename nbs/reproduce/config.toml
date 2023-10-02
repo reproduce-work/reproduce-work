@@ -6,7 +6,7 @@ abstract = "Abstract goes here."
 version = "reproduce.work/v1/default"
 stages = [ "init", "develop", "build",]
 verbose = false
-notebooks = [ "nbs/index.ipynb", "nbs/index.ipynb",]
+notebooks = [ "nbs/index.ipynb",]
 
 [repro.files]
 input = "reproduce/main.md"

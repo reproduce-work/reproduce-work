@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+
+%%% STYLING
+
+%% CUSTOM COLORS
+\usepackage{xcolor}
+
+
+%% MARGINS & SIZES
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+
+
+%-------------------------------------------
+% Citation and bibliography commands. Edit as needed.
+\usepackage[round,sort,comma]{natbib}
+\bibliographystyle{apa}
+%-------------------------------------------
+
+
+%% MAIN FONT STYLE
+%\setmainfont[Scale=0.93]{TeX Gyre Schola} % OS alternative to New Century Schoolbook
+%\setmathfont[Scale=0.93]{TeX Gyre Schola Math} % https://tex.stackexchange.com/a/230276/90049
+%\setmainfont{Times New Roman}
+
+
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+\usepackage{booktabs}
+%\usepackage{pdfcomment}
+
+
+\usepackage{titlesec}
+\newcommand{\addperiod}[1]{#1.$\;$}
+
+% Use this section formatting when double spacing
+\titlespacing{\section}{0pt}{\parskip}{-\parskip}
+%\titleformat{\section}[runin]{\normalfont\normalsize\bf}{\thesection}{1em}{\addperiod}
+\titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{1em}{\addperiod}
+%\titlespacing{\subsection}{14pt}{0pt}{3pt}
+
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{\addperiod}
+\titlespacing{\subsubsection}{14pt plus 4pt minus 2pt}{0pt}{0pt plus 2pt minus 2pt}
+
+
+\setlength{\parindent}{1em}
+
+
+\makeatletter
+\g@addto@macro \normalsize {%
+ \setlength\abovedisplayskip{3pt plus 5pt minus 2pt}%
+ \setlength\belowdisplayskip{3pt plus 5pt minus 2pt}%
+}
+\makeatother
+
+% Custom character mappings
+\newcommand{\QED}{ \begin{flushright} $\blacksquare$ \end{flushright} }
+\newcommand\qedsymbol{$\blacksquare$}
+\newcommand{\E}{ \mathbf\text{E} }
+\newcommand{\V}{ \text{Var} }
+
+\newcommand{\Comment}[1]{}
+\newcommand{\comment}[1]{}
+
+
+%\title{}
+%\author{}
+
+
+\begin{document}
+
+
+\pagenumbering{gobble}
+
+\begin{center}
+{\fontsize{16}{16}\selectfont\bfseries 
+\INSERT{config.project.full_title}
+}
+
+%\comment{
+\vspace{5mm}
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{c c }
+\shortstack{ 
+\INSERT{config.authors.author1.name} \\
+\INSERT{config.authors.author1.affiliation} \\
+\INSERT{config.authors.author1.email} 
+}
+%&
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\vspace{5mm}
+
+\emph{Last updated: \today}
+\vspace{4mm}
+
+%}
+
+
+\abstract{
+\INSERT{config.project.abstract}
+}
+
+\vspace{2cm}
+
+{\scriptsize \noindent Notes: }
+\vspace{10mm}
+
+\end{center}
+
+\newpage
+
+\singlespacing
+%\doublespacing
+%\setspace{4}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+
+%%@@LOWDOWN_CONTENT@@%%
+
+
+\newpage
+%%%%% BIBLIOGRAPHY %%%%%
+%-------------------------------------------
+%\nocite{*} % If applicable, uncomment this line to display all entries in the .bib file
+\bibliography{latex/bibliography}
+%-------------------------------------------
+
+\end{document}

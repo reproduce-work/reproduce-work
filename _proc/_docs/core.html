@@ -159,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dynamic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">save dynamic data</span></a>
+ <span class="menu-text">dynamic</span></a>
   </div>
 </li>
     </ul>
@@ -173,9 +173,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#test_validate_base_config" id="toc-test_validate_base_config" class="nav-link active" data-scroll-target="#test_validate_base_config">test_validate_base_config</a></li>
-  <li><a href="#validate_base_config" id="toc-validate_base_config" class="nav-link" data-scroll-target="#validate_base_config">validate_base_config</a></li>
   <li><a href="#generate_config" id="toc-generate_config" class="nav-link" data-scroll-target="#generate_config">generate_config</a></li>
+  <li><a href="#reproduceworkencoder" id="toc-reproduceworkencoder" class="nav-link" data-scroll-target="#reproduceworkencoder">ReproduceWorkEncoder</a></li>
+  <li><a href="#requires_config" id="toc-requires_config" class="nav-link" data-scroll-target="#requires_config">requires_config</a></li>
+  <li><a href="#validate_base_config" id="toc-validate_base_config" class="nav-link" data-scroll-target="#validate_base_config">validate_base_config</a></li>
   <li><a href="#read_base_config" id="toc-read_base_config" class="nav-link" data-scroll-target="#read_base_config">read_base_config</a></li>
+  <li><a href="#set_default_dir" id="toc-set_default_dir" class="nav-link" data-scroll-target="#set_default_dir">set_default_dir</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/reproduce-work/reproduce-work/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -213,17 +216,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <hr>
 </section>
+<section id="generate_config" class="level3">
+<h3 class="anchored" data-anchor-id="generate_config">generate_config</h3>
+<blockquote class="blockquote">
+<pre><code> generate_config (inputs={}, version='reproduce.work/v1/default')</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="reproduceworkencoder" class="level3">
+<h3 class="anchored" data-anchor-id="reproduceworkencoder">ReproduceWorkEncoder</h3>
+<blockquote class="blockquote">
+<pre><code> ReproduceWorkEncoder (_dict=&lt;class 'dict'&gt;, preserve=False)</code></pre>
+</blockquote>
+<p>Initialize self. See help(type(self)) for accurate signature.</p>
+<hr>
+</section>
+<section id="requires_config" class="level3">
+<h3 class="anchored" data-anchor-id="requires_config">requires_config</h3>
+<blockquote class="blockquote">
+<pre><code> requires_config (func)</code></pre>
+</blockquote>
+<hr>
+</section>
 <section id="validate_base_config" class="level3">
 <h3 class="anchored" data-anchor-id="validate_base_config">validate_base_config</h3>
 <blockquote class="blockquote">
 <pre><code> validate_base_config (base_config)</code></pre>
-</blockquote>
-<hr>
-</section>
-<section id="generate_config" class="level3">
-<h3 class="anchored" data-anchor-id="generate_config">generate_config</h3>
-<blockquote class="blockquote">
-<pre><code> generate_config ()</code></pre>
 </blockquote>
 <hr>
 </section>
@@ -232,9 +250,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <pre><code> read_base_config ()</code></pre>
 </blockquote>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import os</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#os.listdir(os.getcwd())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="set_default_dir" class="level3">
+<h3 class="anchored" data-anchor-id="set_default_dir">set_default_dir</h3>
+<blockquote class="blockquote">
+<pre><code> set_default_dir ()</code></pre>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import os</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#os.listdir(os.getcwd())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>: </code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'authors'</span>: {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.affiliation'</span>: <span class="st">'USC Marshall School of Business'</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro'</span>: {</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">'version'</span>: <span class="st">'reproduce.work/v1/default'</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">'stages'</span>: [<span class="st">'init'</span>, <span class="st">'develop'</span>, <span class="st">'build'</span>]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.files'</span>: {</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">'input'</span>: <span class="st">'document/main.md'</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">'dynamic'</span>: <span class="st">'document/data.toml'</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">'latex_template'</span>: <span class="st">'document/latex/template.tex'</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">'output'</span>: <span class="st">'document/latex/compiled.tex'</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.init'</span>: {</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker build -t </span><span class="sc">{dev_image_tag}</span><span class="st"> .</span><span class="ch">\n</span><span class="st">docker build -t tinytex </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.tinytex</span><span class="ch">\n</span><span class="st">docker build -t watcher </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.watch</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.develop'</span>: {</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> start.sh jupyter lab --LabApp.token=</span><span class="ch">\'\'\n\\</span><span class="st">INSERT</span><span class="sc">{watch_cmd_here}</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.build'</span>: {</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> python reproduce_work.build() # this replaces instances of </span><span class="ch">\\</span><span class="st">INSERT</span><span class="sc">{var}</span><span class="st"> in `input` file</span><span class="ch">\n</span><span class="st">docker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex</span><span class="ch">\n</span><span class="st">docker run --rm -i --net=none -v $(pwd):/home tinytex sh -c "cd /home/document/latex &amp;&amp; xelatex compiled.tex" # this compiles the latex</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>validate_base_config(base_config)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>True</code></pre>
+</div>
 </div>
 
 
