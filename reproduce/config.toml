@@ -1,0 +1,22 @@
+[repro]
+version = "reproduce.work/v1/default"
+stages = [ "init", "develop", "build",]
+
+[repro.files]
+input = "reproduce/main.md"
+dynamic = "reproduce/data.toml"
+latex_template = "reproduce/latex/template.tex"
+output = "reproduce/latex/compiled.tex"
+watch = [ "reproduce/main.md", "reproduce/data.toml", "reproduce/latex/template.tex", "saved_file.txt",]
+
+[authors.author1]
+email = ""
+
+[repro.stage.init]
+script = "docker build -t adf .\ndocker build -t tinytex reproduce/Dockerfile.tinytex\ndocker build -t watcher reproduce/Dockerfile.watch\n"
+
+[repro.stage.develop]
+script = "docker run -v $(pwd):/home/jovyan -p 8888:8888 adf\ndocker run watcher \"reproduce/main.md,reproduce/data.toml,reproduce/latex/template.tex,saved_file.txt\" \n"
+
+[repro.stage.build]
+script = "docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 adf python reproduce_work.build() # this replaces instances of INSERTvar in input file\ndocker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex\ndocker run --rm -i --net=none -v $(pwd):/home tinytex sh -c \"cd /home/reproduce/latex && xelatex compiled.tex\" # this compiles the latex\n"

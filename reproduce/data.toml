@@ -1,0 +1,15 @@
+[test_var_timestamp_1]
+type = "string"
+timestamp = "2023-10-02T00:46:09.487888"
+value = "67890"
+
+[test_var_timestamp_2]
+type = "string"
+timestamp = "2023-10-02T00:46:09.498131"
+value = "Hello again!"
+
+["saved_file.txt"]
+type = "file"
+timestamp = "2023-10-02T00:46:13.115681"
+content_hash = "d1866c6aa7d10eb57a35cc88a77802c5"
+timed_hash = "d1f9605265405ef94bc604989b7551d3"
