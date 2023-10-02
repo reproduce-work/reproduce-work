@@ -80,7 +80,7 @@ def generate_config(inputs={}, version="reproduce.work/v1/default"):
         
         # default should be no
         nbdev_project = input("Is this a nbdev project? (y/n) ") == 'y'
-
+        github_repo = input("Enter github repo (required): ")
     
     else:
         author1_email = inputs['authors']['author1']['email']
@@ -101,6 +101,10 @@ def generate_config(inputs={}, version="reproduce.work/v1/default"):
         if 'nbdev_project' in inputs:
             nbdev_project = inputs['nbdev_project']
 
+        github_repo = False
+        if 'project' in inputs and 'github_repo' in inputs['project']:
+            github_repo = inputs['project']['github_repo']
+        
         verbose = False
         if 'verbose' in inputs:
             verbose = inputs['verbose']
@@ -124,7 +128,10 @@ def generate_config(inputs={}, version="reproduce.work/v1/default"):
     if nbdev_project:
         nbdev_project_cmd = '\nnbdev_install_hooks && nbdev_export'
 
-    
+    github_repo_str = ''
+    if github_repo:
+        github_repo_str = f'\ngithub_repo = "{github_repo}"'
+
     #reproduce_dir_default = f"{reproduce_dir}"  # this can be changed if needed
     #reproduce_dir = input(f"Enter reproduce directory (Default: {reproduce_dir_default}): ") or reproduce_dir_default
     
@@ -143,7 +150,7 @@ author1.email = "{author1_email}"{newline + 'author1.name = "' + author1_name + 
 
 [project]
 full_title = "My Reproducible Work: Title goes here"
-abstract = "Abstract goes here."
+abstract = "Abstract goes here."{github_repo_str}
 
 # reproduce.work configuration
 [repro]

@@ -2,15 +2,18 @@
 
 # %% auto 0
 __all__ = ['reproduce_dir', 'dev_image_tag', 'VAR_REGISTRY', 'set_default_dir', 'read_base_config', 'update_watched_files',
-           'validate_base_config', 'requires_config', 'register_notebook']
+           'validate_base_config', 'requires_config', 'get_cell_index', 'check_for_defintion_in_context',
+           'ReproduceWorkEncoder', 'serialize_to_toml', 'publish_data', 'publish_file', 'reproducible',
+           'publish_variable', 'register_notebook']
 
-# %% ../nbs/02_dynamic.ipynb 4
+# %% ../nbs/02_dynamic.ipynb 5
 import datetime
 import os
 import sys
 import platform
 from dotenv import load_dotenv
 from pathlib import Path
+import functools
 
 load_dotenv()
 def set_default_dir():
@@ -78,6 +81,405 @@ def requires_config(func):
         return func(*args, **kwargs)
     return wrapper
 
+
+VAR_REGISTRY = {
+    'REPROWORK_REMOTE_URL': None,
+    'REPROWORK_ACTIVE_NOTEBOOK': None
+}
+
+# %% ../nbs/02_dynamic.ipynb 8
+from pathlib import Path
+import hashlib
+import inspect
+import re
+import toml
+import io
+import pandas as pd
+import numpy as np
+
+#def update_registry(var_name, value):
+    
+
+def get_cell_index():
+    """
+    Get the current cell index in a Jupyter notebook environment.
+    If not in Jupyter, return None.
+    """
+    try:
+        # Execute JavaScript to get the current cell index
+        get_ipython().run_cell_magic('javascript', '', 'IPython.notebook.kernel.execute(\'current_cell_index = \' + IPython.notebook.get_selected_index())')
+        return current_cell_index
+    except:
+        return None
+    
+def check_for_defintion_in_context(function_name='save'):
+    assert function_name in ['save', 'assign'], "function_name must be either 'save' or 'assign'"
+    
+    from IPython import get_ipython
+    ip = get_ipython()
+
+    # Check if in Jupyter environment
+    if ip is None:
+        
+        #fill this in 
+        pass
+
+    else:
+        # Get the input history
+        #lineno = inspect.stack()[0].lineno
+        raw_hist = ip.history_manager.input_hist_raw
+        current_cell = raw_hist[-1]
+
+
+        matches = re.findall(rf"{function_name}\((.+?),", current_cell)
+                
+        if matches:
+            # save call
+            defined_var = matches[0].strip()
+            definition_cell_content = ''
+            
+            for prior_cell in raw_hist[-2::-1]:
+                #print(prior_cell)
+                if f'{defined_var} =' in prior_cell or f'{defined_var}=' in prior_cell:
+                    definition_cell_content = prior_cell
+                    break
+            
+            # find the line number of the where the variable was defined
+            # Give a window of 5 lines around the definition call
+            def_cell_lines = definition_cell_content.split('\n')
+            if len(def_cell_lines)>0:
+                lineno = None
+                for line_num, line in enumerate(def_cell_lines):
+                    if defined_var in line:
+                        lineno = line_num
+                        break
+                if lineno:
+                    definition_context = (
+                        '\n'.join(def_cell_lines[max(0, lineno-5):lineno]) + 
+                        '\nFLAG' + def_cell_lines[lineno] + '\n' +
+                        '\n'.join(def_cell_lines[lineno+1:min(len(def_cell_lines), lineno+5)])
+                    )
+                else:
+                    definition_context = None
+
+            else:
+                definition_context = None
+
+            
+            save_cell_lines = current_cell.split('\n')
+            if len(save_cell_lines)>0:
+                save_lineno = None
+                for line_num, line in enumerate(save_cell_lines):
+                    if 'save(' in line:
+                        save_lineno = line_num
+                        break
+                
+                if save_lineno:
+                    save_context = (
+                        '\n'.join(save_cell_lines[max(0, save_lineno-5):save_lineno]) + 
+                        '\nFLAG' + save_cell_lines[save_lineno] + '\n' +
+                        '\n'.join(save_cell_lines[save_lineno+1:min(len(save_cell_lines), save_lineno+5)])
+                    )
+                else:
+                    save_context = None
+                
+            else:
+                save_context = None
+            
+
+        else:
+            # not a save call
+            save_context = None
+            definition_context = None
+
+        return(save_context, definition_context)
+
+
+class ReproduceWorkEncoder(toml.TomlEncoder):
+    def dump_str(self, v):
+        """Encode a string."""
+        if "\n" in v:
+            return v  # If it's a multi-line string, return it as-is
+        return super().dump_str(v)
+    
+    def dump_value(self, v):
+        """Determine the type of a Python object and serialize it accordingly."""
+        if isinstance(v, str) and "\n" in v:
+            return '"""\n' + v.strip() + '\n' + '"""'
+        return super().dump_value(v)
+
+
+def serialize_to_toml(data, root=True):
+    """Unified function to serialize various Python data types to TOML format."""
+    toml_string = ""
+    
+    # Handle numpy array
+    if isinstance(data, np.ndarray):
+        return f"array = {data.tolist()}"
+    
+    # Handle pandas DataFrame
+    if isinstance(data, pd.DataFrame):
+        toml_string += "[dataframe]\n"
+        for col in data.columns:
+            values = data[col].tolist()
+            if all(isinstance(val, (int, float)) for val in values):
+                toml_string += f"{col} = {values}\n"
+            else:
+                values_str = ['"' + str(val) + '"' for val in values]
+                toml_string += f"{col} = [{', '.join(values_str)}]\n"
+        return toml_string
+    
+    # Handle dictionary
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if isinstance(value, str):
+                toml_string += f"{key} = \"{value}\"\n"
+            elif isinstance(value, (int, float)):
+                toml_string += f"{key} = {value}\n"
+            elif isinstance(value, bool):
+                toml_string += f"{key} = {str(value).lower()}\n"
+            elif isinstance(value, (list, set, tuple)):
+                values = ", ".join([str(v) for v in value])
+                toml_string += f"{key} = [{values}]\n"
+            elif value is None:
+                toml_string += f"{key} = null\n"
+            elif isinstance(value, (np.datetime64, pd.Timestamp)):
+                toml_string += f"{key} = \"{str(value)}\"\n"
+            elif isinstance(value, dict) or isinstance(value, pd.DataFrame):
+                # Recursive call for nested dictionaries or DataFrames
+                nested_str = serialize_to_toml(value, root=False)
+                toml_string += f"[{key}]\n{nested_str}\n"
+    
+    # If it's the root call, remove any trailing newline
+    if root:
+        toml_string = toml_string.rstrip()
+    return toml_string
+
+
+class ReproduceWorkEncoder(toml.TomlEncoder):
+    def dump_str(self, v):
+        """Encode a string."""
+        if "\n" in v:
+            return v  # If it's a multi-line string, return it as-is
+        return super().dump_str(v)
+    
+    def dump_value(self, v):
+        """Determine the type of a Python object and serialize it accordingly."""
+        if isinstance(v, str) and "\n" in v:
+            return '"""\n' + v.strip() + '\n' + '"""'
+        return super().dump_value(v)
+
+@requires_config
+def publish_data(content, name, metadata={}, watch=True):
+    """
+    Save data to default data.toml file and register metadata.
+    """
+    # Capture metadata
+    timestamp = datetime.datetime.now().isoformat()
+
+    # generate cryptographic hash of file contents
+    content_hash = hashlib.md5(str(content).encode('utf-8')).hexdigest()
+    timed_hash = hashlib.md5((str(content) + timestamp).encode('utf-8')).hexdigest()
+         
+    # Store metadata
+    new_metadata = {
+        "type": "data",
+        "timestamp": timestamp,
+        "content_hash": content_hash,
+        "timed_hash": timed_hash
+    }
+    if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
+        metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/data.toml"
+
+    if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
+        metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
+
+    '''
+    # detect if content var is of matplotlib or seaborn object type
+    if type(content).__name__ in ['Figure', 'AxesSubplot'] and 'savefig' in dir(content):
+        print('Saving serialized plot to SVG as file and in local data registry.')
+        # Serialize plot to SVG
+        buffer = io.BytesIO()
+        content.savefig(buffer, format='svg')
+        svg_data = buffer.getvalue()
+        buffer.close()
+
+        # Save SVG to file
+        svg_filename = filename.replace('.py', '.svg')
+        with open(svg_filename, 'wb') as file:
+            file.write(svg_data)
+
+        # Save SVG to registry
+        metadata['plot'] = svg_data.decode()
+    '''
+
+    base_config = read_base_config()
+    metadata.update(new_metadata)
+
+    metadata['value'] = content
+
+    # Save content to the default data.toml file
+    #with open(Path(reproduce_dir, 'data.toml'), 'a') as file:
+    #    file.write(f'\n[{name}]\n')
+    #    file.write(toml.dumps(content, encoder=ReproduceWorkEncoder()))
+
+
+    # For this demo, let's return the metadata (in practice, you might want to log it, save it to another file, etc.)
+    if watch:
+        update_watched_files(add=[Path(reproduce_dir, 'data.toml').resolve().as_posix()])
+
+    # check if dynamic file exists
+    if not os.path.exists(Path(base_config['repro']['files']['dynamic'])):
+        with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+            file.write(toml.dumps({}))
+
+    with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
+        dynamic_data = toml.load(file)
+        
+    dynamic_data[name] = metadata
+
+    with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+        toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
+
+    #return metadata
+    
+
+@requires_config
+def publish_file(filename, metadata={}, watch=True):
+    """
+    Save content to a file and register metadata.
+    """
+
+    # Capture metadata
+    timestamp = datetime.datetime.now().isoformat()
+    script_filename = inspect.currentframe().f_back.f_code.co_filename
+    python_version = sys.version
+    platform_info = platform.platform()
+
+    # generate cryptographic hash of file contents
+
+    with open(filename, 'r') as file:
+        content = file.read()
+    content_hash = hashlib.md5(content.encode('utf-8')).hexdigest()
+    timed_hash = hashlib.md5((content + timestamp).encode('utf-8')).hexdigest()
+         
+    #save_context, definition_context = check_for_defintion_in_context(function_name='save')
+
+    # Store metadata
+    new_metadata = {
+        "type": "file",
+        "timestamp": timestamp,
+        "script_filename": script_filename,
+        "python_version": python_version,
+        "platform_info": platform_info,
+        "content_hash": content_hash,
+        "timed_hash": timed_hash,
+        #"save_context": save_context,
+        #"definition_context": definition_context
+    }
+    cell_index = get_cell_index()
+    if cell_index:
+        new_metadata["cell_index"] = cell_index
+
+    if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
+        new_metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{filename}"
+
+    if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
+        new_metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
+
+    base_config = read_base_config()
+    #reproduce_work_watched_files = base_config['repro.files.watch']
+
+    metadata.update(new_metadata)
+
+    if watch:
+        update_watched_files(add=[filename])
+
+    # check if dynamic file exists
+    if not os.path.exists(Path(base_config['repro']['files']['dynamic'])):
+        with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+            file.write(toml.dumps({}))
+
+    with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
+        dynamic_data = toml.load(file)
+        
+    dynamic_data[filename] = metadata
+
+    with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+        toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
+
+    return metadata
+
+
+
+def reproducible(var_assignment_func):
+    """
+    A decorator to register the line number and timestamp when a variable is assigned.
+    """
+    @functools.wraps(var_assignment_func)
+    def wrapper(*args, **kwargs):
+        # Extract value and var_name from args
+        # Assumes the decorated function always takes at least two arguments: value and var_name
+        value, var_name = args[0], args[1]
+
+        # Extract metadata from kwargs or default to an empty dictionary
+        metadata = kwargs.get('metadata', {})
+
+        # Get the current frame and line number
+        frame = inspect.currentframe()
+        line_number = frame.f_back.f_lineno
+
+        # Get the current timestamp
+        timestamp = datetime.datetime.now().isoformat()
+
+        # Get the filename of the caller
+        filename = frame.f_back.f_code.co_filename
+
+        # Execute the variable assignment function
+        result = var_assignment_func(*args, **kwargs)
+
+        # Register the variable name, line number, timestamp, and filename
+        VAR_REGISTRY[var_name] = {
+            "type": "string",
+            "timestamp": timestamp,
+        }
+
+        if type(value) is not str:
+            value = str(value)
+            print(f"WARNING: value of {var_name} was not a string. Converted to string: {value}.")
+
+        VAR_REGISTRY[var_name]['value'] = value
+
+        metadata.update(VAR_REGISTRY[var_name])
+        
+        if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
+            metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/data.toml"
+
+        if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
+            metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
+
+        config = read_base_config()
+
+        # check if dynamic file exists
+        if not os.path.exists(Path(config['repro']['files']['dynamic'])):
+            with open(Path(config['repro']['files']['dynamic']), 'w') as file:
+                file.write(toml.dumps({}))
+        with open(Path(config['repro']['files']['dynamic']), 'r') as file:
+            dynamic_data = toml.load(file)
+
+        dynamic_data[var_name] = metadata
+
+        with open(Path(config['repro']['files']['dynamic']), 'w') as file:
+            toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
+
+        return result
+    return wrapper
+
+@reproducible
+def publish_variable(value, var_name, metadata={}):
+    globals()[var_name] = value
+
+
 @requires_config
 def register_notebook(notebook_name, notebook_dir='nbs'):
     """
@@ -90,7 +492,7 @@ def register_notebook(notebook_name, notebook_dir='nbs'):
     if 'notebooks' not in base_config['repro']:
         base_config['repro']['notebooks'] = []
 
-    if notebook_name not in base_config['repro']['notebooks']:
+    if notebook_path not in base_config['repro']['notebooks']:
         base_config['repro']['notebooks'].append(notebook_path)
         with open(Path(reproduce_dir, 'config.toml'), 'w') as f:
             toml.dump(base_config, f)
@@ -100,5 +502,21 @@ def register_notebook(notebook_name, notebook_dir='nbs'):
         if base_config['repro']['verbose']:
             print(f"Notebook {notebook_path} already registered in {reproduce_dir}/config.toml")
 
-VAR_REGISTRY = {}
+    if 'github_repo' in base_config['project']:
+        remote_url_val = f"https://github.com/{base_config['project']['github_repo']}"
+        notebook_new_val = f"{remote_url_val}/{notebook_path}"
+    else:
+        notebook_new_val = Path(notebook_path).resolve().as_posix()
+    
+    if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
+        print(f"Warning: {VAR_REGISTRY['REPROWORK_REMOTE_URL']} is already registered. Overwriting with {remote_url_val}")
+    VAR_REGISTRY['REPROWORK_REMOTE_URL'] = remote_url_val
+
+    if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
+        print(f"Warning: Notebook {VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']} is already registered. Overwriting with {notebook_new_val}")
+    VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK'] = notebook_new_val
+
+    return True
+
+# Test code
 
