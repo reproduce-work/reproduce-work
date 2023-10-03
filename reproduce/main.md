@@ -1,8 +1,23 @@
 # Introduction.
 
-In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists---or anyone interested, for that matter. Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. 
-First, recent conversations around $p$-hacking and fraud in scientific publishing have led to a "crisis" at the core of of social science centered around the role of human error, incentives, and guile. 
+In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. 
+First, recent conversations around $p$-hacking and fraud in scientific publishing have led to a "crisis" at the core of of social science centered around the role of human error, incentives, and guile    . 
 Additionally , the increasing computational complexity of scientific research has led to a new set of challenges. Chief among these is the fact that the results of many scientific papers are not reproducible to even the lowest degree. This is because the data and code used to produce the results are not made available to the public.
+<!--
+@article{lindsay2023plea,
+  title={A Plea to Psychology Professional Societies that Publish Journals: Assess Computational Reproducibility},
+  author={Lindsay, D Stephen},
+  journal={Meta-Psychology},
+  volume={7},
+  year={2023}
+  url={https://conferences.lnu.se/index.php/metapsychology/article/view/4020}
+}
+-->
+
+
+# Background
+
+
 
 advent of computational science has brought new challenges to the field.
 
@@ -19,7 +34,7 @@ In 2016, the journal Nature published a study that attempted to reproduce the re
 
 In 2018, the journal Science published a study that attempted to reproduce the results of 21 landmark economics studies. They were only able to reproduce the results of 1 of the 21 studies.
 
-this is known as the [reproducibility crisis](https://en.wikipedia.org/wiki/Replication_crisis). 
+this is known as the [replication crisis](https://en.wikipedia.org/wiki/Replication_crisis).
 
 ## Related projects
 
@@ -28,6 +43,26 @@ There have been a number of projects with similar aims to this one.
 Some work has been done to develop reproducible workflows within specific computing environments. See [example 1](https://mine-cetinkaya-rundel.github.io/improve-repro-workflow-reproducibilitea-2020/) in R.
 
 While some initiatives have emerged to facilitate computational reproduction, there is no widely accepted standard for computational reproduction. 
+
+## An ontology of computation and composition
+
+
+\begin{figure}[h]
+\centering
+\caption{Different models of ontology of computation and composition.}
+\label{fig:comp}
+\includegraphics[width=\textwidth]{../../nbs/img/comp.pdf}
+
+\vspace{2mm}
+\begin{minipage}{0.95\textwidth}
+%\centering
+\setstretch{1}
+\footnotesize{
+\emph{Note:} The **interweave** model is one in which computation and composition happen linearly within the flow of a single document. Of course, many paradigms including RMarkdown and MyST are quite flexible and allow for a variety of workflows; however, we believe most existing software follows this model. This leads to our proposal of the **tracked model with structured interfacing**. In this model, the data and code are tracked and structured in a way that allows for easy verification and traceability of reported scientific results.
+}
+\end{minipage}
+\end{figure}
+
 
 Lay readers may be surprised to learn that the results of many scientific papers are not reproducible to even the lowest degree. (We put forward the following standard as the first of computational reproducibility: "More than one person verified that the results in the published paper match the results of the code and data provided by the authors.") 
 
@@ -50,7 +85,11 @@ the most promising avenue might be emphasizing the importance of collaboration a
 In the coming era, science must not be buoyed by computational power alone, but also by a culture of rigor, collaboration, and transparency.
 , the challenge lies not just in advancing science but in ensuring its very foundation remains robust, trustworthy, and verifiable. 
 
-# Future directions!
+
+
+# Limitations and future directions
+
+One may ask whether the framework here allows for $p$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. 
 
 A key requisite for successful adversarial collaborations is the ability to agree on code and data structure and standards. Being able to easily verify that results correspond to code that was written before but executed after the collection of data.
 
