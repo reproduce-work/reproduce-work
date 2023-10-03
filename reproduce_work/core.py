@@ -157,6 +157,8 @@ abstract = "Abstract goes here."{github_repo_str}
 version = "{repro_version}"
 stages = ["init", "develop", "build"]
 verbose = {verbose_str}
+terminal_linefile = "report.tex" # must be plaintext file
+terminal_file = "report.pdf" # can be any filetype
 
 [repro.files]
 input = "{input_file}"

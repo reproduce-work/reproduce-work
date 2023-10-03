@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'Gabarito';
+  src: url('fonts/Gabarito/static/Gabarito-Regular.ttf') format('truetype');
+  /* Add other styles like font-weight or font-style if needed */
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont,  "Helvetica Neue",  "Segoe UI", Arial, sans-serif;
+}
+h1, h2, h3 {
+  font-family: 'Gabarito', sans-serif; /* Use the font */
+}
+
 .cell {
   margin-bottom: 1rem;
 }

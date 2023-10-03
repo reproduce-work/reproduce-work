@@ -1,12 +1,13 @@
-
 @font-face {
-  font-family: 'TexGyreSchola';
-  src: url('fonts/rinoh_typeface_texgyreschola/rinoh_typeface_texgyreschola/texgyreschola-regular.otf') format('truetype');
+  font-family: 'Gabarito';
+  src: url('/fonts/Gabarito/static/Gabarito-Regular.ttf') format('truetype');
   /* Add other styles like font-weight or font-style if needed */
 }
-
 body {
-  font-family: 'TexGyreSchola', sans-serif; /* Use the font */
+  font-family: -apple-system, BlinkMacSystemFont,  "Helvetica Neue",  "Segoe UI", Arial, sans-serif;
+}
+h1, h2, h3 {
+  font-family: 'Gabarito', sans-serif; /* Use the font */
 }
 
 .cell {

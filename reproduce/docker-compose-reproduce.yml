@@ -12,7 +12,7 @@ services:
       - HOSTWORKDIR=${PWD}
     command:
       - "reproduce/main.md,reproduce/config.toml,reproduce/pubdata.toml,reproduce/latex/template.tex,nbs/*.ipynb"
-      - "docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 8878:8888 reproduceworkdev nbdev_export && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
+      - "docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 8878:8888 reproduceworkdev nbdev_export && docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 8878:8888 reproduceworkdev nbdev_preview && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
 
     stdin_open: true
     tty: true

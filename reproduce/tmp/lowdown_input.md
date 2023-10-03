@@ -37,6 +37,8 @@ In 2018, the journal Science published a study that attempted to reproduce the r
 this is known as the [replication crisis](https://en.wikipedia.org/wiki/Replication_crisis).
 
 
+for real?
+
 ## Related projects
 
 There have been a number of projects with similar aims to this one.
@@ -45,7 +47,7 @@ Some work has been done to develop reproducible workflows within specific comput
 
 While some initiatives have emerged to facilitate computational reproduction, there is no widely accepted standard for computational reproduction. 
 
-There does exist some efforts around the ideas of open science, which are closely related but distinct from reproducible science. See [OSF](https://osf.io/tvyxz/), for example.
+There do exist efforts around the ideas of open science, which are closely related but distinct from reproducible science. See [OSF](https://osf.io/tvyxz/), for example.
 
 ## An ontology of computation and composition
 
@@ -100,8 +102,21 @@ Scientific computing is very much like other computing, so it should come as no 
 3. build
 4. verify
 
+# hello
 
-
+<!--
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+& \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+\midrule
+\textbf{const} \& 1.1256 & 0.182 & 6.174 & 0.000 & 0.764 & 1.488 \\
+\textbf{x1} & 2.1637 & 0.239 & 9.038 & 0.000 & 1.689 & 2.639 \\
+\textbf{x2} & 1.3379 & 0.243 & 5.506 & 0.000 & 0.856 & 1.820 \\
+\bottomrule
+\end{tabular}
+\end{center}
+-->
 
 # Future directions
 
