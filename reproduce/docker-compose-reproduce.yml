@@ -41,5 +41,5 @@ services:
       - cd /home/reproduce/latex && xelatex compiled.tex
 
 
-#export HOSTWORKDIR="$(pwd)" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up reproduce-watcher --build
+#export HOSTWORKDIR="$(pwd)" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up --build
       

@@ -4,7 +4,6 @@ In metascience, computational reproduction is the process of reproducing the res
 First, recent conversations around $p$-hacking and fraud in scientific publishing have led to a "crisis" at the core of of social science centered around the role of human error, guile, and incentives. 
 Additionally , the increasing computational complexity of scientific research has led to a new set of challenges. Chief among these is the fact that the results of many scientific papers are not reproducible to even the lowest degree. This is because the data and code used to produce the results are not made available to the public.
 
-holy moly!
 
 advent of computational science has brought new challenges to the field.
 
@@ -23,6 +22,9 @@ In 2018, the journal Science published a study that attempted to reproduce the r
 
 this is known as the [reproducibility crisis](https://en.wikipedia.org/wiki/Replication_crisis). 
 
+
+
+
 Some work has been done to develop reproducible workflows within specific computing environments. See [example 1](https://mine-cetinkaya-rundel.github.io/improve-repro-workflow-reproducibilitea-2020/) in R.
 
  An increasing number of journals 
@@ -37,12 +39,10 @@ such as the [ReScience journal](https://rescience.github.io/) and [MyST Markdown
 
 
 
-
 While many advocate for the value of peer review in scientific publishing, as of 2023, there no scientific standard exists for true computational reproducibility. 
 
 
 This is a problem because it means that the quality of peer review varies from journal to journal, and even from paper to paper. 
-
 
 
 
@@ -55,8 +55,6 @@ In the coming era, science must not be buoyed by computational power alone, but 
 , the challenge lies not just in advancing science but in ensuring its very foundation remains robust, trustworthy, and verifiable. 
 
 # Future directions!
-
-why can't i get a watcher to trigger some 
 
 A key requisite for successful adversarial collaborations is the ability to agree on code and data structure and standards. Being able to easily verify that results correspond to code that was written before but executed after the collection of data.
 
