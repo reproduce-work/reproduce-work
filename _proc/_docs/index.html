@@ -102,11 +102,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="reproduce_work - reproduce.work">
 <meta property="og:description" content="A framework to facilitate cross-platform computational reproducibility in scientific publishing via containerization">
-<meta property="og:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-9-output-2.svg">
+<meta property="og:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-6-output-2.svg">
 <meta property="og:site-name" content="reproduce_work">
 <meta name="twitter:title" content="reproduce_work - reproduce.work">
 <meta name="twitter:description" content="A framework to facilitate cross-platform computational reproducibility in scientific publishing via containerization">
-<meta name="twitter:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-9-output-2.svg">
+<meta name="twitter:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-6-output-2.svg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -188,12 +188,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#main-features" id="toc-main-features" class="nav-link" data-scroll-target="#main-features">Main features:</a></li>
   <li><a href="#roadmap-features" id="toc-roadmap-features" class="nav-link" data-scroll-target="#roadmap-features">Roadmap features:</a></li>
+  <li><a href="#philosophy" id="toc-philosophy" class="nav-link" data-scroll-target="#philosophy">Philosophy</a></li>
   </ul></li>
-  <li><a href="#philosophy" id="toc-philosophy" class="nav-link" data-scroll-target="#philosophy">Philosophy</a>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a>
   <ul class="collapse">
-  <li><a href="#long-term-prospects" id="toc-long-term-prospects" class="nav-link" data-scroll-target="#long-term-prospects">Long-term prospects</a></li>
+  <li><a href="#python-based-workflow" id="toc-python-based-workflow" class="nav-link" data-scroll-target="#python-based-workflow">Python-based workflow</a></li>
   </ul></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a>
   <ul class="collapse">
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
@@ -242,14 +242,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><strong>A group of people</strong> who support the devlopment of these tools and the adoption of these standards.</li>
 </ol>
-<p>Does this work or not?</p>
 </section>
 <section id="at-a-glance" class="level2">
 <h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
 <section id="main-features" class="level3">
 <h3 class="anchored" data-anchor-id="main-features">Main features:</h3>
 <ul>
-<li>✅ Computational reproducibility across all major operating systems and platforms</li>
+<li>✅ Computational reproducibility standards that work across all major platforms</li>
+<li>✅ A Python notebook-oriented workflow for publishing reproducible projects</li>
 <li>✅ A simple and intuitive API that fits into your existing workflow</li>
 <li>✅ Verifiable, traceable, reproducible results in scientific documents</li>
 </ul>
@@ -284,38 +284,38 @@ Future targets:
 - [Maple](https://www.maplesoft.com/products/maple/)
 -->
 </section>
-</section>
-<section id="philosophy" class="level2">
-<h2 class="anchored" data-anchor-id="philosophy">Philosophy</h2>
+<section id="philosophy" class="level3">
+<h3 class="anchored" data-anchor-id="philosophy">Philosophy</h3>
 <p>The objective of this software is to facilitate a version open science with reproducibility of computational results in published scientific work. The software is developed to integrate with existing computing paradigms and development workflows, including any docker-targeted build system. The goal is to accomodate the vast space of computation and logic that counts as “scientific computing” while providing a framework that constrains the core essence of scientific publishing to an ontology that facilitates and encourages reproducibile practices for humans both producing and consuming science.</p>
-<section id="long-term-prospects" class="level3">
-<h3 class="anchored" data-anchor-id="long-term-prospects">Long-term prospects</h3>
-<p>reproduce.work has published the v0.0.1 release of its software. This includes an open-sourcing of the key standards that facilitate our vision of open science, which can be seen online and will always remain free. Our intention is for our software to work at full capacity without cost for those using self-hosted storage and compute resources.</p>
-<p>In the future, we may develop cloud-based services that provide turn-key solution for those who want the convenience of data versioning, verification, and perpetual storage without the hassle of self-hosting. Such services may be available for a fee. However, as mentioned, core standards and software will always remain free and open source.</p>
+<!--
+### Long-term prospects
+
+reproduce.work has published the v0.0.1 release of its software. This includes an open-sourcing of the key standards that facilitate our vision of open science, which can be seen online and will always remain free. Our intention is for our software to work at full capacity without cost for those using self-hosted storage and compute resources.
+
+In the future, we may develop cloud-based services that provide turn-key solution for those who want the convenience of data versioning, verification, and perpetual storage without the hassle of self-hosting. Such services may be available for a fee. However, as mentioned, core standards and software will always remain free and open source.
+-->
 </section>
 </section>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>Requires Docker or suitable drop-in replacement such as OrbStack. See <a href="https://reproduce.work/installation">Docker requirement</a> for more details.</p>
+<section id="python-based-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="python-based-workflow">Python-based workflow</h3>
+<p>To incorporate reproduce.work elements into your Python-based workflow, simply install the package or include it in your <code>requirements.txt</code> and rebuild your project.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install reproduce_work</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="how-to-use" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-use">How to use</h2>
 <section id="getting-started" class="level3">
 <h3 class="anchored" data-anchor-id="getting-started">Getting started</h3>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>4</code></pre>
-</div>
-</div>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>os.chdir(Path.home())</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> reproduce_work</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> reproduce_work.core <span class="im">import</span> generate_config,read_base_config</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> reproduce_work.dynamic <span class="im">import</span> publish_variable,publish_data,publish_file,register_notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>os.chdir(Path.home())</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> reproduce_work</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> reproduce_work.core <span class="im">import</span> generate_config,read_base_config</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> reproduce_work.dynamic <span class="im">import</span> publish_variable,publish_data,publish_file,register_notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Setting reproduce.work config dir to ./reproduce
 Setting reproduce.work config dir to ./reproduce</code></pre>
@@ -323,79 +323,79 @@ Setting reproduce.work config dir to ./reproduce</code></pre>
 </div>
 <p>Generate configuration at beginning of your project</p>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>generate_config(inputs<span class="op">=</span>{</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'authors'</span>: {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1'</span>: {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'affiliation'</span>: <span class="st">'USC Marshall School of Business'</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     },</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>     <span class="st">'project'</span>: {</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'github_repo'</span>: <span class="st">'reproduce-work/reproduce-work'</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>     },</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>     <span class="st">'nbdev_project'</span>: <span class="va">True</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>     <span class="st">'dev_image_tag'</span>: <span class="st">'reproduce-work-dev'</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>     <span class="co">#'verbose': True # enables print statements whenever data are updated/saved</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>generate_config(inputs<span class="op">=</span>{</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'authors'</span>: {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1'</span>: {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'affiliation'</span>: <span class="st">'USC Marshall School of Business'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>     },</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>     <span class="st">'project'</span>: {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'github_repo'</span>: <span class="st">'reproduce-work/reproduce-work'</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>     },</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>     <span class="st">'nbdev_project'</span>: <span class="va">True</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>     <span class="st">'dev_image_tag'</span>: <span class="st">'reproduce-work-dev'</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>     <span class="co">#'verbose': True # enables print statements whenever data are updated/saved</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Successfully generated reproduce.work configuration at reproduce/config.toml</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>register_notebook(<span class="st">'index.ipynb'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>register_notebook(<span class="st">'index.ipynb'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>Run code to analyze data and generate figures</p>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> linregress</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">5</span>]</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>random_state <span class="op">=</span> np.random.RandomState(<span class="dv">552</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> random_state.normal(size<span class="op">=</span><span class="dv">100</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span>x <span class="op">+</span> random_state.normal(scale<span class="op">=</span><span class="dv">10</span>, size<span class="op">=</span><span class="dv">100</span>)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data with seaborn</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'white'</span>)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># compute slope and stats</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>slope, intercept, r_value, p_value, std_err <span class="op">=</span> linregress(x, y)</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># plot x-y scatter data</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>x_y_plot <span class="op">=</span> sns.scatterplot(x<span class="op">=</span>x, y<span class="op">=</span>y)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># plot best fit line</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>x_y_plot.plot(x, intercept <span class="op">+</span> slope<span class="op">*</span>x, color<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute p-value of slope </span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># render p-value with 3 decimal places and no scientific notation</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>p_value_str <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>p_value<span class="sc">:.3f}</span><span class="ss">'</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># add p-value and slope to plot</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.5</span>, y<span class="op">=</span><span class="dv">25</span>, s<span class="op">=</span><span class="st">'β'</span>)</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.75</span>, y<span class="op">=</span><span class="dv">20</span>, s<span class="op">=</span><span class="ss">f'p-value: </span><span class="sc">{</span>p_value_str<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.75</span>, y<span class="op">=</span><span class="dv">15</span>, s<span class="op">=</span><span class="ss">f'slope: </span><span class="sc">{</span>slope<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.75</span>, y<span class="op">=</span><span class="dv">10</span>, s<span class="op">=</span><span class="ss">f'intercept: </span><span class="sc">{</span>intercept<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Set title</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>x_y_plot.set_title(<span class="st">'Reproducibly Simulated Data'</span>)</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co"># save figure</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.savefig('reproducible_plot.svg', bbox_inches='tight')</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>x_y_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> linregress</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">5</span>]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>random_state <span class="op">=</span> np.random.RandomState(<span class="dv">552</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> random_state.normal(size<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span>x <span class="op">+</span> random_state.normal(scale<span class="op">=</span><span class="dv">10</span>, size<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data with seaborn</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'white'</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># compute slope and stats</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>slope, intercept, r_value, p_value, std_err <span class="op">=</span> linregress(x, y)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># plot x-y scatter data</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>x_y_plot <span class="op">=</span> sns.scatterplot(x<span class="op">=</span>x, y<span class="op">=</span>y)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># plot best fit line</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>x_y_plot.plot(x, intercept <span class="op">+</span> slope<span class="op">*</span>x, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute p-value of slope </span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co"># render p-value with 3 decimal places and no scientific notation</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>p_value_str <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>p_value<span class="sc">:.3f}</span><span class="ss">'</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co"># add p-value and slope to plot</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.5</span>, y<span class="op">=</span><span class="dv">25</span>, s<span class="op">=</span><span class="st">'β'</span>)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.75</span>, y<span class="op">=</span><span class="dv">20</span>, s<span class="op">=</span><span class="ss">f'p-value: </span><span class="sc">{</span>p_value_str<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.75</span>, y<span class="op">=</span><span class="dv">15</span>, s<span class="op">=</span><span class="ss">f'slope: </span><span class="sc">{</span>slope<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>x_y_plot.text(x<span class="op">=</span><span class="fl">4.75</span>, y<span class="op">=</span><span class="dv">10</span>, s<span class="op">=</span><span class="ss">f'intercept: </span><span class="sc">{</span>intercept<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Set title</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>x_y_plot.set_title(<span class="st">'Reproducibly Simulated Data'</span>)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co"># save figure</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.savefig('reproducible_plot.svg', bbox_inches='tight')</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>x_y_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>&lt;Axes: title={'center': 'Reproducibly Simulated Data'}&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-9-output-2.svg" class="img-fluid"></p>
+<p><img src="index_files/figure-html/cell-6-output-2.svg" class="img-fluid"></p>
 </div>
 </div>
 <p>There are three primary types:</p>
@@ -417,26 +417,26 @@ Setting reproduce.work config dir to ./reproduce</code></pre>
 </ul></li>
 </ul>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>publish_variable(p_value_str, <span class="st">"p_value_str"</span>, metadata<span class="op">=</span>{</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The p-value of the coefficient on the slope of the linear regression line.'</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>publish_variable(p_value_str, <span class="st">"p_value_str"</span>, metadata<span class="op">=</span>{</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The p-value of the coefficient on the slope of the linear regression line.'</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>publish_data(x, <span class="st">"x"</span>, metadata<span class="op">=</span>{</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated X data'</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'kilograms'</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>publish_data(x, <span class="st">"x"</span>, metadata<span class="op">=</span>{</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated X data'</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'kilograms'</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>publish_data(y, <span class="st">"y"</span>, metadata<span class="op">=</span>{</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated Y data'</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'meters'</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>publish_data(y, <span class="st">"y"</span>, metadata<span class="op">=</span>{</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated Y data'</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'meters'</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>publish_file(<span class="st">'reproducible_plot.svg'</span>, metadata<span class="op">=</span>{</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'A plot of X vs Y'</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>publish_file(<span class="st">'reproducible_plot.svg'</span>, metadata<span class="op">=</span>{</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'A plot of X vs Y'</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
 IPython.notebook.kernel.execute('current_cell_index = ' + IPython.notebook.get_selected_index())
@@ -444,9 +444,9 @@ IPython.notebook.kernel.execute('current_cell_index = ' + IPython.notebook.get_s
 </div>
 </div>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> read_base_config()</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(base_config[<span class="st">'repro'</span>][<span class="st">'files'</span>][<span class="st">'dynamic'</span>], <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> read_base_config()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(base_config[<span class="st">'repro'</span>][<span class="st">'files'</span>][<span class="st">'dynamic'</span>], <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[p_value_str]
 description = "The p-value of the coefficient on the slope of the linear regression line."
