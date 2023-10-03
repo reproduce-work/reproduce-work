@@ -1,10 +1,9 @@
-\documentclass[12pt]{article}\usepackage[english]{babel}\usepackage{xcolor}\usepackage[hmargin=1in,vmargin=1in]{geometry}\usepackage{amsmath}\usepackage{unicode-math}\usepackage[round,sort,comma]{natbib}\bibliographystyle{apa}\usepackage{setspace}\usepackage{graphicx}\usepackage{caption}\usepackage{subcaption}\usepackage[colorlinks=true, allcolors=blue]{hyperref}\usepackage{float}\usepackage{booktabs}\usepackage{titlesec}\usepackage{fontspec}\newcommand{\addperiod}[1]{#1.$\;$}\titlespacing{\section}{0pt}{\parskip}{-\parskip}\titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{1em}{\addperiod}\titleformat{\subsubsection}[runin]{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{\addperiod}\titlespacing{\subsubsection}{14pt plus 4pt minus 2pt}{0pt}{0pt plus 2pt minus 2pt}\setlength{\parindent}{1em}\makeatletter\g@addto@macro \normalsize {\setlength\abovedisplayskip{3pt plus 5pt minus 2pt}\setlength\belowdisplayskip{3pt plus 5pt minus 2pt}}\makeatother\newcommand{\comment}[1]{}\begin{document}\pagenumbering{gobble}\begin{center}{\fontsize{16}{16}\selectfont\bfseries \texttt{reproduce.work}: A framework to facilitate cross-platform computational reproducibility in scientific publishing}\\\vspace{5mm}\begin{table}[!ht]\begin{center}\begin{tabular}{c c }\shortstack{ Alex P. Miller \\USC Marshall School of Business \\alex.miller@marshall.usc.edu }\end{tabular}\end{center}\end{table}\vspace{5mm}\emph{Last updated: \today}\vspace{4mm}\hyphenpenalty=10000 \exhyphenpenalty=10000\abstract{In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of ``reproducibility" in scientific  research, which has been core to the philosophy of science for decades. However, the practice of science has fallen woefully short of meeting even basic standards toward true and widespread reproducibility. In this project, we focus primarily on addressing the narrow problem of computational reproucibility. We propose a framework for facilitating computational reproducibility in scientific publishing, which we call reproduce.work. The framework is designed to be cross-platform, and to work with any programming language. It is also designed to be flexible, and to work with any existing workflow. We highlight the distinction between open and reproducibile practices and showcase how our software framework encourages both simultaneously. We showcase the framework by demonstrating the reproducibility of the results of this very paper, which can be run on any machine that can execute a containerized image. We conclude by discussing the potential of the framework for improving rigor and fidelity of computational science for both producers and consumers of published work.
-}\\\vspace{2cm}{\scriptsize \noindent Notes: reproduce.work/v0.0.1  \raisebox{-1mm}{\includegraphics[width=5mm]{../../nbs/img/logo.png}}}\hyphenpenalty=50 \exhyphenpenalty=50\vspace{10mm}\end{center}\newpage\doublespacing\pagenumbering{arabic}\setcounter{page}{1}
+
 \hypertarget{introduction.}{%
 \section{Introduction.}\label{introduction.}}
 
 In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of ``reproducibility'' in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. 
-First, recent conversations around $p$-hacking and fraud in scientific publishing have led to a ``crisis'' at the core of of social science centered around the role of human error, incentives, and guile    . 
+First, recent conversations around \$p\$-hacking and fraud in scientific publishing have led to a ``crisis'' at the core of of social science centered around the role of human error, incentives, and guile    . 
 Additionally , the increasing computational complexity of scientific research has led to a new set of challenges. Chief among these is the fact that the results of many scientific papers are not reproducible to even the lowest degree. This is because the data and code used to produce the results are not made available to the public.
 
 
@@ -26,7 +25,7 @@ In 2016, the journal Nature published a study that attempted to reproduce the re
 
 In 2018, the journal Science published a study that attempted to reproduce the results of 21 landmark economics studies. They were only able to reproduce the results of 1 of the 21 studies.
 
-this is known as the \href{https://en.wikipedia.org/wiki/Replication_crisis}{replication crisis}.
+this is known as the \href{https://en.wikipedia.org/wiki/Replication\_crisis}{replication crisis}.
 
 \hypertarget{related-projects}{%
 \subsection{Related projects}\label{related-projects}}
@@ -42,21 +41,21 @@ There does exist some efforts around the ideas of open science, which are closel
 \hypertarget{an-ontology-of-computation-and-composition}{%
 \subsection{An ontology of computation and composition}\label{an-ontology-of-computation-and-composition}}
 
-\begin{figure}[h]
-\centering
-\caption{Different models of ontology of computation and composition.}
-\label{fig:comp}
-\includegraphics[width=\textwidth]{../../nbs/img/comp.pdf}
+\textbackslash{}begin\{figure\}[h]
+\textbackslash{}centering
+\textbackslash{}caption\{Different models of ontology of computation and composition.\}
+\textbackslash{}label\{fig:comp\}
+\textbackslash{}includegraphics[width=\textbackslash{}textwidth]\{../../nbs/img/comp.pdf\}
 
-\vspace{2mm}
-\begin{minipage}{0.95\textwidth}
-%\centering
-\setstretch{1}
-\footnotesize{
-\emph{Note:} The \textbf{interweave} model is one in which computation and composition happen linearly within the flow of a single document. Of course, many paradigms including RMarkdown and MyST are quite flexible and allow for a variety of workflows; however, we believe most existing software follows this model. This leads to our proposal of the \textbf{tracked model with structured interfacing}. In this model, the data and code are tracked in a way that allows for easy verification and traceability of reported scientific results with structured metadata.
-}
-\end{minipage}
-\end{figure}
+\textbackslash{}vspace\{2mm\}
+\textbackslash{}begin\{minipage\}\{0.95\textbackslash{}textwidth\}
+\%\textbackslash{}centering
+\textbackslash{}setstretch\{1\}
+\textbackslash{}footnotesize\{
+\textbackslash{}emph\{Note:\} The \textbf{interweave} model is one in which computation and composition happen linearly within the flow of a single document. Of course, many paradigms including RMarkdown and MyST are quite flexible and allow for a variety of workflows; however, we believe most existing software follows this model. This leads to our proposal of the \textbf{tracked model with structured interfacing}. In this model, the data and code are tracked in a way that allows for easy verification and traceability of reported scientific results with structured metadata.
+\}
+\textbackslash{}end\{minipage\}
+\textbackslash{}end\{figure\}
 
 Lay readers may be surprised to learn that the results of many scientific papers are not reproducible to even the lowest degree. (We put forward the following standard as the first of computational reproducibility: ``More than one person verified that the results in the published paper match the results of the code and data provided by the authors.'') 
 
@@ -68,7 +67,7 @@ While many advocate for the value of peer review in scientific publishing, as of
 
 This is a problem because it means that the quality of peer review varies from journal to journal, and even from paper to paper. 
 
-Do i include \hyperlink{reproduce.work}{0.068}?
+Do i include \textbackslash{}hyperlink\{reproduce.work\}\{0.068\}?
 
 the most promising avenue might be emphasizing the importance of collaboration and transparency. By fostering a culture where researchers work together, openly share data and findings, and commit to thorough documentation, the reliability and replicability of work can be increased.
 
@@ -85,9 +84,9 @@ Scientific computing is very much like other computing, so it should come as no 
 
 \begin{enumerate}
 \itemsep -0.2em
-\item init
-\item develop
+\item inits 
 \item build
+\item publish
 \item verify
 \end{enumerate}
 
@@ -102,7 +101,7 @@ In this section we mention some of the ambitious and yet under-developed ideas f
 \hypertarget{pre-registered-code-with-verifiable-order-of-computation}{%
 \subsubsection{Pre-registered code with verifiable order-of-computation}\label{pre-registered-code-with-verifiable-order-of-computation}}
 
-$$ \text{pre-registered code} \rightarrow \text{timestamped data collection} \rightarrow \text{code execution} \rightarrow \text{verified results} $$
+\$\$ \textbackslash{}text\{pre-registered code\} \textbackslash{}rightarrow \textbackslash{}text\{timestamped data collection\} \textbackslash{}rightarrow \textbackslash{}text\{code execution\} \textbackslash{}rightarrow \textbackslash{}text\{verified results\} \$\$
 
 \hypertarget{adversarial-collaborations.}{%
 \subsubsection{Adversarial collaborations.}\label{adversarial-collaborations.}}
@@ -112,7 +111,7 @@ A key requisite for successful adversarial collaborations is the ability to agre
 \hypertarget{computational-reproducibility-with-specification-curves-or-ml-driven-analysis}{%
 \subsection{Computational reproducibility with specification curves or ML-driven analysis}\label{computational-reproducibility-with-specification-curves-or-ml-driven-analysis}}
 
-One may ask whether the framework here allows for $p$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. Nonetheless, it is valuable to discuss some ideas in which we may use our computing paradigm to encourage certain behaviors and practices of quantitative research.
+One may ask whether the framework here allows for \$p\$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. Nonetheless, it is valuable to discuss some ideas in which we may use our computing paradigm to encourage certain behaviors and practices of quantitative research.
 
 One such method that may be possible to explore in future versions of this work is the potential for pre-registering exactly the model specification with which one wishes to estimate. If we were forced to pre-register our exact model specifications, we would be discouraged from pursuing models that depend on researcher degrees of freedom that can be exploited between the collection of data and reporting of results. As such, this may encourage scientists to explore the use of machine learning for analysis of heterogeneous treatment effects or specification curve analyses that are designed to be robust to specification searching. 
 
@@ -120,4 +119,3 @@ One such method that may be possible to explore in future versions of this work 
 \section{Conclusion}\label{conclusion}}
 
 In conclusion, this paper has argued that computational reproduction is a promising avenue for improving the quality of scientific research. The project put forward in the body of this project is a mere first step in the direction of computational reproduction. The software lacks support for many important features and the concept is heretofore untested. However, given the low bars required to improve the existing practices around computational reproduction, we beleive this project and the ideas put forward here have potential as the seed of a revolution in reproducibility.
-\bibliography{latex/bibliography}\end{document}

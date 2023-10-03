@@ -36,7 +36,6 @@ In 2018, the journal Science published a study that attempted to reproduce the r
 
 this is known as the [replication crisis](https://en.wikipedia.org/wiki/Replication_crisis).
 
-
 ## Related projects
 
 There have been a number of projects with similar aims to this one.
@@ -95,9 +94,9 @@ Scientific computing is very much like other computing, so it should come as no 
 
 
 
-1. init
-2. develop
-3. build
+1. inits 
+2. build
+3. publish
 4. verify
 
 

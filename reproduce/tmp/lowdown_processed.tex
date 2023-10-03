@@ -36,6 +36,8 @@ Some work has been done to develop reproducible workflows within specific comput
 
 While some initiatives have emerged to facilitate computational reproduction, there is no widely accepted standard for computational reproduction. 
 
+There does exist some efforts around the ideas of open science, which are closely related but distinct from reproducible science. See \href{https://osf.io/tvyxz/}{OSF}, for example.
+
 \hypertarget{an-ontology-of-computation-and-composition}{%
 \subsection{An ontology of computation and composition}\label{an-ontology-of-computation-and-composition}}
 
@@ -82,18 +84,36 @@ Scientific computing is very much like other computing, so it should come as no 
 
 \begin{enumerate}
 \itemsep -0.2em
-\item inits 
+\item init
+\item develop
 \item build
-\item publish
 \item verify
 \end{enumerate}
 
-\hypertarget{limitations-and-future-directions}{%
-\section{Limitations and future directions}\label{limitations-and-future-directions}}
+\hypertarget{future-directions}{%
+\section{Future directions}\label{future-directions}}
 
-One may ask whether the framework here allows for $p$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. 
+In this section we mention some of the ambitious and yet under-developed ideas for future directions for this project.
+
+\hypertarget{computational-reproducibility-with-pre-registration}{%
+\subsection{Computational reproducibility with pre-registration}\label{computational-reproducibility-with-pre-registration}}
+
+\hypertarget{pre-registered-code-with-verifiable-order-of-computation}{%
+\subsubsection{Pre-registered code with verifiable order-of-computation}\label{pre-registered-code-with-verifiable-order-of-computation}}
+
+$$ \text{pre-registered code} \rightarrow \text{timestamped data collection} \rightarrow \text{code execution} \rightarrow \text{verified results} $$
+
+\hypertarget{adversarial-collaborations.}{%
+\subsubsection{Adversarial collaborations.}\label{adversarial-collaborations.}}
 
 A key requisite for successful adversarial collaborations is the ability to agree on code and data structure and standards. Being able to easily verify that results correspond to code that was written before but executed after the collection of data.
+
+\hypertarget{computational-reproducibility-with-specification-curves-or-ml-driven-analysis}{%
+\subsection{Computational reproducibility with specification curves or ML-driven analysis}\label{computational-reproducibility-with-specification-curves-or-ml-driven-analysis}}
+
+One may ask whether the framework here allows for $p$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. Nonetheless, it is valuable to discuss some ideas in which we may use our computing paradigm to encourage certain behaviors and practices of quantitative research.
+
+One such method that may be possible to explore in future versions of this work is the potential for pre-registering exactly the model specification with which one wishes to estimate. If we were forced to pre-register our exact model specifications, we would be discouraged from pursuing models that depend on researcher degrees of freedom that can be exploited between the collection of data and reporting of results. As such, this may encourage scientists to explore the use of machine learning for analysis of heterogeneous treatment effects or specification curve analyses that are designed to be robust to specification searching. 
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}

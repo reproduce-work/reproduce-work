@@ -1,3 +1,14 @@
+
+@font-face {
+  font-family: 'TexGyreSchola';
+  src: url('fonts/rinoh_typeface_texgyreschola/rinoh_typeface_texgyreschola/texgyreschola-regular.otf') format('truetype');
+  /* Add other styles like font-weight or font-style if needed */
+}
+
+body {
+  font-family: 'TexGyreSchola', sans-serif; /* Use the font */
+}
+
 .cell {
   margin-bottom: 1rem;
 }

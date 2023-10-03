@@ -36,6 +36,7 @@ In 2018, the journal Science published a study that attempted to reproduce the r
 
 this is known as the [replication crisis](https://en.wikipedia.org/wiki/Replication_crisis).
 
+
 ## Related projects
 
 There have been a number of projects with similar aims to this one.
@@ -43,6 +44,8 @@ There have been a number of projects with similar aims to this one.
 Some work has been done to develop reproducible workflows within specific computing environments. See [example 1](https://mine-cetinkaya-rundel.github.io/improve-repro-workflow-reproducibilitea-2020/) in R.
 
 While some initiatives have emerged to facilitate computational reproduction, there is no widely accepted standard for computational reproduction. 
+
+There does exist some efforts around the ideas of open science, which are closely related but distinct from reproducible science. See [OSF](https://osf.io/tvyxz/), for example.
 
 ## An ontology of computation and composition
 
@@ -92,22 +95,35 @@ Scientific computing is very much like other computing, so it should come as no 
 
 
 
-1. inits 
-2. build
-3. publish
+1. init
+2. develop
+3. build
 4. verify
 
 
 
 
-# Limitations and future directions
+# Future directions
 
-One may ask whether the framework here allows for $p$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. 
+In this section we mention some of the ambitious and yet under-developed ideas for future directions for this project.
 
+## Computational reproducibility with pre-registration
+
+### Pre-registered code with verifiable order-of-computation
+$$ \text{pre-registered code} \rightarrow \text{timestamped data collection} \rightarrow \text{code execution} \rightarrow \text{verified results} $$
+
+### Adversarial collaborations. 
 A key requisite for successful adversarial collaborations is the ability to agree on code and data structure and standards. Being able to easily verify that results correspond to code that was written before but executed after the collection of data.
 
+## Computational reproducibility with specification curves or ML-driven analysis
+
+One may ask whether the framework here allows for $p$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. Nonetheless, it is valuable to discuss some ideas in which we may use our computing paradigm to encourage certain behaviors and practices of quantitative research.
+
+One such method that may be possible to explore in future versions of this work is the potential for pre-registering exactly the model specification with which one wishes to estimate. If we were forced to pre-register our exact model specifications, we would be discouraged from pursuing models that depend on researcher degrees of freedom that can be exploited between the collection of data and reporting of results. As such, this may encourage scientists to explore the use of machine learning for analysis of heterogeneous treatment effects or specification curve analyses that are designed to be robust to specification searching. 
 
 # Conclusion
+
+
 
 In conclusion, this paper has argued that computational reproduction is a promising avenue for improving the quality of scientific research. The project put forward in the body of this project is a mere first step in the direction of computational reproduction. The software lacks support for many important features and the concept is heretofore untested. However, given the low bars required to improve the existing practices around computational reproduction, we beleive this project and the ideas put forward here have potential as the seed of a revolution in reproducibility.
 
