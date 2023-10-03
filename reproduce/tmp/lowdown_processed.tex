@@ -50,7 +50,7 @@ While some initiatives have emerged to facilitate computational reproduction, th
 %\centering
 \setstretch{1}
 \footnotesize{
-\emph{Note:} The \textbf{interweave} model is one in which computation and composition happen linearly within the flow of a single document. Of course, many paradigms including RMarkdown and MyST are quite flexible and allow for a variety of workflows; however, we believe most existing software follows this model. This leads to our proposal of the \textbf{tracked model with structured interfacing}. In this model, the data and code are tracked and structured in a way that allows for easy verification and traceability of reported scientific results.
+\emph{Note:} The \textbf{interweave} model is one in which computation and composition happen linearly within the flow of a single document. Of course, many paradigms including RMarkdown and MyST are quite flexible and allow for a variety of workflows; however, we believe most existing software follows this model. This leads to our proposal of the \textbf{tracked model with structured interfacing}. In this model, the data and code are tracked in a way that allows for easy verification and traceability of reported scientific results with structured metadata.
 }
 \end{minipage}
 \end{figure}
@@ -71,6 +71,22 @@ the most promising avenue might be emphasizing the importance of collaboration a
 
 In the coming era, science must not be buoyed by computational power alone, but also by a culture of rigor, collaboration, and transparency.
 , the challenge lies not just in advancing science but in ensuring its very foundation remains robust, trustworthy, and verifiable. 
+
+\hypertarget{software}{%
+\section{Software}\label{software}}
+
+\hypertarget{seemless-reproducible-scientific-computing-via-containerization}{%
+\subsection{Seemless reproducible scientific computing via containerization}\label{seemless-reproducible-scientific-computing-via-containerization}}
+
+Scientific computing is very much like other computing, so it should come as no surprise that tools that have been developed to faciltate the reproduction of arbitrary computing tasks can be adapted to the ends of scientists. Containerization is a technology that allows for the creation of self-contained computing ``containers'' that can be run on any computer with the containerization software installed. While this does necessitate the installation of the containerization software, this is a one-time task that can be done by anyone with a computer. Once the containerization software is installed, the promise of containerization is that a container can be run on any computer, regardless of the operating system or other software installed on the computer. Many containerization standards exist; for present purposes this project uses the \href{https://www.docker.com/}{Docker} containerization standard.
+
+\begin{enumerate}
+\itemsep -0.2em
+\item inits 
+\item build
+\item publish
+\item verify
+\end{enumerate}
 
 \hypertarget{limitations-and-future-directions}{%
 \section{Limitations and future directions}\label{limitations-and-future-directions}}
