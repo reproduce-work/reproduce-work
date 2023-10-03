@@ -10,9 +10,9 @@ services:
       - REPROWORKDIR=reproduce
       - REPROWORKOUTFILE=reproduce/latex/compiled.tex
       - HOSTWORKDIR=${PWD}
-    command: 
-      - "reproduce/main.md" 
-      - "docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
+    command:
+      - "reproduce/main.md,reproduce/config.toml,reproduce/pubdata.toml,reproduce/latex/template.tex,nbs/*.ipynb"
+      - "docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 8878:8888 reproduceworkdev nbdev_export && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
 
     stdin_open: true
     tty: true
@@ -40,6 +40,6 @@ services:
       - -c
       - cd /home/reproduce/latex && xelatex compiled.tex
 
-
 #export HOSTWORKDIR="$(pwd)" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up --build
-      
+#export HOSTWORKDIR="$(pwd)" && docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 8881:8888 reproduceworkdev nbdev_export
+#"export HOSTWORKDIR=\"$(pwd)\" && docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 3000 reproduceworkdev livepreview && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"

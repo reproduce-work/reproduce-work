@@ -1,9 +1,8 @@
 # Introduction.
 
 In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists---or anyone interested, for that matter. Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. 
-First, recent conversations around $p$-hacking and fraud in scientific publishing have led to a "crisis" at the core of of social science centered around the role of human error, guile, and incentives. 
+First, recent conversations around $p$-hacking and fraud in scientific publishing have led to a "crisis" at the core of of social science centered around the role of human error, incentives, and guile. 
 Additionally , the increasing computational complexity of scientific research has led to a new set of challenges. Chief among these is the fact that the results of many scientific papers are not reproducible to even the lowest degree. This is because the data and code used to produce the results are not made available to the public.
-
 
 advent of computational science has brought new challenges to the field.
 
@@ -22,12 +21,11 @@ In 2018, the journal Science published a study that attempted to reproduce the r
 
 this is known as the [reproducibility crisis](https://en.wikipedia.org/wiki/Replication_crisis). 
 
+## Related projects
 
-
+There have been a number of projects with similar aims to this one.
 
 Some work has been done to develop reproducible workflows within specific computing environments. See [example 1](https://mine-cetinkaya-rundel.github.io/improve-repro-workflow-reproducibilitea-2020/) in R.
-
- An increasing number of journals 
 
 While some initiatives have emerged to facilitate computational reproduction, there is no widely accepted standard for computational reproduction. 
 
@@ -44,9 +42,7 @@ While many advocate for the value of peer review in scientific publishing, as of
 
 This is a problem because it means that the quality of peer review varies from journal to journal, and even from paper to paper. 
 
-
-
-
+Do i include \hyperlink{reproduce.work}{0.068}?
 
 
 the most promising avenue might be emphasizing the importance of collaboration and transparency. By fostering a culture where researchers work together, openly share data and findings, and commit to thorough documentation, the reliability and replicability of work can be increased.

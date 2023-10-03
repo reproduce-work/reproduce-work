@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/index.html</loc>
+    <lastmod>2023-10-03T18:58:54.586Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/build.html</loc>
+    <lastmod>2023-10-03T18:54:50.126Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/core.html</loc>
+    <lastmod>2023-10-03T18:54:49.889Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/dynamic.html</loc>
+    <lastmod>2023-10-03T18:54:50.376Z</lastmod>
+  </url>
 </urlset>

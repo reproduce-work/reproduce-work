@@ -1,7 +1,7 @@
 [p_value_str]
 description = "The p-value of the coefficient on the slope of the linear regression line."
 type = "string"
-timestamp = "2023-10-03T03:08:54.702193"
+timestamp = "2023-10-03T04:28:18.696570"
 value = "0.068"
 published_url = "https://github.com/reproduce-work/reproduce-work/reproduce/pubdata.toml"
 generating_script = "https://github.com/reproduce-work/reproduce-work/nbs/index.ipynb"

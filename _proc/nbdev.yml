@@ -2,8 +2,8 @@ project:
   output-dir: _docs
 
 website:
-  title: "reproduce-work"
-  site-url: "https://reproduce-work.github.io/reproduce-work"
+  title: "reproduce_work"
+  site-url: "https://reproduce-work.github.io/reproducework"
   description: "A package to facilitate cross-platform computational reproducibility in scientific publishing."
   repo-branch: main
-  repo-url: "https://github.com/reproduce-work/reproduce-work"
+  repo-url: "https://github.com/reproduce-work/reproducework"
