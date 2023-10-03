@@ -215,7 +215,7 @@ def serialize_to_toml(data, root=True):
     
     # Handle numpy array
     if isinstance(data, np.ndarray):
-        return f"array = {data.tolist()}"
+        toml_string += f"array = {data.tolist()}"
     
     # Handle pandas DataFrame
     if isinstance(data, pd.DataFrame):
@@ -360,8 +360,8 @@ def publish_file(filename, metadata={}, watch=True):
     # Capture metadata
     timestamp = datetime.datetime.now().isoformat()
     inspect_filename = inspect.currentframe().f_back.f_code.co_filename
-    python_version = sys.version.strip().replace('\n', ' ')
-    platform_info = platform.platform()
+    #python_version = sys.version.strip().replace('\n', ' ')
+    #platform_info = platform.platform()
 
     # generate cryptographic hash of file contents
 

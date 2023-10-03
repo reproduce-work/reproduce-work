@@ -21,9 +21,9 @@ In 2016, the journal Nature published a study that attempted to reproduce the re
 
 In 2018, the journal Science published a study that attempted to reproduce the results of 21 landmark economics studies. They were only able to reproduce the results of 1 of the 21 studies.
 
-a
-
 this is known as the [reproducibility crisis](https://en.wikipedia.org/wiki/Replication_crisis). 
+
+Some work has been done to develop reproducible workflows within specific computing environments. See [example 1](https://mine-cetinkaya-rundel.github.io/improve-repro-workflow-reproducibilitea-2020/) in R.
 
  An increasing number of journals 
 
