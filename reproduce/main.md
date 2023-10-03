@@ -1,8 +1,10 @@
-# Introduction
+# Introduction.
 
-Computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists---or anyone interested, for that matter. Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. 
+In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists---or anyone interested, for that matter. Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. 
 First, recent conversations around $p$-hacking and fraud in scientific publishing have led to a "crisis" at the core of of social science centered around the role of human error, guile, and incentives. 
 Additionally , the increasing computational complexity of scientific research has led to a new set of challenges. Chief among these is the fact that the results of many scientific papers are not reproducible to even the lowest degree. This is because the data and code used to produce the results are not made available to the public.
+
+holy moly!
 
 advent of computational science has brought new challenges to the field.
 
@@ -19,9 +21,7 @@ In 2016, the journal Nature published a study that attempted to reproduce the re
 
 In 2018, the journal Science published a study that attempted to reproduce the results of 21 landmark economics studies. They were only able to reproduce the results of 1 of the 21 studies.
 
-
-
-
+a
 
 this is known as the [reproducibility crisis](https://en.wikipedia.org/wiki/Replication_crisis). 
 
@@ -53,6 +53,12 @@ the most promising avenue might be emphasizing the importance of collaboration a
 
 In the coming era, science must not be buoyed by computational power alone, but also by a culture of rigor, collaboration, and transparency.
 , the challenge lies not just in advancing science but in ensuring its very foundation remains robust, trustworthy, and verifiable. 
+
+# Future directions!
+
+why can't i get a watcher to trigger some 
+
+A key requisite for successful adversarial collaborations is the ability to agree on code and data structure and standards. Being able to easily verify that results correspond to code that was written before but executed after the collection of data.
 
 
 # Conclusion

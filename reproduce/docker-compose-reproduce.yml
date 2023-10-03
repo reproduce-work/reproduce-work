@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  reproduce-watcher:
+    image: watcher
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}:/usr/src/app
+    environment:
+      - REPROWORKDIR=reproduce
+      - REPROWORKOUTFILE=reproduce/latex/compiled.tex
+      - HOSTWORKDIR=${PWD}
+    command: 
+      - "reproduce/main.md" 
+      - "docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
+
+    stdin_open: true
+    tty: true
+
+  tex-prepare:
+    image: tex-prepare
+    volumes:
+      - ${HOSTWORKDIR}:/home
+    environment:
+      - REPROWORKDIR=reproduce
+      - REPROWORKOUTFILE=reproduce/latex/compiled.tex
+    #command: ls -al /home
+    command: python /run.py
+
+  tex-compile:
+    image: tex-compile
+    volumes:
+      - ${HOSTWORKDIR}:/home
+    network_mode: "none"
+    environment:
+      - REPROWORKDIR=reproduce
+      - REPROWORKOUTFILE=reproduce/latex/compiled.tex
+    command:
+      - sh
+      - -c
+      - cd /home/reproduce/latex && xelatex compiled.tex
+
+
+#export HOSTWORKDIR="$(pwd)" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up reproduce-watcher --build
+      

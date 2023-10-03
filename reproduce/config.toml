@@ -14,7 +14,7 @@ input = "reproduce/main.md"
 dynamic = "reproduce/pubdata.toml"
 latex_template = "reproduce/latex/template.tex"
 output = "reproduce/latex/compiled.tex"
-watch = [ "reproduce/main.md", "reproduce/pubdata.toml", "reproduce/latex/template.tex", "/home/jovyan/reproduce/pubdata.toml", "reproducible_plot.svg",]
+watch = [ "reproduce/main.md", "reproduce/pubdata.toml", "reproduce/latex/template.tex", "/home/jovyan/reproduce/pubdata.toml",]
 
 [authors.author1]
 email = "alex.miller@marshall.usc.edu"
@@ -25,7 +25,7 @@ affiliation = "USC Marshall School of Business"
 script = "docker build -t reproduce-work-dev .\ndocker build -t tinytex reproduce/Dockerfile.tinytex\ndocker build -t watcher reproduce/Dockerfile.watch\n"
 
 [repro.stage.develop]
-script = "docker run -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev\ndocker run watcher \"reproduce/main.md,reproduce/pubdata.toml,reproduce/latex/template.tex,/home/jovyan/reproduce/pubdata.toml,reproducible_plot.svg\" \"echo \"File has changed!\" && build_cmd\"\n"
+script = "docker run -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev\ndocker run watcher \"reproduce/main.md,reproduce/pubdata.toml,reproduce/latex/template.tex,/home/jovyan/reproduce/pubdata.toml\" \"echo \"File has changed!\" && build_cmd\"\n"
 
 [repro.stage.build]
 script = "docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev python reproduce_work.build() # this replaces instances of INSERTvar in input file\ndocker run --rm -i -v $(pwd):/home -e REPROWORKDIR=\"reproduce\" -e REPROWORKOUTFILE=\"reproduce/latex/compiled.tex\" tex-prepare python build.py # this converts the markdown to latex\ndocker run --rm -i --net=none -v $(pwd):/home tex-compile sh -c \"cd /home/reproduce/latex && xelatex compiled.tex\" # this compiles the latex\nnbdev_install_hooks && nbdev_export\n"
