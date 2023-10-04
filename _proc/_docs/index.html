@@ -102,11 +102,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="reproduce_work - reproduce.work">
 <meta property="og:description" content="A framework to facilitate cross-platform computational reproducibility in scientific publishing via containerization">
-<meta property="og:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-6-output-2.svg">
+<meta property="og:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-6-output-1.svg">
 <meta property="og:site-name" content="reproduce_work">
 <meta name="twitter:title" content="reproduce_work - reproduce.work">
 <meta name="twitter:description" content="A framework to facilitate cross-platform computational reproducibility in scientific publishing via containerization">
-<meta name="twitter:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-6-output-2.svg">
+<meta name="twitter:image" content="https://reproduce-work.github.io/reproducework/index_files/figure-html/cell-6-output-1.svg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -309,7 +309,7 @@ In the future, we may develop cloud-based services that provide turn-key solutio
 <h2 class="anchored" data-anchor-id="how-to-use">How to use</h2>
 <section id="getting-started" class="level3">
 <h3 class="anchored" data-anchor-id="getting-started">Getting started</h3>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>os.chdir(Path.home())</span>
@@ -322,7 +322,7 @@ Setting reproduce.work config dir to ./reproduce</code></pre>
 </div>
 </div>
 <p>Generate configuration at beginning of your project</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>generate_config(inputs<span class="op">=</span>{</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'authors'</span>: {</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1'</span>: {</span>
@@ -342,14 +342,14 @@ Setting reproduce.work config dir to ./reproduce</code></pre>
 <pre><code>Successfully generated reproduce.work configuration at reproduce/config.toml</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>register_notebook(<span class="st">'index.ipynb'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>Run code to analyze data and generate figures</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -390,12 +390,9 @@ Setting reproduce.work config dir to ./reproduce</code></pre>
 <span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co"># save figure</span></span>
 <span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.savefig('reproducible_plot.svg', bbox_inches='tight')</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>x_y_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>&lt;Axes: title={'center': 'Reproducibly Simulated Data'}&gt;</code></pre>
-</div>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> x_y_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-6-output-2.svg" class="img-fluid"></p>
+<p><img src="index_files/figure-html/cell-6-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <p>There are three primary types:</p>
@@ -417,26 +414,26 @@ Setting reproduce.work config dir to ./reproduce</code></pre>
 </ul></li>
 </ul>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>publish_variable(p_value_str, <span class="st">"p_value_str"</span>, metadata<span class="op">=</span>{</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The p-value of the coefficient on the slope of the linear regression line.'</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>publish_variable(p_value_str, <span class="st">"p_value_str"</span>, metadata<span class="op">=</span>{</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The p-value of the coefficient on the slope of the linear regression line.'</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>publish_data(x, <span class="st">"x"</span>, metadata<span class="op">=</span>{</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated X data'</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'kilograms'</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>publish_data(x, <span class="st">"x"</span>, metadata<span class="op">=</span>{</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated X data'</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'kilograms'</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>publish_data(y, <span class="st">"y"</span>, metadata<span class="op">=</span>{</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated Y data'</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'meters'</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>publish_data(y, <span class="st">"y"</span>, metadata<span class="op">=</span>{</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'The simulated Y data'</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: <span class="st">'meters'</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>publish_file(<span class="st">'reproducible_plot.svg'</span>, metadata<span class="op">=</span>{</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'A plot of X vs Y'</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>publish_file(<span class="st">'reproducible_plot.svg'</span>, metadata<span class="op">=</span>{</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'description'</span>: <span class="st">'A plot of X vs Y'</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
 IPython.notebook.kernel.execute('current_cell_index = ' + IPython.notebook.get_selected_index())
@@ -444,9 +441,9 @@ IPython.notebook.kernel.execute('current_cell_index = ' + IPython.notebook.get_s
 </div>
 </div>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> read_base_config()</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(base_config[<span class="st">'repro'</span>][<span class="st">'files'</span>][<span class="st">'dynamic'</span>], <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> read_base_config()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(base_config[<span class="st">'repro'</span>][<span class="st">'files'</span>][<span class="st">'dynamic'</span>], <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[p_value_str]
 description = "The p-value of the coefficient on the slope of the linear regression line."

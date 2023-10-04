@@ -24,6 +24,29 @@ h1, h2, h3 {
 .navbar-title {
   font-size: 0;
 }
+.navbar.navbar-dark {
+  background: linear-gradient(to right, #536c60, #fff);
+}
+a {
+  color: #9753b8; 
+  text-decoration: none; /* This removes the default underline for links. */
+}
+div.sidebar-item-container .active, div.sidebar-item-container .show>.nav-link, div.sidebar-item-container .sidebar-link>code {
+  color: #536c60; 
+  text-decoration: none; /* This removes the default underline for links. */
+}
+a:hover {
+  color: #9753b8; /* A slightly darker shade for hover effect. */
+  text-decoration: underline; /* Underline on hover for better UX. */
+}
+.sidebar nav[role=doc-toc] ul>li>a.active, .sidebar nav[role=doc-toc] ul>li>ul>li>a.active {
+  border-left: 1px solid #9753b8;
+  color: #9753b8 !important;
+}
+code {
+  color: #11c781;
+}
+
 
 
 .cell {
