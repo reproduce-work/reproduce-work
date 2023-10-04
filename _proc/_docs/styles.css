@@ -1,13 +1,22 @@
 @font-face {
-  font-family: 'Gabarito';
-  src: url('fonts/Gabarito/static/Gabarito-Regular.ttf') format('truetype');
+  font-family: 'TexGyreSchola';
+  src: url('https://alexmiller.phd/css/fonts/tgs/texgyreschola-regular.ttf') format('truetype');
   /* Add other styles like font-weight or font-style if needed */
 }
-body {
-  font-family: -apple-system, BlinkMacSystemFont,  "Helvetica Neue",  "Segoe UI", Arial, sans-serif;
+
+.navbar-title::after {
+  content: ""; /* This is necessary for the pseudo-element to be generated */
+  display: inline-block; /* To place it inline with the text */
+  width: 45px; /* Width of the logo - Adjust as needed */
+  height: 45px; /* Height of the logo - Adjust as needed */
+  background-image: url('/img/logo.svg'); /* Replace with your logo's URL */
+  background-size: contain; /* To ensure the logo fits within the dimensions specified */
+  background-repeat: no-repeat; /* To ensure the logo doesn't repeat */
+  margin-right: 5px; /* Some space between the logo and the title */
+  vertical-align: middle; /* To vertically align the logo with the text */
 }
-h1, h2, h3 {
-  font-family: 'Gabarito', sans-serif; /* Use the font */
+.navbar-title {
+  font-size: 0;
 }
 
 .cell {

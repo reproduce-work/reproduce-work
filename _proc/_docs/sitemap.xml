@@ -2,26 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://reproduce-work.github.io/reproducework/index.html</loc>
-    <lastmod>2023-10-03T23:03:38.214Z</lastmod>
-  </url>
-  <url>
-    <loc>https://reproduce-work.github.io/reproducework/build.html</loc>
-    <lastmod>2023-10-03T18:54:50.126Z</lastmod>
-  </url>
-  <url>
-    <loc>https://reproduce-work.github.io/reproducework/core.html</loc>
-    <lastmod>2023-10-03T18:54:49.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://reproduce-work.github.io/reproducework/dynamic.html</loc>
-    <lastmod>2023-10-03T18:54:50.376Z</lastmod>
-  </url>
-  <url>
-    <loc>https://reproduce-work.github.io/reproducework/paper.html</loc>
-    <lastmod>2023-10-03T21:28:22.159Z</lastmod>
+    <lastmod>2023-10-03T23:12:45.074Z</lastmod>
   </url>
   <url>
     <loc>https://reproduce-work.github.io/reproducework/package.html</loc>
-    <lastmod>2023-10-03T22:42:57.525Z</lastmod>
+    <lastmod>2023-10-03T23:12:43.434Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/core.html</loc>
+    <lastmod>2023-10-03T23:12:42.444Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/paper.html</loc>
+    <lastmod>2023-10-03T23:12:42.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/dynamic.html</loc>
+    <lastmod>2023-10-03T23:12:43.885Z</lastmod>
   </url>
 </urlset>
