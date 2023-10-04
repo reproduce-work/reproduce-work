@@ -14,6 +14,16 @@ Additionally , the increasing computational complexity of scientific research ha
 }
 -->
 
+## Barriers to computational reproduction
+
+**Lack of documentation**. Very rarely is it ever written down explicitly which code was run to generate which results in a scientific report. Even if the code is open and published by the authors, it may be complex and difficult to parse. Scientific code is often written with the intention of generating specific set of results, rather than with the intention of being read and reproduced independently. As such, the code is often not documented in a way that is easy to understand.
+
+
+**Platform dependence.** The reality is that is not enough to merely point to the code that generated a given piece of data. For even if a human were to track down the relevant commands, setting up the requisite computing environment to reproduce the results is often a non-trivial task. This is because the code that produced the results may depend on a specific version of a programming language, a specific version of a software package, or even a specific operating system.
+
+**Code complexity**. Even if the computing environment is set up correctly, the code may be too complex to understand. This is especially true for code that is written by a researcher who is not a professional software developer. One script may "generate" a resulting variable for publication, but this script alone may depend on several other scripts and files in the process. Very rarely are complex scientific analyses possible to reproduce by running a simple function or script with a single command.
+
+
 
 # Background
 
@@ -48,6 +58,7 @@ Some work has been done to develop reproducible workflows within specific comput
 While some initiatives have emerged to facilitate computational reproduction, there is no widely accepted standard for computational reproduction. 
 
 There do exist efforts around the ideas of open science, which are closely related but distinct from reproducible science. See [OSF](https://osf.io/tvyxz/), for example.
+
 
 ## An ontology of computation and composition
 
@@ -97,12 +108,19 @@ Scientific computing is very much like other computing, so it should come as no 
 
 
 
-1. init
-2. develop
-3. build
-4. verify
+### init
 
-# hello
+### develop
+
+### build
+
+### verify
+
+In the context of this version, "verify" will mean only to verify the computation reproduction of a given document. In future versions, we hope to expand this scope to include verification of the data collection and other analysis steps. On a more practical level, what this means is that for each piece of data or statistical output reported in a published document, we will verify two things:
+
+1. That the data and code provided by the authors of the document produce the same output as the published document.
+2. That each piece of data and statistical output reported in the published document is documented with structured metadata to trace the origin of the result and provide a link to the code that produced the result.
+
 
 <!--
 \begin{center}
@@ -132,15 +150,14 @@ A key requisite for successful adversarial collaborations is the ability to agre
 
 ## Computational reproducibility with specification curves or ML-driven analysis
 
-One may ask whether the framework here allows for $p$-hacking type of behavior. To this, we say merely that the framework here is not a panacea; the bar we wished to clear in this first version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage or encourage certain aspects of human behaviors is a task for future work. Nonetheless, it is valuable to discuss some ideas in which we may use our computing paradigm to encourage certain behaviors and practices of quantitative research.
+One may ask whether the framework here prevents questionable research practices including undesirable behavior like $p$-hacking or seed hacking. Unfortunately, the framework put forward here is not a panacea. The bar we set out to clear in this version of the project was to take steps toward a world where computational reproduction is possible. Developing software specifically designed to discourage bad or encourage good aspects of research behavior is a task for future work. Nonetheless, it is valuable to discuss some ideas in which we may use our computing paradigm to encourage certain behaviors and practices of quantitative research.
 
-One such method that may be possible to explore in future versions of this work is the potential for pre-registering exactly the model specification with which one wishes to estimate. If we were forced to pre-register our exact model specifications, we would be discouraged from pursuing models that depend on researcher degrees of freedom that can be exploited between the collection of data and reporting of results. As such, this may encourage scientists to explore the use of machine learning for analysis of heterogeneous treatment effects or specification curve analyses that are designed to be robust to specification searching. 
+One such method for exploration in future versions of this work is the potential for pre-registering exactly the model specification with which one wishes to estimate. If we were forced to pre-register our exact model specifications, we would be discouraged from pursuing models that depend on researcher degrees of freedom that can be exploited between the collection of data and reporting of results. As such, this may encourage scientists to explore the use of machine learning for analysis of heterogeneous treatment effects or specification curve analyses that are designed to be robust to specification searching. 
+
 
 # Conclusion
 
-
-
-In conclusion, this paper has argued that computational reproduction is a promising avenue for improving the quality of scientific research. The project put forward in the body of this project is a mere first step in the direction of computational reproduction. The software lacks support for many important features and the concept is heretofore untested. However, given the low bars required to improve the existing practices around computational reproduction, we beleive this project and the ideas put forward here have potential as the seed of a revolution in reproducibility.
+The project put forward in the body of this project is a mere first step in the direction of computational reproduction. The software lacks support for many important features and the concept is heretofore untested. While there are many aspects to reproducibility in the epistemology of science, we believe that computational reproducibility is a necessary first step toward a world where scientific results are verifiable and trustworthy. However, given the low bars required to improve the existing practices around computational reproduction, we beleive this project and the ideas put forward here have potential as the seed of a growing culture of scientific rigor and transparency. 
 
 
 

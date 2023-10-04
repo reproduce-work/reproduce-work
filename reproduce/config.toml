@@ -1,6 +1,8 @@
 [project]
-full_title = "My Reproducible Work: Title goes here"
-abstract = "Abstract goes here."
+full_title = "\\texttt{reproduce.work}: A framework to facilitate cross-platform computational reproducibility in scientific publishing"
+abstract = """
+In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which has been core to the philosophy of science for decades. However, the practice of science has fallen woefully short of meeting even basic standards toward true and widespread reproducibility. In this project, we focus primarily on addressing the narrow problem of computational reproucibility. We propose a framework for facilitating computational reproducibility in scientific publishing, which we call reproduce.work. The reproducibility standards are designed to be cross-platform and to work with any programming language. We highlight the distinction between open and reproducibile practices and showcase how our software framework encourages both simultaneously. The results of this very paper can be reproduced on any machine that can execute a containerized image using the reproduce.work workflow. We conclude by discussing the potential of the framework for improving rigor and fidelity of computational science for both producers and consumers of published work.
+"""
 github_repo = "reproduce-work/reproduce-work"
 
 [repro]
@@ -8,8 +10,13 @@ version = "reproduce.work/v1/default"
 stages = [ "init", "develop", "build",]
 verbose = false
 terminal_linefile = "report.tex"
-terminal_file = "report.pdf"
-notebooks = [ "nbs/index.ipynb",]
+terminal_outfile = "report.pdf"
+
+
+[authors.author1]
+email = "alex.miller@marshall.usc.edu"
+name = "Alex P. Miller"
+affiliation = "USC Marshall School of Business"
 
 [repro.files]
 input = "reproduce/main.md"
@@ -18,16 +25,23 @@ latex_template = "reproduce/latex/template.tex"
 output = "reproduce/latex/compiled.tex"
 watch = [ "reproduce/main.md", "reproduce/pubdata.toml", "reproduce/latex/template.tex",]
 
-[authors.author1]
-email = "alex.miller@marshall.usc.edu"
-name = "Alex P. Miller"
-affiliation = "USC Marshall School of Business"
-
 [repro.stage.init]
-script = "docker build -t reproduce-work-dev .\ndocker build -t tinytex reproduce/Dockerfile.tinytex\ndocker build -t watcher reproduce/Dockerfile.watch\n"
+script = """
+docker build -t reproduce-work-dev .
+docker build -t tinytex reproduce/Dockerfile.tinytex
+docker build -t watcher https://github.com/reproduce-work/rwatch.git
+"""
 
 [repro.stage.develop]
-script = "docker run -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev\ndocker run watcher \"reproduce/main.md,reproduce/pubdata.toml,reproduce/latex/template.tex\" \"echo \"File has changed!\" && build_cmd\"\n"
+script = """
+docker run -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev
+docker run watcher "reproduce/main.md,reproduce/pubdata.toml,reproduce/latex/template.tex" "echo "File has changed!" && build_cmd"
+"""
 
 [repro.stage.build]
-script = "docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev python reproduce_work.build() # this replaces instances of INSERTvar in input file\ndocker run --rm -i -v $(pwd):/home -e REPROWORKDIR=\"reproduce\" -e REPROWORKOUTFILE=\"reproduce/latex/compiled.tex\" tex-prepare python build.py # this converts the markdown to latex\ndocker run --rm -i --net=none -v $(pwd):/home tex-compile sh -c \"cd /home/reproduce/latex && xelatex compiled.tex\" # this compiles the latex\nnbdev_install_hooks && nbdev_export\n"
+script = """
+docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev python reproduce_work.build() # this replaces instances of INSERTvar in input file
+docker run --rm -i -v $(pwd):/home -e REPROWORKDIR="reproduce" -e REPROWORKOUTFILE="reproduce/latex/compiled.tex" tex-prepare python build.py # this converts the markdown to latex
+docker run --rm -i --net=none -v $(pwd):/home tex-compile sh -c "cd /home/reproduce/latex && xelatex compiled.tex" # this compiles the latex
+nbdev_install_hooks && nbdev_export
+"""

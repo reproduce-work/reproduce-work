@@ -23,7 +23,9 @@ def set_default_dir():
 reproduce_dir = os.getenv("REPROWORKDIR", set_default_dir())
 dev_image_tag = os.getenv("REPRODEVIMAGE")
 
+
 def read_base_config():
+    #print(os.getcwd())
     with open(Path(reproduce_dir, 'config.toml'), 'r') as f:
         base_config = toml.load(f)
     return base_config
