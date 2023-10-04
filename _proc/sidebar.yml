@@ -3,6 +3,6 @@ website:
     contents:
       - index.ipynb
       - 00_core.ipynb
-      - 01_package.ipynb
+      - 01_standards.ipynb
       - 02_dynamic.ipynb
       - 03_paper.ipynb
