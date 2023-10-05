@@ -7,6 +7,34 @@ First, recent conversations around $p$-hacking and fraud in scientific publishin
 Additionally , the increasing computational complexity of scientific research has led to a new set of challenges. Chief among these is the fact that the results of many scientific papers are not reproducible to even the lowest degree. This is because the data and code used to produce the results are not made available to the public.
 
 
+\begin{tikzpicture}[node distance=1.5cm, auto]
+
+% Document Nodes (Rectangles)
+\node[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm] (reportTentative) {report.tentative};
+\node[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of reportTentative] (reportReproduce) {report.reproduce};
+\node[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of reportReproduce] (pubdata) {pubdata.toml};
+\node[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of pubdata] (config) {config.toml};
+
+% Processor Nodes (Circle)
+\node[draw, circle, below=1cm of pubdata] (engine) {
+\shortstack{
+\texttt{reproduce.work}\\
+{engine}
+}
+};
+
+% Scientific Report Node (Rectangle)
+\node[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, below=of engine, xshift=-1.25cm] (outputFile) {\shortstack{\texttt{output\_file:}\\ {\texttt{report.pdf}}}};
+\node[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of outputFile] (report) {verification standards};
+
+% Arrows
+\draw[->] (reportReproduce) -- (engine);
+\draw[->] (pubdata) -- (engine);
+\draw[->] (config) -- (engine);
+\draw[->] (engine) -- (report);
+
+\end{tikzpicture}
+
 \hypertarget{barriers-to-computational-reproduction}{%
 \subsection{Barriers to computational reproduction}\label{barriers-to-computational-reproduction}}
 
@@ -104,6 +132,24 @@ Scientific computing is very much like other computing, so it should come as no 
 
 \hypertarget{verify}{%
 \subsubsection{verify}\label{verify}}
+
+\hypertarget{the-reproduce.work-workflow}{%
+\subsection{The reproduce.work workflow}\label{the-reproduce.work-workflow}}
+
+The workflow put forward in this project is designed to be as simple as possible while accommodating a wide variety of scientific output. 
+
+\begin{enumerate}
+\itemsep -0.2em
+\item Clone reproduce-work/template repository
+\item Build and run the containerized interface; within the container:
+
+\begin{itemize}
+\itemsep -0.2em
+\item Use specialized software, add data, and conduct analysis
+\item reproduce.work software facilitates publishing of standardized computational report data with structured metadata
+\end{itemize}
+\item Verify compliance to open and reproducibility standards and publish project to the web
+\end{enumerate}
 
 In the context of this version, ``verify'' will mean only to verify the computation reproduction of a given document. In future versions, we hope to expand this scope to include verification of the data collection and other analysis steps. On a more practical level, what this means is that for each piece of data or statistical output reported in a published document, we will verify two things:
 

@@ -14,6 +14,39 @@ Additionally , the increasing computational complexity of scientific research ha
 }
 -->
 
+\begin{tikzpicture}\[node distance=1.5cm, auto\]
+
+% Document Nodes (Rectangles)
+\node\[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm\] (reportTentative) \{report.tentative\};
+\node\[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of reportTentative\] (reportReproduce) \{report.reproduce\};
+\node\[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of reportReproduce\] (pubdata) \{pubdata.toml\};
+\node\[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of pubdata\] (config) \{config.toml\};
+
+% Processor Nodes (Circle)
+\node\[draw, circle, below=1cm of pubdata\] (engine) {
+\shortstack{
+\texttt{reproduce.work}\\\\
+{engine}
+}
+};
+
+% Scientific Report Node (Rectangle)
+\node\[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, below=of engine, xshift=-1.25cm\] (outputFile) \{\shortstack{`output\_file:`\\\\ {`report.pdf`}}\};
+\node\[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, right=of outputFile\] (report) \{verification standards\};
+
+% Arrows
+\draw\[\-\>\] (reportReproduce) -- (engine);
+\draw\[\-\>\] (pubdata) -- (engine);
+\draw\[\-\>\] (config) -- (engine);
+\draw\[\-\>\] (engine) -- (report);
+
+\end{tikzpicture}
+
+
+
+
+
+
 ## Barriers to computational reproduction
 
 **Lack of documentation**. Very rarely is it ever written down explicitly which code was run to generate which results in a scientific report. Even if the code is open and published by the authors, it may be complex and difficult to parse. Scientific code is often written with the intention of generating specific set of results, rather than with the intention of being read and reproduced independently. As such, the code is often not documented in a way that is easy to understand.
@@ -115,6 +148,16 @@ Scientific computing is very much like other computing, so it should come as no 
 ### build
 
 ### verify
+
+## The reproduce.work workflow
+
+The workflow put forward in this project is designed to be as simple as possible while accommodating a wide variety of scientific output. 
+
+1. Clone reproduce-work/template repository
+2. Build and run the containerized interface; within the container:
+  - Use specialized software, add data, and conduct analysis
+  - reproduce.work software facilitates publishing of standardized computational report data with structured metadata
+3. Verify compliance to open and reproducibility standards and publish project to the web
 
 In the context of this version, "verify" will mean only to verify the computation reproduction of a given document. In future versions, we hope to expand this scope to include verification of the data collection and other analysis steps. On a more practical level, what this means is that for each piece of data or statistical output reported in a published document, we will verify two things:
 

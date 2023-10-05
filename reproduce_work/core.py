@@ -9,9 +9,8 @@ import toml
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import re
-
 load_dotenv()
+
 def set_default_dir():
     print('Setting reproduce.work config dir to ./reproduce')
     return Path("./reproduce")

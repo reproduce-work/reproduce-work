@@ -1,0 +1,33 @@
+name: Reproducibility Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run verification
+      run: python verification_script.py
+
+    - name: Create badge if verified
+      run: |
+        if [ $? -eq 0 ]; then
+            # Use the decryption method to decrypt badge parts
+            # Combine the parts to form the badge
+            # Add the badge to the README or appropriate location
+        fi
