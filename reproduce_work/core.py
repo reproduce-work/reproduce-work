@@ -85,7 +85,8 @@ def generate_config(inputs={}, version="reproduce.work/v1/default"):
 
         project_full_title = input("Enter project full title (options): ") or "Title goes here"
         project_abstract = input("Enter project abstract (optional): ") or "Abstract goes here."
-    
+
+        full_url = False
     else:
         author1_email = inputs['authors']['author1']['email']
         if 'name' in inputs['authors']['author1']:
@@ -116,6 +117,11 @@ def generate_config(inputs={}, version="reproduce.work/v1/default"):
                 project_full_title = inputs['project']['full_title']
             if 'abstract' in inputs['project']:
                 project_abstract = inputs['project']['abstract']
+
+        if 'full_url' in inputs:
+            full_url = inputs['full_url']
+        else:  
+            full_url = False
         
         verbose = False
         if 'verbose' in inputs:
@@ -144,6 +150,13 @@ def generate_config(inputs={}, version="reproduce.work/v1/default"):
     if github_repo:
         github_repo_str = f'\ngithub_repo = "{github_repo}"'
 
+    if not full_url and github_repo:
+        full_url = f"https://github.com{github_repo}"
+    if full_url:
+        full_url_str = f'\nfull = "{full_url}"'
+    else:
+        full_url_str = ''
+
     #reproduce_dir_default = f"{reproduce_dir}"  # this can be changed if needed
     #reproduce_dir = input(f"Enter reproduce directory (Default: {reproduce_dir_default}): ") or reproduce_dir_default
     
@@ -166,7 +179,7 @@ author1.email = "{author1_email}"{newline + 'author1.name = "' + author1_name + 
 full_title = "{project_full_title}"
 abstract = """
 {project_abstract}
-"""{github_repo_str}
+"""{github_repo_str}{full_url_str}
 
 # reproduce.work configuration
 [repro]
@@ -627,7 +640,11 @@ def publish_data(content, name, metadata={}, watch=True):
     base_config = read_base_config()
     metadata.update(new_metadata)
 
-    metadata['value'] = content
+    if metadata.get('type', '') == 'text/latex':
+        # escape special characters
+        metadata['value'] = content.replace('\\', '\\\\').replace('&', '\\&').replace('$', '\$')
+    else:
+        metadata['value'] = content
 
     # Save content to the default pubdata.toml file
     #with open(Path(reproduce_dir, 'pubdata.toml'), 'a') as file:
@@ -669,10 +686,11 @@ def publish_file(filename, metadata={}, watch=True):
 
     # generate cryptographic hash of file contents
 
-    with open(filename, 'r') as file:
+    with open(filename, 'rb') as file:
         content = file.read()
-    content_hash = hashlib.md5(content.encode('utf-8')).hexdigest()
-    timed_hash = hashlib.md5((content + timestamp).encode('utf-8')).hexdigest()
+
+    content_hash = hashlib.md5(content).hexdigest()
+    timed_hash = hashlib.md5((content_hash + timestamp).encode('utf-8')).hexdigest()
          
     #save_context, definition_context = check_for_defintion_in_context(function_name='save')
 

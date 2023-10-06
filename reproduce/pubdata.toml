@@ -36,3 +36,13 @@ content_hash = "1e080e0dc7114d6d9da8764a1f036f1b"
 timed_hash = "bf78dfcb06194317a6d590cc5269e827"
 published_url = "https://github.com/reproduce-work/reproduce-work/reproducible_plot.svg"
 generating_script = "https://github.com/reproduce-work/reproduce-work/nbs/index.ipynb"
+
+[ols_model_summary]
+description = "OLS Model Summary from regression of y on x"
+badge = "reproduce-work-logo"
+generating_script = "/home/jovyan/reproduce_work/core.py"
+type = "data"
+timestamp = "2023-10-06T08:07:37.943366"
+content_hash = "d8f1208292c669322492ed62550c77dd"
+timed_hash = "7f7d570d6b448c05e46e4e764d26446c"
+value = "\\begin{center} \\begin{tabular}{lcccccc} \\toprule                & \\textbf{coef} & \\textbf{std err} & \\textbf{t} & \\textbf{P$> |$t$|$} & \\textbf{[0.025} & \\textbf{0.975]}  \\\\ \\midrule \\textbf{$\\alpha$} &       2.1368  &        0.100     &    21.343  &         0.000        &        1.940    &        2.333     \\\\ \\textbf{$\\beta$}    &       0.2921  &        0.100     &     2.915  &         0.004        &        0.095    &        0.489     \\\\ \\bottomrule \\end{tabular} \\end{center}"

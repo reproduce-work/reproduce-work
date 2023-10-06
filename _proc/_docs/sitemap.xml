@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://reproduce-work.github.io/reproducework/standards.html</loc>
-    <lastmod>2023-10-04T22:43:11.641Z</lastmod>
+    <lastmod>2023-10-06T07:28:07.736Z</lastmod>
   </url>
   <url>
     <loc>https://reproduce-work.github.io/reproducework/dynamic.html</loc>
@@ -10,14 +10,18 @@
   </url>
   <url>
     <loc>https://reproduce-work.github.io/reproducework/core.html</loc>
-    <lastmod>2023-10-04T22:43:10.467Z</lastmod>
+    <lastmod>2023-10-06T07:28:06.174Z</lastmod>
   </url>
   <url>
     <loc>https://reproduce-work.github.io/reproducework/paper.html</loc>
-    <lastmod>2023-10-04T22:43:10.683Z</lastmod>
+    <lastmod>2023-10-06T08:09:41.444Z</lastmod>
   </url>
   <url>
     <loc>https://reproduce-work.github.io/reproducework/index.html</loc>
-    <lastmod>2023-10-04T22:43:11.452Z</lastmod>
+    <lastmod>2023-10-06T08:04:34.648Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/index copy.html</loc>
+    <lastmod>2023-10-06T07:28:06.987Z</lastmod>
   </url>
 </urlset>

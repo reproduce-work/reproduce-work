@@ -3,46 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: compiled.aux
 The style file: apa.bst
 Database file #1: bibliography.bib
-Warning--empty publisher in dreber2019statistical
-You've used 1 entry,
+You've used 18 entries,
             1928 wiz_defined-function locations,
-            476 strings with 3878 characters,
-and the built_in function-call counts, 370 in all, are:
-= -- 32
-> -- 13
-< -- 1
-+ -- 4
-- -- 4
-* -- 29
-:= -- 67
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 6
-chr.to.int$ -- 1
-cite$ -- 2
-duplicate$ -- 18
-empty$ -- 31
-format.name$ -- 7
-if$ -- 72
+            588 strings with 7262 characters,
+and the built_in function-call counts, 6737 in all, are:
+= -- 640
+> -- 326
+< -- 14
++ -- 118
+- -- 112
+* -- 612
+:= -- 1237
+add.period$ -- 55
+call.type$ -- 18
+change.case$ -- 127
+chr.to.int$ -- 18
+cite$ -- 18
+duplicate$ -- 233
+empty$ -- 409
+format.name$ -- 142
+if$ -- 1251
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 3
-pop$ -- 11
+missing$ -- 13
+newline$ -- 93
+num.names$ -- 54
+pop$ -- 103
 preamble$ -- 1
-purify$ -- 7
+purify$ -- 145
 quote$ -- 0
-skip$ -- 10
+skip$ -- 186
 stack$ -- 0
-substring$ -- 12
-swap$ -- 2
+substring$ -- 395
+swap$ -- 31
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 6
-warning$ -- 1
-while$ -- 2
+type$ -- 108
+warning$ -- 0
+while$ -- 47
 width$ -- 0
-write$ -- 14
-(There was 1 warning)
+write$ -- 230
