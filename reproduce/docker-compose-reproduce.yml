@@ -37,7 +37,7 @@ services:
     command:
       - sh
       - -c
-      - cd /home/reproduce/latex && lualatex compiled.tex
+      - cd /home/reproduce/latex && xelatex compiled.tex && bibtex compiled
 
 #export HOSTWORKDIR="$(pwd)" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up --build
 #export HOSTWORKDIR="$(pwd)" && docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 8881:8888 reproduceworkdev nbdev_export
