@@ -56,6 +56,22 @@ Gomes, D.~G., Pottier, P., Crystal-Ornelas, R., Hudgins, E.~J., Foroughirad,
 Hutson, M. (2018).
 \newblock Artificial intelligence faces reproducibility crisis.
 
+\bibitem[\protect\astroncite{Ioannidis}{2005}]{ioannidis2005most}
+Ioannidis, J.~P. (2005).
+\newblock Why most published research findings are false.
+\newblock {\em PLoS medicine}, 2(8):e124.
+
+\bibitem[\protect\astroncite{Ioannidis
+  et~al.}{2009}]{ioannidis2009repeatability}
+Ioannidis, J.~P., Allison, D.~B., Ball, C.~A., Coulibaly, I., Cui, X., Culhane,
+  A.~C., Falchi, M., Furlanello, C., Game, L., Jurman, G., et~al. (2009).
+\newblock Repeatability of published microarray gene expression analyses.
+\newblock {\em Nature genetics}, 41(2):149--155.
+
+\bibitem[\protect\astroncite{Ioannidis et~al.}{2017}]{ioannidis2017power}
+Ioannidis, J.~P., Stanley, T.~D., and Doucouliagos, H. (2017).
+\newblock The power of bias in economics research.
+
 \bibitem[\protect\astroncite{Lindsay}{2023}]{lindsay2023plea}
 Lindsay, D.~S. (2023).
 \newblock A Plea to Psychology Professional Societies that Publish Journals:

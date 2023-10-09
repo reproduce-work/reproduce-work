@@ -3,8 +3,11 @@
 An increasing number of scientists across various disciplines are calling for heightened standards of reproducibility in published work   \citep{lindsay2023plea,mcnutt2014}. From biomedical research and computer science to management, psychology, and economics, the scientific community is grappling with the challenges of ensuring that published scientific work is verifiable and trustworthy \citep{cancer2021Reproducibility,christensen2018transparency,hutson2018artificial,davis2023replication}.  Several scholars have described the current state of affairs as an epistemological "crisis" in the core of science  \citep{dreber2019statistical,dougherty2008epistemological,earp2015replication,gelman2016statistical}. 
 In its most dramatic form, high profile accusations of data fabrication have led to \\verb,$,25 million dollar lawsuits and the resignation of a university presidents \citep{nytimesHarvardProfessor, stanforddailyReviewFound}. 
 
+
+
 A more mundane but pervasive manifestation of epistemological precarity is the fact that most scientific papers are not reproducible to even the lowest degree \citep{gomes2022don,tenopir2020data}. A low percentage of published papers claim to share their data and code; of those that do, many fail to follow through or even respond to inquiries \citep{tenopir2011data}. Even when good faith efforts are made to share data and code, the vagaries of software development and the complexity of scientific code make it difficult to reproduce results across time, space, and computing environments.
-Unfortunately for the incentives of honest scientists, \cite{serragarciagneezy2021} find that nonreplicable publications are cited about twice as much as replicable ones.
+Unfortunately for the incentives of honest scientists, \cite{serragarciagneezy2021} find that nonreplicable publications are cited about twice as much as replicable ones. The problem is exacerbated by the fact that many scientists do not understand the nature of statistical inference and human's innate tendency to search for patterns in data \citep{gelman2016statistical,ioannidis2009repeatability}.
+The low bar for publication in many scientific journals, has resulted in a literature that is rife with false positives and irreproducible results \citep{ioannidis2005most,ioannidis2017power}.
 
 
 In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. On top of the outright fraud and misconduct that is apparently common, there are more subtle forms research malpractice and human error that are known to pervade the published scientific literature as well. Simple misunderstandings about the nature of statistical inference and the human tendency to search for patterns in data can lead to the publication of results that are not trustworthy. Further, the complexity of scientific code and restrictiveness of many data sharing agreements means that most published scientific results are not reproducible to even the lowest degree. 
@@ -89,14 +92,7 @@ Our project is no panacea for the problem of human error and fraud. As such, it 
 - Standardized Inspection: Since everyone adheres to the same standard, it becomes easier to inspect, review, and identify anomalies.
 - Flexibility: The modular nature of the design means it can be adapted or updated to counter new threats or abuses as they emerge.
 
-<!--%#latex-->
-\begin{figure}[h]
-\centering
-\caption{\texttt{reproduce.work} is a set of software and standards for scientific publishing}
-\label{fig:comp}
-\includegraphics[width=.85\textwidth]{../../nbs/img/reproduce_is.png}
-\end{figure}
-<!--%#/latex-->
+
 
 <!--%#comment-->
 \begin{figure}[h]
@@ -119,12 +115,26 @@ Our project is no panacea for the problem of human error and fraud. As such, it 
 
 <!--%#md-->
 
-# Software 
+# Need for new software:   `reproduce.work`
 
+The preceding conversation highlights the need for a new paradigm for scientific computing in publishing. One that prioritizes both producers and consumers of scientific documents, with an aim specifically toward facilitating computational reproducibility. This allows us to introduce the alpha v0.0.1 version of the `reproduce.work` framework, which we do so briefly here.
 
-At the heart of the reproduce.work ecosystem is a commitment to value of structured metadata. The primary contribution of the reproduce.work standards framework is its ability to augment published scientific work with a static ledger of structured metadata that facilitates human traceability of results and computational reproducibility. This is a simple idea, but it has profound implications for the way that scientific reports are produced and published.
+<!--# We believe that the current paradigm for scientific computing and publishing is not well suited for the task of computational reproducibility. The current paradigm is one in which scientific computing and publishing are separate processes that are not well integrated. This is illustrated in Figure \ref{fig:comp}, which shows the current paradigm for scientific computing and publishing. In this paradigm, scientific computing and publishing are separate processes that are not well integrated. The scientific computing process is one in which data and code are used to produce results. The scientific publishing process is one in which results are reported in a document. The two processes are not well integrated, which makes it difficult to verify that the results reported in the document are indeed reproducible.-->
+
+## `reproduce.work`
+
+At the heart of the `reproduce.work` ecosystem is a commitment to value of structured metadata. The primary contribution of the reproduce.work standards framework is its ability to augment published scientific work with a static ledger of structured metadata that facilitates human traceability of results and computational reproducibility. This is a simple idea, but it has profound implications for the way that scientific reports are produced and published.
 
 The concept is visualized in Figure \ref{fig:comp}. In this diagram, we communicate several key aspects of the way the `reproduce.work` is envisioned to work. One key factor the software tools, starting with the `sci-dev-kit`, which facilitate  reproducible, self-documenting scientific reports. The mechanism for verifying reproducibility consists of a set of standards that can be checked and cross referenced depending on aspects of the metadata embedded in the report. 
+
+<!--%#latex-->
+\begin{figure}[h]
+\centering
+\caption{\texttt{reproduce.work} is a set of software and standards for scientific publishing}
+\label{fig:comp}
+\includegraphics[width=.85\textwidth]{../../nbs/img/reproduce_is.png}
+\end{figure}
+<!--%#/latex-->
 
 ### The reproduce.work [`sci-dev-kit`](https://github.com/reproduce-work/sci-dev-kit)
 
@@ -171,7 +181,6 @@ The aim of this paper is merely to present a proof-of-concept of the `reproduce.
 
 
 # Conclusion
-
 
 The project put forward in the body of this project is a mere first step in the direction of computational reproduction. The software lacks support for many important features and the concept is heretofore untested. While there are many aspects to reproducibility in the epistemology of science, we believe that computational reproducibility is a necessary first step toward a world where scientific results are verifiable and trustworthy. However, given the low bars required to improve the existing practices around computational reproduction, we beleive this project and the ideas put forward here have potential as the seed of a growing culture of scientific rigor and transparency. 
 

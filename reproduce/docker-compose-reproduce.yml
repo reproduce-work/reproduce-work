@@ -11,7 +11,7 @@ services:
       - REPROWORKOUTFILE=reproduce/latex/compiled.tex
       - HOSTWORKDIR=${PWD}
     command:
-      - "reproduce/main.md,reproduce/config.toml,reproduce/pubdata.toml,reproduce/latex/template.tex,nbs/*.ipynb"
+      - "reproduce/main.md,reproduce/config.toml,reproduce/pubdata.toml,reproduce/latex/template.tex,reproduce/latex/bibliography.bib,nbs/*.ipynb"
       - "docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan reproduceworkdev nbdev_export && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
 
     stdin_open: true
