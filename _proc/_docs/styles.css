@@ -15,7 +15,7 @@ h1, h2, h3 {
   display: inline-block; /* To place it inline with the text */
   width: 45px; /* Width of the logo - Adjust as needed */
   height: 45px; /* Height of the logo - Adjust as needed */
-  background-image: url('img/rw.svg'); /* Replace with your logo's URL */
+  background-image: url('img/logo.svg'); /* Replace with your logo's URL */
   background-size: contain; /* To ensure the logo fits within the dimensions specified */
   background-repeat: no-repeat; /* To ensure the logo doesn't repeat */
   margin-right: 5px; /* Some space between the logo and the title */

@@ -1,7 +1,17 @@
 [project]
 full_title = "\\texttt{reproduce.work}: A framework to facilitate cross-platform computational reproducibility in scientific publishing"
 abstract = """
-In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of ``reproducibility" in scientific  research, which has been core to the philosophy of science for decades. However, the practice of science has fallen woefully short of meeting even basic standards toward true and widespread reproducibility. In this project, we focus primarily on addressing the narrow problem of computational reproducibility. We propose a framework for facilitating computational reproducibility in scientific publishing, which we call reproduce.work. The reproducibility standards are designed to be cross-platform and to work with any programming language. We highlight the distinction between open and reproducibile practices and show how our software framework encourages both simultaneously. The results of this very paper can be reproduced on any machine that can execute a containerized image using the reproduce.work workflow. We conclude by discussing the potential of the framework for improving rigor and fidelity of computational science for both producers and consumers of published work.
+In metascience, computational reproduction is the process of reproducing the results of a scientific paper
+using the data and code provided by the authors of the paper. This subject sits within the broader context of 
+``reproducibility" in scientific  research, which has been core to the philosophy of science for decades. However, 
+the practice of science has fallen woefully short of meeting even basic standards toward true and widespread 
+reproducibility. In this project, we focus primarily on addressing the narrow problem of computational reproducibility. 
+We propose a framework for facilitating computational reproducibility in scientific publishing, which we call 
+reproduce.work. The reproducibility standards are designed to be cross-platform and to work with any programming language. 
+We highlight the distinction between open and reproducibile practices and show how our software framework encourages 
+both simultaneously. The results of this very paper can be reproduced on any machine that can execute a containerized 
+image using the reproduce.work workflow. We conclude by discussing the potential of the framework for improving rigor 
+and fidelity of computational science for both producers and consumers of published work.
 """
 github_repo = "reproduce-work/reproduce-work"
 base_url = "https://github.comreproduce-work/reproduce-work"
@@ -10,7 +20,7 @@ base_url = "https://github.comreproduce-work/reproduce-work"
 version = "reproduce.work/v1/default"
 stages = [ "init", "develop", "build",]
 verbose = true
-notebooks = [ "nbs/index.ipynb",]
+notebooks = [ "nbs/00_introduction.ipynb",]
 
 [repro.files]
 input = "document/main.md"
@@ -19,7 +29,7 @@ latex_template = "document/latex/template.tex"
 bibfile = "document/latex/bibliography.bib"
 output_linefile = "report.tex"
 output_report = "report.pdf"
-watch = [ "document/main.md", "reproduce/pubdata.toml", "document/latex/template.tex", "document/latex/bibliography.bib", "nbs/index.ipynb",]
+watch = [ "document/main.md", "reproduce/pubdata.toml", "document/latex/template.tex", "document/latex/bibliography.bib", "nbs/00_introduction.ipynb", "/home/jovyan/reproduce/pubdata.toml",]
 
 [authors.author1]
 email = "alex.miller@marshall.usc.edu"
@@ -37,7 +47,7 @@ docker build -t watcher https://github.com/reproduce-work/rwatch.git
 [repro.stage.develop]
 script = """
 docker run -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev
-docker run watcher "document/main.md,reproduce/pubdata.toml,document/latex/template.tex,document/latex/bibliography.bib,nbs/index.ipynb" "echo "File has changed!" && build_cmd"
+docker run watcher "document/main.md,reproduce/pubdata.toml,document/latex/template.tex,document/latex/bibliography.bib,nbs/00_introduction.ipynb,/home/jovyan/reproduce/pubdata.toml" "echo "File has changed!" && build_cmd"
 """
 
 [repro.stage.build]

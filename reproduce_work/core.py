@@ -86,18 +86,18 @@ def validate_base_config(base_config, quiet=False):
         if key not in base_config:
             #printrw(toml.dumps(base_config))
             if not quiet:
-                printrw(f"Error: Missing required field '{key}' in config.toml")
+                printrw(f"Error with ╔ω config: Missing required field '{key}' in config.toml")
             return False
         if key=='repro':
             if 'stages' not in base_config['repro']:
                 if not quiet:
-                    printrw(f"Error: Missing required field 'repro.stages' in reproduce.work configuration at {reproduce_dir}/config.toml")
+                    printrw(f"Error with ╔ω config:: Missing required field 'repro.stages' in reproduce.work configuration at {reproduce_dir}/config.toml")
                 return False
             for stage in base_config['repro']['stages']:
                 if (f'repro.stage.{stage}' not in base_config) and (stage not in base_config['repro']['stage']):
                     if not quiet:
                         (toml.dumps(base_config, encoder=ReproduceWorkEncoder()))
-                    printrw(f"Error: Missing required field repro.stage.{stage} in reproduce.work configuration at {reproduce_dir}/config.toml")
+                    printrw(f"Error with ╔ω config:: Missing required field repro.stage.{stage} in reproduce.work configuration at {reproduce_dir}/config.toml")
                     return False
     return True
 
@@ -401,7 +401,8 @@ docker build -t watcher https://github.com/reproduce-work/rwatch.git
         latex_template_default_str = r'\documentclass[12pt]{article}\usepackage[english]{babel}\usepackage{xcolor}\usepackage[hmargin=1in,vmargin=1in]{geometry}\usepackage{amsmath}\usepackage{unicode-math}\usepackage[round,sort,comma]{natbib}\bibliographystyle{apa}\usepackage{setspace}\usepackage{graphicx}\usepackage{caption}\usepackage{subcaption}\usepackage[colorlinks=true, allcolors=blue]{hyperref}\usepackage{float}\usepackage{booktabs}\usepackage{titlesec}\newcommand{\addperiod}[1]{#1.$\;$}\titlespacing{\section}{0pt}{\parskip}{-\parskip}\titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{1em}{\addperiod}\titleformat{\subsubsection}[runin]{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{\addperiod}\titlespacing{\subsubsection}{14pt plus 4pt minus 2pt}{0pt}{0pt plus 2pt minus 2pt}\setlength{\parindent}{1em}\makeatletter\g@addto@macro \normalsize {\setlength\abovedisplayskip{3pt plus 5pt minus 2pt}\setlength\belowdisplayskip{3pt plus 5pt minus 2pt}}\makeatother\newcommand{\comment}[1]{}\begin{document}\pagenumbering{gobble}\begin{center}{\fontsize{16}{16}\selectfont\bfseries \INSERT{config.project.full_title}}\vspace{5mm}\begin{table}[!ht]\begin{center}\begin{tabular}{c c }\shortstack{ \INSERT{config.authors.author1.name} \\\INSERT{config.authors.author1.affiliation} \\\INSERT{config.authors.author1.email} }\end{tabular}\end{center}\end{table}\vspace{5mm}\emph{Last updated: \today}\vspace{4mm}\abstract{\INSERT{config.project.abstract}}\vspace{2cm}{\scriptsize \noindent Notes: }\vspace{10mm}\end{center}\newpage\doublespacing\pagenumbering{arabic}\setcounter{page}{1}%%@@LOWDOWN_CONTENT@@%%\bibliography{latex/bibliography}\end{document}'
         with open(latex_template, 'w') as f:
             f.write(latex_template_default_str)
-        printrw(f"╔ω: Successfully generated latex template at {latex_template}")
+        if config_data['repro']['verbose']:
+            printrw(f"╔ω: Successfully generated latex template at {latex_template}")
 
 
 # Write some basic tests
@@ -485,7 +486,7 @@ def update_watched_files(add=[], remove=[], quiet=False):
     base_config['repro']['files']['watch'] = new_files
 
     current_develop_script = base_config['repro']['stage']['develop']['script']
-    current_develop_script
+    
     # regex to replace content in string matching 'watcher \"{to_replace}\"'
     # with 'watcher \"{new_files}\"'
     # and replace 'build_cmd' with 'python reproduce_work.build()'
@@ -497,11 +498,13 @@ def update_watched_files(add=[], remove=[], quiet=False):
     )
     base_config['repro']['stage']['develop']['script'] = new_develop_script
 
-    with open(Path(reproduce_dir, 'config.toml'), 'w') as f:
-        toml.dump(base_config, f, encoder=ReproduceWorkEncoder())
-        
-    if base_config['repro']['verbose'] and not quiet:
-        printrw(f"Updated watched files to {new_files}")
+    if current_develop_script!=new_develop_script:
+        with open(Path(reproduce_dir, 'config.toml'), 'w') as f:
+            toml.dump(base_config, f, encoder=ReproduceWorkEncoder())
+            
+        if base_config['repro']['verbose'] and not quiet:
+            printrw(f"Updated watched files to {new_files}")
+
     return new_files
 
 
@@ -683,8 +686,8 @@ def publish_data(content, name, metadata={}, watch=True):
         "timestamp": timestamp,
         "content_hash": content_hash,
         "timed_hash": timed_hash,
-        #"python_version": python_version,
-        #"platform_info": platform_info,
+        "python_version": python_version,
+        "platform_info": platform_info,
     }
     if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
         metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/pubdata.toml"
@@ -694,24 +697,6 @@ def publish_data(content, name, metadata={}, watch=True):
     else:
         metadata['generating_script'] = inspect_filename
 
-    '''
-    # detect if content var is of matplotlib or seaborn object type
-    if type(content).__name__ in ['Figure', 'AxesSubplot'] and 'savefig' in dir(content):
-        printrw('Saving serialized plot to SVG as file and in local data registry.')
-        # Serialize plot to SVG
-        buffer = io.BytesIO()
-        content.savefig(buffer, format='svg')
-        svg_data = buffer.getvalue()
-        buffer.close()
-
-        # Save SVG to file
-        svg_filename = filename.replace('.py', '.svg')
-        with open(svg_filename, 'wb') as file:
-            file.write(svg_data)
-
-        # Save SVG to registry
-        metadata['plot'] = svg_data.decode()
-    '''
 
     base_config = read_base_config()
     metadata.update(new_metadata)
@@ -722,13 +707,6 @@ def publish_data(content, name, metadata={}, watch=True):
     else:
         metadata['value'] = content
 
-    # Save content to the default pubdata.toml file
-    #with open(Path(reproduce_dir, 'pubdata.toml'), 'a') as file:
-    #    file.write(f'\n[{name}]\n')
-    #    file.write(toml.dumps(content, encoder=ReproduceWorkEncoder()))
-
-
-    # For this demo, let's return the metadata (in practice, you might want to log it, save it to another file, etc.)
     if watch:
         update_watched_files(add=[Path(reproduce_dir, 'pubdata.toml').resolve().as_posix()])
 
@@ -738,14 +716,24 @@ def publish_data(content, name, metadata={}, watch=True):
             file.write(toml.dumps({}))
 
     with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
-        dynamic_data = toml.load(file)
+        existing_dynamic_data = toml.load(file)
         
+    dynamic_data = existing_dynamic_data.copy()
     dynamic_data[name] = metadata
 
-    with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
-        toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
+    print({name: {k:v for k,v in var.items() if not any(k.startswith(prefix) for prefix in ['time'])} if isinstance(var, dict) else var for name,var in existing_dynamic_data.items()})
 
-    #return metadata
+    if (
+        {name: {k:v for k,v in var.items() if not k[:4] in ['time']} if isinstance(var, dict) else var for name,var in existing_dynamic_data.items()} !=\
+        {name: {k:v for k,v in var.items() if not k[:4] in ['time']} if isinstance(var, dict) else var for name,var in dynamic_data.items()}
+    ):
+        with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+            toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
+        
+        if base_config['repro']['verbose']:
+            printrw(f"Updated '{name}' in {base_config['repro']['files']['dynamic']}")
+            
+
     
 
 @requires_config
@@ -914,7 +902,8 @@ def register_notebook(notebook_name, notebook_dir='nbs', quiet=False):
 
     if 'github_repo' in base_config['project']:
         remote_url_val = f"https://github.com/{base_config['project']['github_repo']}"
-        notebook_new_val = f"{remote_url_val}/{notebook_path}"
+        interim_path = '/blob/main'
+        notebook_new_val = f"{remote_url_val}{interim_path}/{notebook_path}"
     else:
         notebook_new_val = Path(notebook_path).resolve().as_posix()
     
