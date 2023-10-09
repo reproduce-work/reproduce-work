@@ -50,3 +50,9 @@ paper</span>
 </div>
 
 </div>
+
+<div style="text-align:center;">
+
+    <img src="img/nutshell.png" width="800px" />
+
+</div>

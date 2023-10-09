@@ -11,7 +11,7 @@ A more mundane but pervasive manifestation of epistemological precarity is the f
 Unfortunately for the incentives of honest scientists, \cite{serragarciagneezy2021} find that nonreplicable publications are cited about twice as much as replicable ones. The problem is exacerbated by the fact that many scientists do not understand the nature of statistical inference and human's innate tendency to search for patterns in data \citep{gelman2016statistical,ioannidis2009repeatability}.
 The low bar for publication in many scientific journals, has resulted in a literature that is rife with false positives and irreproducible results \citep{ioannidis2005most,ioannidis2017power}.
 
-In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of ``reproducibility'' in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. On top of the outright fraud and misconduct that is apparently common, there are more subtle forms research malpractice and human error that are known to pervade the published scientific literature as well. Simple misunderstandings about the nature of statistical inference and the human tendency to search for patterns in data can lead to the publication of results that are not trustworthy. Further, the complexity of scientific code and restrictiveness of many data sharing agreements means that most published scientific results are not reproducible to even the lowest degree. 
+In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of ``reproducibility'' in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. On top of the outright fraud and misconduct that is apparently common, there are more subtle forms research malpractice and human error that are known to pervade the published scientific literature as well, in the form of selective publication and $p$-hacking described above. On top of all this, the complexity of scientific code and restrictiveness of many data sharing agreements means that most published scientific results are not reproducible to even the lowest degree. 
 Among those concerned about reproducibility on all fronts, this has led to a call for heightened standards of reproducibility in scientific research. 
 
 To this end, we introduce a simple framework for achieving and demonstrating computational reproducibility, referred to as \texttt{reproduce.work}. The associated scientific development kit is designed to facilitate production of reproducible scientific computing projects by default. It features a full-featured computing environment (enabled by containerization) that is compatible with essentially any existing scientific workflow. The framework also features a suite of software that facilitates the publication of standardized computational reports with structured metadata. The framework is designed to be as simple as possible while accommodating a wide variety of scientific output. As a proof-of-concept version 0.0.1 example of this framework, the source code for this paper and the full stack containerized environment used to produce it are open source and can be found \href{https://github.com/reproduce-work/reproduce-work}{here}\footnote{\href{https://github.com/reproduce-work/reproduce-work}{https://github.com/reproduce-work/reproduce-work}} run and in any modern computing environment. 
@@ -41,15 +41,11 @@ While conceptual reproduction is obviously core to the scientific method, the fo
 \subsection{Barriers to computational reproduction}\label{barriers-to-computational-reproduction}}
 
 We highlight several challenges to computational reproduction that are not necessarily unique to but are common in scientific research. 
-
-\begin{itemize}
-\itemsep -0.2em
-\item \textbf{Lack of documentation} 
-\item \textbf{Platform dependence} 
-\item \textbf{Code complexity} 
-\item \textbf{Lack of independent verification}
-\item \textbf{Data availability} 
-\end{itemize}
+\textbf{Lack of documentation},
+\textbf{Platform dependence},
+\textbf{Code complexity},
+\textbf{Lack of independent verification}, and
+\textbf{Data availability}.
 
 The last of these challenges will always remain relevant to some degree. However, this project is based on notion that the first four challenges are all amenable to software solutions to some degree. The purpose of this project is to develop a framework for computational reproducibility that is designed to overcome the challenges of poor documentation, platform dependence, and code complexity, and lack of verification. 
 
