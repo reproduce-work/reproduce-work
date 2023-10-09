@@ -48,17 +48,17 @@ timed_hash = "7f7d570d6b448c05e46e4e764d26446c"
 value = "\\begin{center} \\begin{tabular}{lcccccc} \\toprule                & \\textbf{coef} & \\textbf{std err} & \\textbf{t} & \\textbf{P$> |$t$|$} & \\textbf{[0.025} & \\textbf{0.975]}  \\\\ \\midrule \\textbf{$\\alpha$} &       2.1368  &        0.100     &    21.343  &         0.000        &        1.940    &        2.333     \\\\ \\textbf{$\\beta$}    &       0.2921  &        0.100     &     2.915  &         0.004        &        0.095    &        0.489     \\\\ \\bottomrule \\end{tabular} \\end{center}"
 
 [test_var_timestamp_1]
-generating_script = "/tmp/ipykernel_177/1852397692.py"
+generating_script = "/tmp/ipykernel_2738/638293654.py"
 type = "data"
-timestamp = "2023-10-09T17:22:20.196606"
+timestamp = "2023-10-09T19:03:26.425949"
 content_hash = "1e01ba3e07ac48cbdab2d3284d1dd0fa"
-timed_hash = "a061a18f2ba934bf29fc12e3d5315031"
+timed_hash = "b8803e9ccb1d0bad174e9bad0e4e1756"
 value = 67890
 
 [test_var_timestamp_2]
-generating_script = "/tmp/ipykernel_177/1852397692.py"
+generating_script = "/tmp/ipykernel_2738/638293654.py"
 type = "data"
-timestamp = "2023-10-09T17:22:20.210050"
+timestamp = "2023-10-09T19:03:26.437087"
 content_hash = "eb42d96bdba3982c623d20284b808d8b"
-timed_hash = "880bf5bc61fb65a6554f93f6a9f8638a"
+timed_hash = "f02c00432e5086cf56e3ca28f24b1f2a"
 value = "Hello again!"

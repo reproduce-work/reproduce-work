@@ -51,6 +51,8 @@ paper</span>
 
 </div>
 
+## In a nutshell
+
 <div style="text-align:center;">
 
 <img src="img/nutshell.png" width="800px" />

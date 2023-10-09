@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text">introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -180,14 +180,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#requires_config" id="toc-requires_config" class="nav-link active" data-scroll-target="#requires_config">requires_config</a></li>
   <li><a href="#validate_base_config" id="toc-validate_base_config" class="nav-link" data-scroll-target="#validate_base_config">validate_base_config</a></li>
-  <li><a href="#update_watched_files" id="toc-update_watched_files" class="nav-link" data-scroll-target="#update_watched_files">update_watched_files</a></li>
+  <li><a href="#reproduceworkencoder" id="toc-reproduceworkencoder" class="nav-link" data-scroll-target="#reproduceworkencoder">ReproduceWorkEncoder</a></li>
   <li><a href="#read_base_config" id="toc-read_base_config" class="nav-link" data-scroll-target="#read_base_config">read_base_config</a></li>
   <li><a href="#set_default_dir" id="toc-set_default_dir" class="nav-link" data-scroll-target="#set_default_dir">set_default_dir</a></li>
+  <li><a href="#printrw" id="toc-printrw" class="nav-link" data-scroll-target="#printrw">printrw</a></li>
   <li><a href="#test_validate_base_config" id="toc-test_validate_base_config" class="nav-link" data-scroll-target="#test_validate_base_config">test_validate_base_config</a></li>
   <li><a href="#generate_config" id="toc-generate_config" class="nav-link" data-scroll-target="#generate_config">generate_config</a></li>
   <li><a href="#construct_config" id="toc-construct_config" class="nav-link" data-scroll-target="#construct_config">construct_config</a></li>
-  <li><a href="#reproduceworkencoder" id="toc-reproduceworkencoder" class="nav-link" data-scroll-target="#reproduceworkencoder">ReproduceWorkEncoder</a></li>
-  <li><a href="#update_watched_files-1" id="toc-update_watched_files-1" class="nav-link" data-scroll-target="#update_watched_files-1">update_watched_files</a></li>
+  <li><a href="#reproduceworkencoder-1" id="toc-reproduceworkencoder-1" class="nav-link" data-scroll-target="#reproduceworkencoder-1">ReproduceWorkEncoder</a></li>
+  <li><a href="#update_watched_files" id="toc-update_watched_files" class="nav-link" data-scroll-target="#update_watched_files">update_watched_files</a></li>
+  <li><a href="#requires_config..wrapper" id="toc-requires_config..wrapper" class="nav-link" data-scroll-target="#requires_config..wrapper">requires_config.<locals>.wrapper</locals></a></li>
+  <li><a href="#publish_variable" id="toc-publish_variable" class="nav-link" data-scroll-target="#publish_variable">publish_variable</a></li>
+  <li><a href="#reproducible" id="toc-reproducible" class="nav-link" data-scroll-target="#reproducible">reproducible</a></li>
+  <li><a href="#requires_config..wrapper-1" id="toc-requires_config..wrapper-1" class="nav-link" data-scroll-target="#requires_config..wrapper-1">requires_config.<locals>.wrapper</locals></a></li>
+  <li><a href="#requires_config..wrapper-2" id="toc-requires_config..wrapper-2" class="nav-link" data-scroll-target="#requires_config..wrapper-2">requires_config.<locals>.wrapper</locals></a></li>
+  <li><a href="#reproduceworkencoder-2" id="toc-reproduceworkencoder-2" class="nav-link" data-scroll-target="#reproduceworkencoder-2">ReproduceWorkEncoder</a></li>
+  <li><a href="#serialize_to_toml" id="toc-serialize_to_toml" class="nav-link" data-scroll-target="#serialize_to_toml">serialize_to_toml</a></li>
+  <li><a href="#check_for_defintion_in_context" id="toc-check_for_defintion_in_context" class="nav-link" data-scroll-target="#check_for_defintion_in_context">check_for_defintion_in_context</a></li>
+  <li><a href="#get_cell_index" id="toc-get_cell_index" class="nav-link" data-scroll-target="#get_cell_index">get_cell_index</a></li>
+  <li><a href="#test-code" id="toc-test-code" class="nav-link" data-scroll-target="#test-code">Test Code</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/reproduce-work/reproducework/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -236,11 +247,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <hr>
 </section>
-<section id="update_watched_files" class="level3">
-<h3 class="anchored" data-anchor-id="update_watched_files">update_watched_files</h3>
+<section id="reproduceworkencoder" class="level3">
+<h3 class="anchored" data-anchor-id="reproduceworkencoder">ReproduceWorkEncoder</h3>
 <blockquote class="blockquote">
-<pre><code> update_watched_files (add=[], remove=[])</code></pre>
+<pre><code> ReproduceWorkEncoder (_dict=&lt;class 'dict'&gt;, preserve=False)</code></pre>
 </blockquote>
+<p>Initialize self. See help(type(self)) for accurate signature.</p>
 <hr>
 </section>
 <section id="read_base_config" class="level3">
@@ -255,6 +267,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <pre><code> set_default_dir (quiet=True)</code></pre>
 </blockquote>
+<hr>
+</section>
+<section id="printrw" class="level3">
+<h3 class="anchored" data-anchor-id="printrw">printrw</h3>
+<blockquote class="blockquote">
+<pre><code> printrw (*args, **kwargs)</code></pre>
+</blockquote>
+<p>fancy reproduce.work print function</p>
 <hr>
 </section>
 <section id="test_validate_base_config" class="level3">
@@ -278,87 +298,157 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <hr>
 </section>
-<section id="reproduceworkencoder" class="level3">
-<h3 class="anchored" data-anchor-id="reproduceworkencoder">ReproduceWorkEncoder</h3>
+<section id="reproduceworkencoder-1" class="level3">
+<h3 class="anchored" data-anchor-id="reproduceworkencoder-1">ReproduceWorkEncoder</h3>
 <blockquote class="blockquote">
 <pre><code> ReproduceWorkEncoder (_dict=&lt;class 'dict'&gt;, preserve=False)</code></pre>
 </blockquote>
 <p>Initialize self. See help(type(self)) for accurate signature.</p>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'authors'</span>: {</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.affiliation'</span>: <span class="st">'USC Marshall School of Business'</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro'</span>: {</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">'version'</span>: <span class="st">'reproduce.work/v1/default'</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">'stages'</span>: [<span class="st">'init'</span>, <span class="st">'develop'</span>, <span class="st">'build'</span>]</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.files'</span>: {</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">'input'</span>: <span class="st">'document/main.md'</span>,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">'dynamic'</span>: <span class="st">'document/pubdata.toml'</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">'latex_template'</span>: <span class="st">'document/latex/template.tex'</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">'output'</span>: <span class="st">'document/latex/compiled.tex'</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.init'</span>: {</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker build -t </span><span class="sc">{dev_image_tag}</span><span class="st"> .</span><span class="ch">\n</span><span class="st">docker build -t tinytex </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.tinytex</span><span class="ch">\n</span><span class="st">docker build -t watcher </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.watch</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.develop'</span>: {</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> start.sh jupyter lab --LabApp.token=</span><span class="ch">\'\'\n\\</span><span class="st">INSERT</span><span class="sc">{watch_cmd_here}</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.build'</span>: {</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> python reproduce_work.build() # this replaces instances of </span><span class="ch">\\</span><span class="st">INSERT</span><span class="sc">{var}</span><span class="st"> in `input` file</span><span class="ch">\n</span><span class="st">docker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex</span><span class="ch">\n</span><span class="st">docker run --rm -i --net=none -v $(pwd):/home tinytex sh -c "cd /home/document/latex &amp;&amp; xelatex compiled.tex" # this compiles the latex</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>validate_base_config(base_config)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'authors'</span>: {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.affiliation'</span>: <span class="st">'USC Marshall School of Business'</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro'</span>: {</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">'version'</span>: <span class="st">'reproduce.work/v1/default'</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">'stages'</span>: [<span class="st">'init'</span>, <span class="st">'develop'</span>, <span class="st">'build'</span>]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.files'</span>: {</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">'input'</span>: <span class="st">'document/main.md'</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">'dynamic'</span>: <span class="st">'document/pubdata.toml'</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">'latex_template'</span>: <span class="st">'document/latex/template.tex'</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">'output'</span>: <span class="st">'document/latex/compiled.tex'</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.init'</span>: {</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker build -t </span><span class="sc">{dev_image_tag}</span><span class="st"> .</span><span class="ch">\n</span><span class="st">docker build -t tinytex </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.tinytex</span><span class="ch">\n</span><span class="st">docker build -t watcher </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.watch</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.develop'</span>: {</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> start.sh jupyter lab --LabApp.token=</span><span class="ch">\'\'\n\\</span><span class="st">INSERT</span><span class="sc">{watch_cmd_here}</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.build'</span>: {</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> python reproduce_work.build() # this replaces instances of </span><span class="ch">\\</span><span class="st">INSERT</span><span class="sc">{var}</span><span class="st"> in `input` file</span><span class="ch">\n</span><span class="st">docker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex</span><span class="ch">\n</span><span class="st">docker run --rm -i --net=none -v $(pwd):/home tinytex sh -c "cd /home/document/latex &amp;&amp; xelatex compiled.tex" # this compiles the latex</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>validate_base_config(base_config)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>True</code></pre>
 </div>
 </div>
 <hr>
 </section>
-<section id="update_watched_files-1" class="level3">
-<h3 class="anchored" data-anchor-id="update_watched_files-1">update_watched_files</h3>
+<section id="update_watched_files" class="level3">
+<h3 class="anchored" data-anchor-id="update_watched_files">update_watched_files</h3>
 <blockquote class="blockquote">
-<pre><code> update_watched_files (add=[], remove=[])</code></pre>
+<pre><code> update_watched_files (add=[], remove=[], quiet=False)</code></pre>
 </blockquote>
+<hr>
+</section>
+<section id="requires_config..wrapper" class="level3">
+<h3 class="anchored" data-anchor-id="requires_config..wrapper">requires_config.<locals>.wrapper</locals></h3>
+<blockquote class="blockquote">
+<pre><code> requires_config.&lt;locals&gt;.wrapper (*args, **kwargs)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="publish_variable" class="level3">
+<h3 class="anchored" data-anchor-id="publish_variable">publish_variable</h3>
+<blockquote class="blockquote">
+<pre><code> publish_variable (value, var_name, metadata={})</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="reproducible" class="level3">
+<h3 class="anchored" data-anchor-id="reproducible">reproducible</h3>
+<blockquote class="blockquote">
+<pre><code> reproducible (var_assignment_func)</code></pre>
+</blockquote>
+<p>A decorator to register the line number and timestamp when a variable is assigned.</p>
+<hr>
+</section>
+<section id="requires_config..wrapper-1" class="level3">
+<h3 class="anchored" data-anchor-id="requires_config..wrapper-1">requires_config.<locals>.wrapper</locals></h3>
+<blockquote class="blockquote">
+<pre><code> requires_config.&lt;locals&gt;.wrapper (*args, **kwargs)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="requires_config..wrapper-2" class="level3">
+<h3 class="anchored" data-anchor-id="requires_config..wrapper-2">requires_config.<locals>.wrapper</locals></h3>
+<blockquote class="blockquote">
+<pre><code> requires_config.&lt;locals&gt;.wrapper (*args, **kwargs)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="reproduceworkencoder-2" class="level3">
+<h3 class="anchored" data-anchor-id="reproduceworkencoder-2">ReproduceWorkEncoder</h3>
+<blockquote class="blockquote">
+<pre><code> ReproduceWorkEncoder (_dict=&lt;class 'dict'&gt;, preserve=False)</code></pre>
+</blockquote>
+<p>Initialize self. See help(type(self)) for accurate signature.</p>
+<hr>
+</section>
+<section id="serialize_to_toml" class="level3">
+<h3 class="anchored" data-anchor-id="serialize_to_toml">serialize_to_toml</h3>
+<blockquote class="blockquote">
+<pre><code> serialize_to_toml (data, root=True)</code></pre>
+</blockquote>
+<p>Unified function to serialize various Python data types to TOML format.</p>
+<hr>
+</section>
+<section id="check_for_defintion_in_context" class="level3">
+<h3 class="anchored" data-anchor-id="check_for_defintion_in_context">check_for_defintion_in_context</h3>
+<blockquote class="blockquote">
+<pre><code> check_for_defintion_in_context (function_name='save')</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="get_cell_index" class="level3">
+<h3 class="anchored" data-anchor-id="get_cell_index">get_cell_index</h3>
+<blockquote class="blockquote">
+<pre><code> get_cell_index ()</code></pre>
+</blockquote>
+<p>Get the current cell index in a Jupyter notebook environment. If not in Jupyter, return None.</p>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>publish_data(<span class="dv">67890</span>, <span class="st">"test_var_timestamp_1"</span>)  <span class="co"># This should capture this line number and timestamp</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>publish_data(<span class="st">"Hello again!"</span>, <span class="st">"test_var_timestamp_2"</span>)  <span class="co"># And this line number and timestamp</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>VAR_REGISTRY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>publish_data(<span class="dv">67890</span>, <span class="st">"test_var_timestamp_1"</span>)  <span class="co"># This should capture this line number and timestamp</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>publish_data(<span class="st">"Hello again!"</span>, <span class="st">"test_var_timestamp_2"</span>)  <span class="co"># And this line number and timestamp</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>VAR_REGISTRY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>{'REPROWORK_REMOTE_URL': None, 'REPROWORK_ACTIVE_NOTEBOOK': None}</code></pre>
 </div>
 </div>
+</section>
+<section id="test-code" class="level2">
+<h2 class="anchored" data-anchor-id="test-code">Test Code</h2>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the serialize_to_toml function</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data_sample <span class="op">=</span> {</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: <span class="st">'John'</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: <span class="dv">28</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'is_student'</span>: <span class="va">False</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'scores'</span>: [<span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">78</span>, <span class="dv">92</span>],</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'birthday'</span>: pd.Timestamp(<span class="st">'2000-01-01'</span>),</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'matrix'</span>: np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]),</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'df'</span>: pd.DataFrame({</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'A'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'B'</span>: [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>],</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'date'</span>: [pd.Timestamp(<span class="st">'2022-01-01'</span>), pd.Timestamp(<span class="st">'2022-01-02'</span>), pd.Timestamp(<span class="st">'2022-01-03'</span>)]</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    }),</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'nested_dict'</span>: {</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'key1'</span>: <span class="st">'value1'</span>,</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'sub_dict'</span>: {</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'sub_key'</span>: <span class="st">'sub_value'</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'none_value'</span>: <span class="va">None</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>toml_representation <span class="op">=</span> serialize_to_toml(data_sample)</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(toml_representation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the serialize_to_toml function</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data_sample <span class="op">=</span> {</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: <span class="st">'John'</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: <span class="dv">28</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'is_student'</span>: <span class="va">False</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'scores'</span>: [<span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">78</span>, <span class="dv">92</span>],</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'birthday'</span>: pd.Timestamp(<span class="st">'2000-01-01'</span>),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'matrix'</span>: np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'df'</span>: pd.DataFrame({</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'A'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'B'</span>: [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>],</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'date'</span>: [pd.Timestamp(<span class="st">'2022-01-01'</span>), pd.Timestamp(<span class="st">'2022-01-02'</span>), pd.Timestamp(<span class="st">'2022-01-03'</span>)]</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    }),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'nested_dict'</span>: {</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'key1'</span>: <span class="st">'value1'</span>,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'sub_dict'</span>: {</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'sub_key'</span>: <span class="st">'sub_value'</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'none_value'</span>: <span class="va">None</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>toml_representation <span class="op">=</span> serialize_to_toml(data_sample)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>printrw(<span class="ss">f'</span><span class="sc">{</span>toml_representation<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>name = "John"
+<pre><code>╔ω: name = "John"
 age = 28
 is_student = False
 scores = [85, 90, 78, 92]
