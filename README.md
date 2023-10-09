@@ -8,11 +8,12 @@
 
 <a href="https://github.com/reproduce-work/sci-dev-kit">
 <h1>
-<span style="font-size:120px;">📦</span>
+<span style="font-size:120px;">📦</span> <br/>
+<span style="font-size: 20px; margin-top:-10px;"><code>sci-dev-kit</code>
+⬇️ </span>
 </h1>
 
-<span style="font-size: 20px; margin-top:-10px;"><code>sci-dev-kit</code>
-⬇️ </span> </a>
+</a>
 
 </div>
 
@@ -20,11 +21,12 @@
 
 <a href="https://github.com/reproduce-work/reproduce-work/">
 <h1>
-<span style="font-size:120px;">📃</span>
+<span style="font-size:120px;">📃</span> <br/>
+<span style="font-size: 20px; margin-top:-10px;">reproduce.work
+paper</span>
 </h1>
 
-<span style="font-size: 20px; margin-top:-10px;">reproduce.work
-paper</span> </a>
+</a>
 
 </div>
 
@@ -32,8 +34,7 @@ paper</span> </a>
 
 <a href="https://github.com/reproduce-work/reproduce-work/">
 <h1>
-<span style="font-size:120px;">📀</span>
-</h1>
+<span style="font-size:120px;">📀</span><br/>
 
 <div style="font-size: 20px">
 
@@ -41,6 +42,8 @@ paper</span> </a>
 <span style="margin-top:-20px;"> python package</span>
 
 </div>
+
+</h1>
 
 </a>
 
