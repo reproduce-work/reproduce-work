@@ -1059,15 +1059,12 @@ def publish_file(filename, metadata={}, watch=True):
     with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
         dynamic_data = toml.load(file)
 
-    
-
-    #remove quotes around filename if present
-    #printrw('filenamebefore:', filename)
-    filename = filename.rstrip('"').rstrip("'").lstrip('"').lstrip("'")
-    #printrw('filenameafter:', filename)
-
-    if r'"{filename}"' in dynamic_data:
-        printrw(f"WARNING: overwriting existing metadata for file {filename}")
+    dub_quot_,sing_quot_ =r'"{filename}"' in dynamic_data, rf"'{filename}'" in dynamic_data
+    if dub_quot_ or sing_quot_:
+        printrw(f"Overwriting existing metadata for file {filename}")
+        existing_dyndata = dynamic_data.pop(dub_quot_ if dub_quot_ else sing_quot_)
+        existing_dyndata.update(metadata)
+        metadata = existing_dyndata
 
     dynamic_data[filename] = metadata
 
@@ -1176,7 +1173,7 @@ def register_notebook(notebook_name, notebook_dir='nbs', quiet=False):
     update_watched_files(add=[notebook_path], quiet=True)
 
     if 'github_repo' in base_config['project']:
-        remote_url_val = f"https://github.com/{base_config['project']['github_repo']}/main/blob"
+        remote_url_val = f"https://github.com/{base_config['project']['github_repo']}/blob/main"
         notebook_new_val = f"{remote_url_val}/{notebook_path}"
     else:
         notebook_new_val = Path(notebook_path).resolve().as_posix()
