@@ -51,15 +51,13 @@ paper</span>
 
 </div>
 
-## In a nutshell
+## At a glance
 
 <div style="text-align:center;">
 
 <img src="img/nutshell.png" width="800px" />
 
 </div>
-
-## At a glance
 
 ### Main features:
 

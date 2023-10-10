@@ -11,9 +11,8 @@ services:
       - REPROWORKOUTFILE=reproduce/latex/compiled.tex
       - HOSTWORKDIR=${PWD}
     command:
-      - "reproduce/main.md,reproduce/config.toml,reproduce/pubdata.toml,reproduce/latex/template.tex,reproduce/latex/bibliography.bib,nbs/*.ipynb"
-      - "docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan reproduceworkdev nbdev_export && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
-
+      - "${REPRO_WATCH_LIST}"
+      - ${REPROWORKDIR}/watch.sh    
     stdin_open: true
     tty: true
 
@@ -23,7 +22,6 @@ services:
       - ${HOSTWORKDIR}:/home
     environment:
       - REPROWORKDIR=reproduce
-      - REPROWORKOUTFILE=reproduce/latex/compiled.tex
     command: python /run.py
 
   tex-compile:
@@ -33,12 +31,14 @@ services:
     network_mode: "none"
     environment:
       - REPROWORKDIR=reproduce
-      - REPROWORKOUTFILE=reproduce/latex/compiled.tex
     command:
       - sh
       - -c
-      - cd /home/reproduce/latex && xelatex compiled.tex && bibtex compiled
+      - cd /home/reproduce/tmp/document/latex && xelatex report.tex && bibtex report
 
-#export HOSTWORKDIR="$(pwd)" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up --build
+#export HOSTWORKDIR="$(pwd)" && export WATCH_LIST="$(awk '/^watch = \[/ {gsub(/^watch = \[|]$/, "", $0); n = split($0, arr, ","); result = ""; for (i = 1; i <= n; i++) { gsub(/^ *"| *"$|^ *| *$/, "", arr[i]); if (arr[i] != "") result = (result == "" ? arr[i] : result "," arr[i]); } print result;}' "${REPRODUCEWORKDIR}/config.toml")" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up --build
 #export HOSTWORKDIR="$(pwd)" && docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 8881:8888 reproduceworkdev nbdev_export
 #"export HOSTWORKDIR=\"$(pwd)\" && docker run --rm -i -v ${HOSTWORKDIR}:/home/jovyan -p 3000 reproduceworkdev livepreview && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-prepare && docker-compose -f reproduce/docker-compose-reproduce.yml up tex-compile"
+
+
+#export REPROWORKDIR='reproduce' && chmod a+x ${REPROWORKDIR}/watch.sh && export HOSTWORKDIR="$(pwd)" && export REPRO_WATCH_LIST="$(awk '/^watch = \[/ {gsub(/^watch = \[|]$/, "", $0); n = split($0, arr, ","); result = ""; for (i = 1; i <= n; i++) { gsub(/^ *"| *"$|^ *| *$/, "", arr[i]); if (arr[i] != "") result = (result == "" ? arr[i] : result "," arr[i]); } print result;}' "${REPROWORKDIR}/config.toml" | tr -d '\n')" && docker compose -p reproducework -f "reproduce/docker-compose-reproduce.yml" up --build

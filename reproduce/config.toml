@@ -20,16 +20,17 @@ base_url = "https://github.comreproduce-work/reproduce-work"
 version = "reproduce.work/v1/default"
 stages = [ "init", "develop", "build",]
 verbose = true
-notebooks = [ "nbs/00_introduction.ipynb",]
+document_dir = "document"
+notebooks = [ "nbs/00_introduction.ipynb", "nbs/01_core.ipynb", "nbs/03_paper.ipynb",]
 
 [repro.files]
 input = "document/main.md"
 dynamic = "reproduce/pubdata.toml"
 latex_template = "document/latex/template.tex"
 bibfile = "document/latex/bibliography.bib"
-output_linefile = "report.tex"
-output_report = "report.pdf"
-watch = [ "document/main.md", "reproduce/pubdata.toml", "document/latex/template.tex", "document/latex/bibliography.bib", "nbs/00_introduction.ipynb", "/home/jovyan/reproduce/pubdata.toml",]
+output_linefile = "document/latex/report.tex"
+output_report = "document/report.pdf"
+watch = [ "document/main.md", "reproduce/pubdata.toml", "document/latex/template.tex", "document/latex/bibliography.bib", "nbs/00_introduction.ipynb", "img/reproducible_plot.svg", "nbs/01_core.ipynb", "nbs/03_paper.ipynb", "img/scatter_plot.pdf",]
 
 [authors.author1]
 email = "alex.miller@marshall.usc.edu"
@@ -47,12 +48,12 @@ docker build -t watcher https://github.com/reproduce-work/rwatch.git
 [repro.stage.develop]
 script = """
 docker run -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev
-docker run watcher "document/main.md,reproduce/pubdata.toml,document/latex/template.tex,document/latex/bibliography.bib,nbs/00_introduction.ipynb,/home/jovyan/reproduce/pubdata.toml" "echo "File has changed!" && build_cmd"
+docker run watcher "document/main.md,reproduce/pubdata.toml,document/latex/template.tex,document/latex/bibliography.bib,nbs/00_introduction.ipynb,img/reproducible_plot.svg,nbs/01_core.ipynb,nbs/03_paper.ipynb,img/scatter_plot.pdf" "echo "File has changed!" && build_cmd"
 """
 
 [repro.stage.build]
 script = """
 docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 reproduce-work-dev python reproduce_work.build() # this replaces instances of INSERTvar in input file
-docker run --rm -i -v $(pwd):/home -e REPROWORKDIR="reproduce" -e REPROWORKOUTFILE="document/latex/compiled.pdf" tex-prepare python build.py # this converts the markdown to latex
-docker run --rm -i --net=none -v $(pwd):/home tex-compile sh -c "cd /home/document/latex && xelatex compiled.tex" # this compiles the latex
+docker run --rm -i -v $(pwd):/home -e REPROWORKDIR="reproduce" -e REPROWORKOUTFILE="document/report.pdf" tex-prepare python build.py # this converts the markdown to latex
+docker run --rm -i --net=none -v $(pwd):/home tex-compile sh -c "cd /home/reproduce/tmp/document/latex && xelatex compiled.tex" # this compiles the latex
 """

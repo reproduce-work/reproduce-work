@@ -2,9 +2,10 @@
 
 # %% auto 0
 __all__ = ['reproduce_dir', 'dev_image_tag', 'VAR_REGISTRY', 'base_config', 'printrw', 'set_default_dir', 'read_base_config',
-           'ReproduceWorkEncoder', 'validate_base_config', 'requires_config', 'construct_config', 'generate_config',
-           'test_validate_base_config', 'update_watched_files', 'get_cell_index', 'check_for_defintion_in_context',
-           'serialize_to_toml', 'publish_data', 'publish_file', 'reproducible', 'publish_variable', 'register_notebook']
+           'toml_dump', 'ReproduceWorkEncoder', 'validate_base_config', 'requires_config', 'construct_config',
+           'generate_config', 'test_validate_base_config', 'update_watched_files', 'get_cell_index',
+           'check_for_defintion_in_context', 'serialize_to_toml', 'PublishedObj', 'check_for_embedded_objects',
+           'publish_data', 'publish_file', 'reproducible', 'publish_variable', 'register_notebook']
 
 # %% ../nbs/01_core.ipynb 4
 import os
@@ -64,7 +65,28 @@ def read_base_config():
         base_config = toml.load(f)
     return base_config
 
+    
+def toml_dump(val):
+    # Convert special types to serializable formats
+    def serialize_special_types(obj):
+        if isinstance(obj, pd.Timestamp):
+            return obj.isoformat()
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, pd.DataFrame):
+            return obj.to_dict(orient='records')
+        elif obj is None:
+            return 'None'
+        elif isinstance(obj, dict):
+            return {k: serialize_special_types(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [serialize_special_types(i) for i in obj]
+        else:
+            return obj
 
+    serialized_val = serialize_special_types(val)
+    
+    return toml.loads(toml.dumps({'val': serialized_val}))['val']
 
 class ReproduceWorkEncoder(toml.TomlEncoder):
     def dump_str(self, v):
@@ -103,9 +125,14 @@ def validate_base_config(base_config, quiet=False):
 
 def requires_config(func):
     def wrapper(*args, **kwargs):
-        config = read_base_config()
+        try:
+            config = read_base_config()
+        except:
+            raise Exception("Your reproduce.work config is either missing or invalid. Run generate_config() to generate a config file.")
         if not validate_base_config(config):
             raise Exception("Your reproduce.work configuration is not valid.")
+        if func.__name__ in ["publish_data","publish_file"] and VAR_REGISTRY['REPROWORK_REMOTE_URL'] is None:
+            raise Exception(f"register_notebook(*) to use this function: {func.__name__}")
         return func(*args, **kwargs)
     return wrapper
 
@@ -142,7 +169,7 @@ def construct_config(options):
                 'base_url_str', 'repro_version', 'verbose_str', 'input_file',
                 'dynamic_file', 'bibfile', 'latex_template', 'watch_files', 
                 'repro_init_script', 'dev_image_tag', 'reproduce_dir',
-                'output_file', 'document_dir', 'nbdev_project_cmd']:
+                'output_file', 'output_linefile', 'document_dir', 'nbdev_project_cmd']:
         
         if key not in options:
             printrw(f"Error: Missing required key '{key}' in options.")
@@ -164,14 +191,15 @@ abstract = """
 version = "{options['repro_version']}"
 stages = ["init", "develop", "build"]
 verbose = {options['verbose_str']}
+document_dir = "{options['document_dir']}"
 
 [repro.files]
 input = "{options['input_file']}"
 dynamic = "{options['dynamic_file']}"
 latex_template = "{options['latex_template']}"
 bibfile = "{options['bibfile']}"
-output_linefile = "report.tex" # must be plaintext file
-output_report = "report.pdf"
+output_linefile = "{options['output_linefile']}" # must be plaintext file
+output_report = "{options['output_file']}"
 watch = {options['watch_files']}
 
 [repro.stage.init]
@@ -189,7 +217,7 @@ docker run -v $(pwd):/home/jovyan -p 8888:8888 {options['dev_image_tag']}
 script = """
 docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 {options['dev_image_tag']} python reproduce_work.build() # this replaces instances of INSERTvar in input file
 docker run --rm -i -v $(pwd):/home -e REPROWORKDIR="{options['reproduce_dir']}" -e REPROWORKOUTFILE="{options['output_file']}" tex-prepare python build.py # this converts the markdown to latex
-docker run --rm -i --net=none -v $(pwd):/home tex-compile sh -c "cd /home/{options['document_dir']}/latex && xelatex compiled.tex" # this compiles the latex{options['nbdev_project_cmd']}
+docker run --rm -i --net=none -v $(pwd):/home tex-compile sh -c "cd /home/{options['reproduce_dir']}/tmp/{options['document_dir']}/latex && xelatex compiled.tex" # this compiles the latex{options['nbdev_project_cmd']}
 """'''
 
 def generate_config(options={}, version="reproduce.work/v1/default"):
@@ -215,7 +243,8 @@ def generate_config(options={}, version="reproduce.work/v1/default"):
             project_full_title = input("Enter project full title (options): ") or "Title goes here"
             project_abstract = input("Enter project abstract (optional): ") or "Abstract goes here."
             document_dir = input(f"Enter directory to ensure exists (Default: 'document'): ") or "document"
-        
+
+
 
     else:
         author1_email = inputs['authors']['author1']['email']
@@ -270,14 +299,15 @@ def generate_config(options={}, version="reproduce.work/v1/default"):
             verbose = inputs['verbose']
         verbose_str = "true" if verbose else "false"
 
-    if repro_version in ["reproduce.work/v1/default"]:
+    if default_repro_settings:
+        # version reproduce.work/v1/default
         document_dir = "document"
         input_file = f"{document_dir}/main.md"
         dynamic_file = f"{reproduce_dir}/pubdata.toml"
         latex_template = f"{document_dir}/latex/template.tex"
         bibfile =f"{document_dir}/latex/bibliography.bib"
-        output_linefile =f"{document_dir}/latex/compiled.tex"
-        output_file =f"{document_dir}/latex/compiled.pdf"
+        output_linefile =f"{document_dir}/latex/report.tex"
+        output_file =f"{document_dir}/report.pdf"
         watch_files = [input_file, dynamic_file, latex_template, bibfile]
 
     # ensure existence of reproduce_dir and latex subdirectory
@@ -287,7 +317,6 @@ def generate_config(options={}, version="reproduce.work/v1/default"):
     Path(f"{document_dir}/latex").mkdir(parents=True, exist_ok=True)
 
     # ensure existence of main.md
-    Path(input_file).touch()
     Path(input_file).touch()
     
     # Check for critical fields
@@ -340,6 +369,7 @@ docker build -t watcher https://github.com/reproduce-work/rwatch.git
         'repro_init_script': repro_init_script,
         'dev_image_tag': dev_image_tag,
         'reproduce_dir': reproduce_dir,
+        'output_linefile': output_linefile,
         'output_file': output_file,
         'document_dir': document_dir,
         'nbdev_project_cmd': nbdev_project_cmd
@@ -352,6 +382,8 @@ docker build -t watcher https://github.com/reproduce-work/rwatch.git
         # read in existing data
         with open(Path(reproduce_dir, 'config.toml'), 'r') as f:
             existing_config = toml.load(f)
+    else:
+        existing_config = {}
 
     with open(Path(reproduce_dir, 'config.toml'), 'w+') as f:
         f.write(config_str)
@@ -493,7 +525,7 @@ def update_watched_files(add=[], remove=[], quiet=False):
     import re
     new_develop_script = re.sub(
         r'watcher \"(.*?)\"', 
-        f'watcher \"{",".join(new_files)}\"', 
+        f'watcher \"{",".join([f.strip() for f in new_files])}\"'.strip().rstrip(","), 
         current_develop_script
     )
     base_config['repro']['stage']['develop']['script'] = new_develop_script
@@ -664,13 +696,127 @@ class ReproduceWorkEncoder(toml.TomlEncoder):
         if isinstance(v, str) and "\n" in v:
             return '"""\n' + v.strip() + '\n' + '"""'
         return super().dump_value(v)
+    
+
+class PublishedObj:
+    def __init__(self, value, metadata=None):
+        self.value = value
+        self._metadata = metadata or {}
+        
+        self._content = None
+        self._str_content = None
+
+        # Check if this is a file type and then load content if possible
+        if self._metadata.get('type') == 'file':
+            self.load_file_content()
+            
+    def __call__(self):
+        return self.value
+
+    def load_file_content(self):
+        # Check if file exists
+        if os.path.exists(self.value):
+            try:
+                with open(self.value, 'rb') as f:
+                    self._content = f.read()
+            except Exception as e:
+                printrw(f"Error reading file: {e}")
+
+            # If the file extension indicates it's a text type, load as string
+            if self.value.endswith(('.txt', '.csv', '.json')):  # add more text file extensions as needed
+                self._str_content = self._content.decode('utf-8', errors='replace')
+
+    @property
+    def content(self):
+        return self._content
+
+    @property
+    def str_content(self):
+        return self._str_content
+
+    @property
+    def metadata(self):
+        return self._metadata
+
+
+def check_for_embedded_objects(metadata, current_path=None, existing_results=None):
+    if existing_results is None:
+        result = {}
+    else:
+        result = existing_results.copy()
+    
+    # Initialize current_path as an empty list if it's None
+    if current_path is None:
+        current_path = []
+
+    for k, v in metadata.items():
+        new_path = current_path + [k]
+        
+        if isinstance(v, PublishedObj):
+            # Generate a key based on the current path
+            key = ".".join(new_path)
+            
+            #printrw(f"Found embedded object {k} at path {key}")
+
+            # Store the metadata
+            keys = key.split('.')
+            current_result = result
+            for k in keys[:-1]:
+                if k not in current_result:
+                    current_result[k] = {}
+                current_result = current_result[k]
+            
+            current_result[keys[-1]] = v#.metadata['published_url']
+
+        elif isinstance(v, dict):
+            # check recursively
+            new_result = check_for_embedded_objects(v, current_path=new_path, existing_results=result)
+            # Merge new results into the existing result dictionary
+            result.update(new_result)
+            
+    return result
+
+
 
 @requires_config
 def publish_data(content, name, metadata={}, watch=True):
     """
     Save data to default pubdata.toml file and register metadata.
     """
+    base_config = read_base_config()
+
+    # handle any embedded objects:
+    # recurse through metadata and find any objects that are of type PublishedObj
+    # and print out their names
+    embedded_objects = check_for_embedded_objects(metadata)
+
+    if embedded_objects:
+        for k,v in embedded_objects.items():
+            if isinstance(v, PublishedObj):
+                if base_config['repro']['verbose']:
+                    printrw(f"Found embedded object {k} at path {v}")
+                #dynamic_data[k] = v.metadata['published_url']
+                metadata[k] = v.metadata['published_url']
+            
+            elif isinstance(v,dict):
+                for k2,v2 in v.items():
+                    if isinstance(v2, PublishedObj):
+                        if base_config['repro']['verbose']:
+                            printrw(f"Found embedded at second level: {k}.{k2}: {v2}")
+                        #dynamic_data[rf'"{filename}".{k}'] = {f'{k2}': v2.metadata['published_url']}
+                        if k in metadata:
+                            metadata[k][k2] = v2.metadata['published_url']
+                        else:
+                            metadata[k] = {k2: v2.metadata['published_url']}
+                        
+                    else:
+                        raise Exception('ISSUE HERE: Only handle one level nesting for now')
+            
+            else:
+                raise Error('Only handle one level nesting for now')
+    
     # Capture metadata
+    
     timestamp = datetime.datetime.now().isoformat()
     inspect_filename = inspect.currentframe().f_back.f_code.co_filename
     python_version = sys.version.strip().replace('\n', ' ')
@@ -682,7 +828,6 @@ def publish_data(content, name, metadata={}, watch=True):
          
     # Store metadata
     new_metadata = {
-        "type": "data",
         "timestamp": timestamp,
         "content_hash": content_hash,
         "timed_hash": timed_hash,
@@ -704,11 +849,13 @@ def publish_data(content, name, metadata={}, watch=True):
     if metadata.get('type', '') == 'text/latex':
         # escape special characters
         metadata['value'] = content.replace('\\', '\\\\').replace('&', '\\&').replace('$', '\$')
+    elif isinstance(content, dict):
+        metadata['value'] = f'''{toml_dump(content)}'''
     else:
         metadata['value'] = content
 
     if watch:
-        update_watched_files(add=[Path(reproduce_dir, 'pubdata.toml').resolve().as_posix()])
+        update_watched_files(add=[Path(reproduce_dir, 'pubdata.toml').resolve().as_posix().replace('/home/jovyan/', '')])
 
     # check if dynamic file exists
     if not os.path.exists(Path(base_config['repro']['files']['dynamic'])):
@@ -721,26 +868,143 @@ def publish_data(content, name, metadata={}, watch=True):
     dynamic_data = existing_dynamic_data.copy()
     dynamic_data[name] = metadata
 
-    print({name: {k:v for k,v in var.items() if not any(k.startswith(prefix) for prefix in ['time'])} if isinstance(var, dict) else var for name,var in existing_dynamic_data.items()})
+    existing_vals = []
+    for k,v in existing_dynamic_data.items():
+        if isinstance(v, dict):
+            if 'value' in v:
+                existing_vals.append({k:v['value']})
+    
+    new_vals = []
+    for k,v in dynamic_data.items():
+        if isinstance(v, dict):
+            if 'value' in v:
+                new_vals.append({k:v['value']})
 
-    if (
-        {name: {k:v for k,v in var.items() if not k[:4] in ['time']} if isinstance(var, dict) else var for name,var in existing_dynamic_data.items()} !=\
-        {name: {k:v for k,v in var.items() if not k[:4] in ['time']} if isinstance(var, dict) else var for name,var in dynamic_data.items()}
-    ):
+
+    def is_equal(a, b):
+        try:
+            a = toml_dump(a)
+            b = toml_dump(b)
+            # Handle NumPy arrays
+            if isinstance(a, np.ndarray) or isinstance(b, np.ndarray):
+                return np.array_equal(a, b)
+            
+            # Handle lists and tuples
+            elif isinstance(a, (list, tuple)) and isinstance(b, (list, tuple)):
+                return len(a) == len(b) and all([is_equal(x, y) for x, y in zip(a, b)])
+            
+            # For other types, attempt a direct comparison
+            else:
+                return a == b
+            
+        except ValueError:
+            # If direct comparison raises a ValueError, assume they're not equal
+            printrw('ValueError: could not compare values: {} and {}'.format(a, b))
+            return False
+
+    #value_changed = any([not is_equal(v, new_vals[i]) for i, v in enumerate(existing_vals)])
+    #iterate through existing_vals and new_vals and check if any have changed
+    changed_vals = []
+    for i, v in enumerate(existing_vals):
+        if i<len(new_vals):
+            #if objects are identical, return False; otherwise return name(s) of variable(s) that changed
+            if not is_equal(v, new_vals[i]):
+                changed_vals.append(name)
+
+    # do same for reverse
+    for i, v in enumerate(new_vals):
+        if i<len(existing_vals):
+            if not is_equal(v, existing_vals[i]):
+                changed_vals.append(name)
+    
+    changed_vals = list(set(changed_vals))
+
+    if changed_vals:
+        value_changed = changed_vals
+    else:
+        value_changed = False
+    
+
+
+    existing_nontimefields = {name: {k:v for k,v in var.items() if (isinstance(k, str) and k[:4] not in ['time','valu'])} if isinstance(var, dict) else var for name,var in existing_dynamic_data.items()}
+    new_nontimefields = {name: {k:v for k,v in var.items() if (isinstance(k, str) and k[:4] not in ['time','valu'])} if isinstance(var, dict) else var for name,var in dynamic_data.items()}
+    which_changed = []
+    
+    if existing_nontimefields == new_nontimefields:
+        non_timefield_changed = False
+    else:
+        for name in existing_nontimefields:
+            if name in new_nontimefields:
+                if existing_nontimefields[name] != new_nontimefields[name]:
+                    which_changed.append(name)
+            else:
+                which_changed.append(name)
+        
+        for name in new_nontimefields:
+            if name not in existing_nontimefields:
+                which_changed.append(name)
+        
+        non_timefield_changed = which_changed
+
+    if value_changed:
+        which_changed = value_changed + which_changed
+        
+    if value_changed or non_timefield_changed:
         with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
             toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
         
         if base_config['repro']['verbose']:
-            printrw(f"Updated '{name}' in {base_config['repro']['files']['dynamic']}")
-            
+            if len(which_changed)>1:
+                printrw(f"Updated {which_changed} in {base_config['repro']['files']['dynamic']}")
+            else:
+                printrw(f"Updated {which_changed[0]} in {base_config['repro']['files']['dynamic']}")
 
-    
-
+    data_obj = PublishedObj(metadata['value'], metadata)
+    return data_obj
+                 
 @requires_config
 def publish_file(filename, metadata={}, watch=True):
     """
     Save content to a file and register metadata.
     """
+    
+    base_config = read_base_config()
+
+    # handle any embedded objects:
+    # recurse through metadata and find any objects that are of type PublishedObj
+    # and print out their names
+    embedded_objects = check_for_embedded_objects(metadata)
+
+    if embedded_objects:
+        for k,v in embedded_objects.items():
+            if isinstance(v, PublishedObj):
+                if base_config['repro']['verbose']:
+                    printrw(f"Found embedded object {k} at path {v}")
+                #dynamic_data[k] = v.metadata['published_url']
+                metadata[k] = v.metadata['published_url']
+            
+            elif isinstance(v,dict):
+                for k2,v2 in v.items():
+                    if isinstance(v2, PublishedObj):
+                        if base_config['repro']['verbose']:
+                            printrw(f"Found embedded at second level: {k}.{k2}: {v2}")
+                        #dynamic_data[rf'"{filename}".{k}'] = {f'{k2}': v2.metadata['published_url']}
+                        if k in metadata:
+                            metadata[k][k2] = v2.metadata['published_url']
+                        else:
+                            metadata[k] = {k2: v2.metadata['published_url']}
+                        
+                    else:
+                        raise Exception('ISSUE HERE: Only handle one level nesting for now')
+            
+            else:
+                raise Error('Only handle one level nesting for now')
+
+
+    for k,v in metadata.items():
+        if isinstance(v, dict):
+            #printrw('Dumping dict w/ toml')
+            metadata[k] = rf'{toml_dump(v)}'
 
     # Capture metadata
     timestamp = datetime.datetime.now().isoformat()
@@ -781,9 +1045,7 @@ def publish_file(filename, metadata={}, watch=True):
     else:
         new_metadata['generating_script'] = inspect_filename
 
-    base_config = read_base_config()
-    #reproduce_work_watched_files = base_config['repro.files.watch']
-
+    
     metadata.update(new_metadata)
 
     if watch:
@@ -797,7 +1059,19 @@ def publish_file(filename, metadata={}, watch=True):
     with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
         dynamic_data = toml.load(file)
 
+    
+
+    #remove quotes around filename if present
+    #printrw('filenamebefore:', filename)
+    filename = filename.rstrip('"').rstrip("'").lstrip('"').lstrip("'")
+    #printrw('filenameafter:', filename)
+
+    if r'"{filename}"' in dynamic_data:
+        printrw(f"WARNING: overwriting existing metadata for file {filename}")
+
     dynamic_data[filename] = metadata
+
+    printrw(dynamic_data)
 
     with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
         toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
@@ -805,7 +1079,8 @@ def publish_file(filename, metadata={}, watch=True):
     if 'verbosity' in base_config['repro'] and base_config['repro']['verbose']:
         printrw(f"Added metadata for file {filename} to dynamic file {base_config['repro']['files']['dynamic']}")
 
-    #return metadata
+    data_obj = PublishedObj(filename, metadata)
+    return data_obj
 
 
 
@@ -901,9 +1176,8 @@ def register_notebook(notebook_name, notebook_dir='nbs', quiet=False):
     update_watched_files(add=[notebook_path], quiet=True)
 
     if 'github_repo' in base_config['project']:
-        remote_url_val = f"https://github.com/{base_config['project']['github_repo']}"
-        interim_path = '/blob/main'
-        notebook_new_val = f"{remote_url_val}{interim_path}/{notebook_path}"
+        remote_url_val = f"https://github.com/{base_config['project']['github_repo']}/main/blob"
+        notebook_new_val = f"{remote_url_val}/{notebook_path}"
     else:
         notebook_new_val = Path(notebook_path).resolve().as_posix()
     

@@ -13,7 +13,7 @@ The low bar for publication in many scientific journals, has resulted in a liter
 In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. On top of the outright fraud and misconduct that is apparently common, there are more subtle forms research malpractice and human error that are known to pervade the published scientific literature as well, in the form of selective publication and $p$-hacking described above. On top of all this, the complexity of scientific code and restrictiveness of many data sharing agreements means that most published scientific results are not reproducible to even the lowest degree. 
 Among those concerned about reproducibility on all fronts, this has led to a call for heightened standards of reproducibility in scientific research. 
 
-To this end, we introduce a simple framework for achieving and demonstrating computational reproducibility, referred to as `reproduce.work`. The associated scientific development kit is designed to facilitate production of reproducible scientific computing projects by default. It features a full-featured computing environment (enabled by containerization) that is compatible with essentially any existing scientific workflow. The framework also features a suite of software that facilitates the publication of standardized computational reports with structured metadata. The framework is designed to be as simple as possible while accommodating a wide variety of scientific output. As a proof-of-concept version 0.0.1 example of this framework, the source code for this paper and the full stack containerized environment used to produce it are open source and can be found [here](\INSERT{config.project.full_url})\footnote{[\INSERT{config.project.full_url}](\INSERT{config.project.full_url})} run and in any modern computing environment. 
+To this end, we introduce a simple framework for achieving and demonstrating computational reproducibility, referred to as `reproduce.work`. The associated scientific development kit is designed to facilitate production of reproducible scientific computing projects by default. It features a full-featured computing environment (enabled by containerization) that is compatible with essentially any existing scientific workflow. The framework also features a suite of software that facilitates the publication of standardized computational reports with structured metadata. The framework is designed to be as simple as possible while accommodating a wide variety of scientific output. As a proof-of-concept version 0.0.1 example of this framework, the source code for this paper and the full stack containerized environment used to produce it are open source and can be found [here](\INSERT{config.project.base_url})\footnote{[\INSERT{config.project.base_url}](\INSERT{config.project.base_url})} run and in any modern computing environment. 
 
 
 
@@ -57,10 +57,12 @@ The reality, however, is that very few scientists have a reproducible "environme
 
 ### Existing efforts around reproducible science
 
-We wish to highlight the efforts of the [The ReScience Initiative](http://rescience.github.io/), which is an effort to publish the results of independent replications. They have developed a set of standards for publishing replications of scientific results, with a particular focus on reproducing projects in computational neuroscience, robotics, computer science, and bioinformatics \citep{ReScience}. We believe there is significant room for improvement of reproduction across many domains of scientific research, particularly in the economic and social sciences, including those of core business research such as management, marketing, and information systems. We hope our project can find its own niche of scientific adopters and view our efforts merely as a complement to the excellent work going on in other areas of science.
+We wish to highlight the efforts of the [The ReScience Initiative](http://rescience.github.io/), which is an effort to publish the results of independent replications. They have developed a set of standards for publishing replications of scientific results, with a particular focus on reproducing projects in computational neuroscience, robotics, computer science, and bioinformatics \citep{ReScience}. We believe there is significant room for improvement of reproduction across many domains of scientific research, particularly in the economic and social sciences, including those of core business research such as management, marketing, and information systems. We hope our project can find its own niche of scientific adopters and view our efforts merely as a complement to the excellent work going on in other areas of science.\footnote{Note that our disinction between "direct" and "conceptual replication" map on to the convention ReScience uses to distinguish between "reproduction" and "replication" \citep{ReScience}.}
 
-Note that our disinction between "direct" and "conceptual replication" map on to the convention ReScience uses to distinguish between "reproduction" and "replication":
 
+
+
+<!--%#comment-->
 \hyphenpenalty=10000 \exhyphenpenalty=10000
 \singlespacing
 
@@ -71,6 +73,8 @@ Reproduction verifies that a computation was recorded with enough detail that it
 
 \doublespacing
 \hyphenpenalty=100 \exhyphenpenalty=100
+<!--%#/comment-->
+
 
 In this project, we highlight our principle aim for the release versions revolve around \textit{reproduction} in this sense of the word, as should be implied by our definition of \textit{direct replication} above. However, we do also believe our framework may be used to also facilitate replication and meta-analysis in the future as well. We leave this as an open question for future versions of this project.
 
@@ -98,7 +102,7 @@ Our project is no panacea for the problem of human error and fraud. As such, it 
 \centering
 \caption{Different models of computation and composition.}
 \label{fig:comp}
-\includegraphics[width=\textwidth]{../../nbs/img/comp.pdf}
+\includegraphics[width=\textwidth]{../../../../img/comp.pdf}
 
 \vspace{2mm}
 \begin{minipage}{0.95\textwidth}
@@ -131,13 +135,15 @@ The concept is visualized in Figure \ref{fig:comp}. In this diagram, we communic
 \centering
 \caption{\texttt{reproduce.work} is a set of software and standards for scientific publishing}
 \label{fig:comp}
-\includegraphics[width=.85\textwidth]{../../nbs/img/reproduce_is.png}
+\includegraphics[width=.85\textwidth]{../../../../img/reproduce_is.png}
 \end{figure}
 <!--%#/latex-->
 
 ### The reproduce.work [`sci-dev-kit`](https://github.com/reproduce-work/sci-dev-kit)
 
 The `sci-dev-kit` is an [open repository of code](https://github.com/reproduce-work/sci-dev-kit)\footnote{[https://github.com/reproduce-work/sci-dev-kit](https://github.com/reproduce-work/sci-dev-kit)} that contains the basics of a reproducible scientific computing environment. It is designed to be a "starter kit" for scientific computing projects that are designed to be reproducible by default. Using the `sci-dev-kit` to its full potential requires the installation of [containerization software](https://www.docker.com/). Other than that, it is designed to be compatible with essentially any existing scientific workflow. 
+
+
 
 ### The reproduce.work [`standards`]() verification framework
 
@@ -148,28 +154,14 @@ The main pieces of metadata in our v0.0.1 standards framework include the follow
 
 With these two pieces of metadata, we are will be able to verify that the results reported in the published document are indeed reproducible. The `standards` framework is designed to be flexible and extensible, so that it can be adapted to a variety of scientific workflows. These standards currently lack many key features and will inevitably evolve over time. However, we believe that the core concept of a static ledger of structured metadata is a powerful one that can be used to facilitate the production of scientific reports that are both comprehensible and computationally reproducible.
 
-
 ## The medium is the message
 
 This document was produced using the `reproduce.work` framework; as such, we are able to automatically include and publish any data and metadata with links to the code is was used to generate any piece of data analyzed in this project. 
 
 As an example of this phenomenon, we simulated data from a simple linear model published the data to this project's repository using the `reproduce.work` metadata standards. The data has been visuzlied in Figure \ref{fig:scatter}; this figure and the code used to generate it are also openly available in this project's repository, as can be seen by clicking on the logo in the bottom right corner of the figure.
 
+\INSERT{"img/scatter_plot.pdf"}
 
-
-<!--%#latex-->
-\begin{figure}[h]
-\centering
-\begin{minipage}{0.75\textwidth}
-\centering
-\caption{A scatter plot generated using Python and compiled into this report using \texttt{reproduce.work} software}
-\label{fig:scatter}
-\includegraphics[width=.8\textwidth]{../../nbs/img/scatter_plot.pdf}
-
-\hfill {\footnotesize \href{https://example.com}{\texttt{open data} \raisebox{-1mm}{\includegraphics[width=5mm]{../../nbs/img/logo.png}} }} \hspace{-1.5mm}$\;$
-\end{minipage}
-\end{figure}
-<!--%#/latex-->
 
 We also include dynamic results from the output of statistical code as well, which has been embedded into this document in a way that facilitates tracing of its metadata and generating code. 
 
