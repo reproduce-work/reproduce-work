@@ -48,12 +48,12 @@ content_url = "https://github.com/reproduce-work/reproduce-work/blob/main/img/re
 generating_script = "https://github.com/reproduce-work/reproduce-work/blob/main/nbs/00_introduction.ipynb"
 
 [simple_string]
-published_url = "https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L50-L59"
+published_url = "https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml"
 generating_script = "https://github.com/reproduce-work/reproduce-work/blob/main/nbs/01_core.ipynb"
 type = "data"
-timestamp = "2023-10-11T02:18:28.220312"
+timestamp = "2023-10-11T03:05:35.160785"
 content_hash = "86fb269d190d2c85f6e0468ceca42a20"
-timed_hash = "f7dc5c7b12c6f689bc6859688a85e8f1"
+timed_hash = "8635dc606313cded7f1929040b357cf1"
 python_version = "3.9.13 | packaged by conda-forge | (main, May 27 2022, 17:23:23)  [GCC 10.3.0]"
 platform_info = "Linux-6.4.16-orbstack-00105-g14094bfeec09-aarch64-with-glibc2.35"
 value = "Hello world!"
