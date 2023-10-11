@@ -5,7 +5,8 @@ __all__ = ['reproduce_dir', 'dev_image_tag', 'VAR_REGISTRY', 'base_config', 'pri
            'toml_dump', 'ReproduceWorkEncoder', 'validate_base_config', 'requires_config', 'construct_config',
            'generate_config', 'test_validate_base_config', 'update_watched_files', 'get_cell_index',
            'check_for_defintion_in_context', 'serialize_to_toml', 'PublishedObj', 'check_for_embedded_objects',
-           'publish_data', 'publish_file', 'reproducible', 'publish_variable', 'register_notebook']
+           'replace_with_embedded_links', 'publish_data', 'generate_readable_key', 'publish_file', 'reproducible',
+           'register_notebook', 'find_pubdata_links', 'modify_links', 'process_pubdata_links']
 
 # %% ../nbs/01_core.ipynb 4
 import os
@@ -699,32 +700,49 @@ class ReproduceWorkEncoder(toml.TomlEncoder):
     
 
 class PublishedObj:
-    def __init__(self, value, metadata=None):
-        self.value = value
+    def __init__(self, key, metadata=None, filepath=None, value=None):
+        self.key = key
         self._metadata = metadata or {}
+        self._type = self._metadata.get('type', None)
+        self.value = value or self._metadata.get('value', None)
+        self.embedded_link = self._metadata.get('published_url', None)
         
         self._content = None
         self._str_content = None
 
         # Check if this is a file type and then load content if possible
-        if self._metadata.get('type') == 'file':
+        if self._type == 'file':
+            self.filepath = filepath
             self.load_file_content()
+            if self._str_content:
+                self.value = self._str_content
+        
+        elif self._type == 'data':
+            self.value = self._metadata.get('value', None)
+        
+        else:
+            self.value = self._metadata.get('value', None)
             
     def __call__(self):
         return self.value
 
     def load_file_content(self):
         # Check if file exists
-        if os.path.exists(self.value):
+        if os.path.exists(self.filepath):
             try:
-                with open(self.value, 'rb') as f:
+                with open(self.filepath, 'rb') as f:
                     self._content = f.read()
             except Exception as e:
-                printrw(f"Error reading file: {e}")
+                raise Exception(f"Error reading file: {e}")
 
             # If the file extension indicates it's a text type, load as string
-            if self.value.endswith(('.txt', '.csv', '.json')):  # add more text file extensions as needed
+            if self.filepath.endswith(('.txt', '.csv', '.json')):  # add more text file extensions as needed
                 self._str_content = self._content.decode('utf-8', errors='replace')
+
+    def get_embedded_link(self):
+        printrw('loading embedded link: ' + self._metadata['published_url'] + '#' + self.key)
+        self.embedded_link = self._metadata['published_url'] + '#' + self.key
+        return self.embedded_link
 
     @property
     def content(self):
@@ -739,6 +757,7 @@ class PublishedObj:
         return self._metadata
 
 
+
 def check_for_embedded_objects(metadata, current_path=None, existing_results=None):
     if existing_results is None:
         result = {}
@@ -749,33 +768,68 @@ def check_for_embedded_objects(metadata, current_path=None, existing_results=Non
     if current_path is None:
         current_path = []
 
-    for k, v in metadata.items():
-        new_path = current_path + [k]
-        
-        if isinstance(v, PublishedObj):
-            # Generate a key based on the current path
-            key = ".".join(new_path)
+    # Check if metadata is a list
+    if isinstance(metadata, list):
+        for idx, item in enumerate(metadata):
+            new_path = current_path + [str(idx)]
+            # If item is a dictionary or another list, check recursively
+            if isinstance(item, (dict, list)):
+                new_result = check_for_embedded_objects(item, current_path=new_path, existing_results=result)
+                result.update(new_result)
+            # If item is an instance of PublishedObj, process it
+            elif isinstance(item, PublishedObj):
+                key = ".".join(new_path)
+                # Process as per your original logic
+                keys = key.split('.')
+                current_result = result
+                for k in keys[:-1]:
+                    if k not in current_result:
+                        current_result[k] = {}
+                    current_result = current_result[k]
+                current_result[keys[-1]] = item#.metadata['published_url']
+    elif isinstance(metadata, dict):
+        for k, v in metadata.items():
+            new_path = current_path + [k]
             
-            #printrw(f"Found embedded object {k} at path {key}")
+            if isinstance(v, PublishedObj):
+                # Generate a key based on the current path
+                key = ".".join(new_path)
+                # Store the metadata
+                keys = key.split('.')
+                current_result = result
+                for k in keys[:-1]:
+                    if k not in current_result:
+                        current_result[k] = {}
+                    current_result = current_result[k]
+                current_result[keys[-1]] = v#.metadata['published_url']
 
-            # Store the metadata
-            keys = key.split('.')
-            current_result = result
-            for k in keys[:-1]:
-                if k not in current_result:
-                    current_result[k] = {}
-                current_result = current_result[k]
-            
-            current_result[keys[-1]] = v#.metadata['published_url']
+            elif isinstance(v, (dict, list)):
+                # check recursively
+                new_result = check_for_embedded_objects(v, current_path=new_path, existing_results=result)
+                # Merge new results into the existing result dictionary
+                result.update(new_result)
 
-        elif isinstance(v, dict):
-            # check recursively
-            new_result = check_for_embedded_objects(v, current_path=new_path, existing_results=result)
-            # Merge new results into the existing result dictionary
-            result.update(new_result)
-            
+    else:
+        raise Exception(f'Unknown metadata type: {type(metadata)}')
+
     return result
 
+def replace_with_embedded_links(obj):
+    """
+    Recursively replace PublishedObj instances with the result of their get_embedded_link method.
+    """
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            if isinstance(value, PublishedObj):
+                obj[key] = value.get_embedded_link()
+            else:
+                replace_with_embedded_links(value)
+    elif isinstance(obj, list):
+        for idx, item in enumerate(obj):
+            if isinstance(item, PublishedObj):
+                obj[idx] = item.get_embedded_link()
+            else:
+                replace_with_embedded_links(item)
 
 
 @requires_config
@@ -789,34 +843,12 @@ def publish_data(content, name, metadata={}, watch=True):
     # recurse through metadata and find any objects that are of type PublishedObj
     # and print out their names
     embedded_objects = check_for_embedded_objects(metadata)
-
     if embedded_objects:
-        for k,v in embedded_objects.items():
-            if isinstance(v, PublishedObj):
-                if base_config['repro']['verbose']:
-                    printrw(f"Found embedded object {k} at path {v}")
-                #dynamic_data[k] = v.metadata['published_url']
-                metadata[k] = v.metadata['published_url']
-            
-            elif isinstance(v,dict):
-                for k2,v2 in v.items():
-                    if isinstance(v2, PublishedObj):
-                        if base_config['repro']['verbose']:
-                            printrw(f"Found embedded at second level: {k}.{k2}: {v2}")
-                        #dynamic_data[rf'"{filename}".{k}'] = {f'{k2}': v2.metadata['published_url']}
-                        if k in metadata:
-                            metadata[k][k2] = v2.metadata['published_url']
-                        else:
-                            metadata[k] = {k2: v2.metadata['published_url']}
-                        
-                    else:
-                        raise Exception('ISSUE HERE: Only handle one level nesting for now')
-            
-            else:
-                raise Error('Only handle one level nesting for now')
+        metadata_copy = metadata.copy()
+        replace_with_embedded_links(metadata_copy)
+        metadata = metadata_copy.copy()
     
-    # Capture metadata
-    
+    # Capture dynamic metadata
     timestamp = datetime.datetime.now().isoformat()
     inspect_filename = inspect.currentframe().f_back.f_code.co_filename
     python_version = sys.version.strip().replace('\n', ' ')
@@ -828,6 +860,7 @@ def publish_data(content, name, metadata={}, watch=True):
          
     # Store metadata
     new_metadata = {
+        "type": "data",
         "timestamp": timestamp,
         "content_hash": content_hash,
         "timed_hash": timed_hash,
@@ -959,17 +992,55 @@ def publish_data(content, name, metadata={}, watch=True):
             else:
                 printrw(f"Updated {which_changed[0]} in {base_config['repro']['files']['dynamic']}")
 
-    data_obj = PublishedObj(metadata['value'], metadata)
+    data_obj = PublishedObj(name, metadata)
+    data_obj.get_embedded_link()
     return data_obj
-                 
+
+def generate_readable_key(path):
+    # Extract the filename from the path
+    filename = path.split("/")[-1]
+    
+    # Replace slashes, dots, and underscores with TOML-compatible delimiters
+    transformed_filename = filename.replace("_", "_us_").replace("/", "__").replace(".", "_dot_")
+    
+    # Compute the hash of the entire path
+    hash_value = hashlib.sha256(path.encode()).hexdigest()
+
+    # Chop off everything after and including "_dot_"
+    keyname = transformed_filename.split("_dot_")[0]
+    
+    # Replace "_us_" with "_"
+    keyname = keyname.replace("_us_", "_")
+    
+    # Combine the transformed filename with the first 8 characters of the hash
+    key = f"{keyname}_{hash_value[:8]}"
+    
+    return key
+
+  
 @requires_config
-def publish_file(filename, metadata={}, watch=True):
+def publish_file(filepath, key=None, metadata={}, watch=True):
     """
     Save content to a file and register metadata.
     """
+    if metadata is None:
+        metadata = {}
     
     base_config = read_base_config()
 
+    if key is None:
+        key = generate_readable_key(filepath)
+
+
+    embedded_objects = check_for_embedded_objects(metadata)
+    if embedded_objects:
+        print(metadata)
+        metadata_copy = metadata.copy()
+        replace_with_embedded_links(metadata_copy)
+        metadata = metadata_copy.copy()
+        print(metadata)
+
+    '''
     # handle any embedded objects:
     # recurse through metadata and find any objects that are of type PublishedObj
     # and print out their names
@@ -990,15 +1061,34 @@ def publish_file(filename, metadata={}, watch=True):
                             printrw(f"Found embedded at second level: {k}.{k2}: {v2}")
                         #dynamic_data[rf'"{filename}".{k}'] = {f'{k2}': v2.metadata['published_url']}
                         if k in metadata:
-                            metadata[k][k2] = v2.metadata['published_url']
+                            if isinstance(metadata[k], list):
+                                k2 = int(k2)
+                            metadata[k][k2] = v2.get_embedded_link()
                         else:
-                            metadata[k] = {k2: v2.metadata['published_url']}
+                            metadata[k] = {k2: v2.get_embedded_link()}
                         
                     else:
-                        raise Exception('ISSUE HERE: Only handle one level nesting for now')
+                        printrw(f'{k}\n{v}\n{k2}\n{v2}')
+                        raise Exception(f'^ISSUE HERE: Only handle one level nesting for now: \n{k}\n{v}\n{k2}\n{v2}')
             
+            elif isinstance(v, list):
+                for i, v2 in enumerate(v):
+                    if isinstance(v2, PublishedObj):
+                        if base_config['repro']['verbose']:
+                            printrw(f"Found embedded at second level: {k}.{i}: {v2}")
+                        #dynamic_data[rf'"{filename}".{k}'] = {f'{k2}': v2.metadata['published_url']}
+                        if k in metadata:
+                            metadata[k][i] = v2.get_embedded_link()
+                        else:
+                            metadata[k] = {i: v2.get_embedded_link()}
+                        
+                    else:
+                        printrw(k,v,v2)
+                        raise Exception('^^ISSUE HERE: Only handle one level nesting for now')
+
             else:
                 raise Error('Only handle one level nesting for now')
+    '''
 
 
     for k,v in metadata.items():
@@ -1008,13 +1098,19 @@ def publish_file(filename, metadata={}, watch=True):
 
     # Capture metadata
     timestamp = datetime.datetime.now().isoformat()
-    inspect_filename = inspect.currentframe().f_back.f_code.co_filename
-    #python_version = sys.version.strip().replace('\n', ' ')
-    #platform_info = platform.platform()
+    
+    if 'co_filepath' in inspect.currentframe().f_back.f_code.__dir__():
+        # check if in Jupyter environment has co_filepath
+        inspect_filepath = inspect.currentframe().f_back.f_code.co_filepath
+    else:
+        inspect_filepath = ''
+
+    python_version = sys.version.strip().replace('\n', ' ')
+    platform_info = platform.platform()
 
     # generate cryptographic hash of file contents
 
-    with open(filename, 'rb') as file:
+    with open(filepath, 'rb') as file:
         content = file.read()
 
     content_hash = hashlib.md5(content).hexdigest()
@@ -1025,11 +1121,12 @@ def publish_file(filename, metadata={}, watch=True):
     # Store metadata
     new_metadata = {
         "type": "file",
+        "filepath": filepath,
         "timestamp": timestamp,
-        #"python_version": python_version,
-        #"platform_info": platform_info,
+        "python_version": python_version,
+        "platform_info": platform_info,
         "content_hash": content_hash,
-        "timed_hash": timed_hash,
+        "timed_hash": timed_hash
         #"save_context": save_context,
         #"definition_context": definition_context
     }
@@ -1037,19 +1134,12 @@ def publish_file(filename, metadata={}, watch=True):
     if cell_index:
         new_metadata["cell_index"] = cell_index
 
-    if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
-        new_metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{filename}"
-
-    if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
-        new_metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
-    else:
-        new_metadata['generating_script'] = inspect_filename
 
     
     metadata.update(new_metadata)
 
     if watch:
-        update_watched_files(add=[filename])
+        update_watched_files(add=[filepath])
 
     # check if dynamic file exists
     if not os.path.exists(Path(base_config['repro']['files']['dynamic'])):
@@ -1059,24 +1149,27 @@ def publish_file(filename, metadata={}, watch=True):
     with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
         dynamic_data = toml.load(file)
 
-    dub_quot_,sing_quot_ =r'"{filename}"' in dynamic_data, rf"'{filename}'" in dynamic_data
-    if dub_quot_ or sing_quot_:
-        printrw(f"Overwriting existing metadata for file {filename}")
-        existing_dyndata = dynamic_data.pop(dub_quot_ if dub_quot_ else sing_quot_)
-        existing_dyndata.update(metadata)
-        metadata = existing_dyndata
+    if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
+        metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{base_config['repro']['files']['dynamic']}"
+        metadata['content_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{filepath}"
 
-    dynamic_data[filename] = metadata
+    if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
+        metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
+    else:
+        metadata['generating_script'] = inspect_filepath
 
-    printrw(dynamic_data)
+    dynamic_data[key] = metadata
+
+    #printrw(dynamic_data)
 
     with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
         toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
 
     if 'verbosity' in base_config['repro'] and base_config['repro']['verbose']:
-        printrw(f"Added metadata for file {filename} to dynamic file {base_config['repro']['files']['dynamic']}")
+        printrw(f"Added metadata for file {filepath} to dynamic file {base_config['repro']['files']['dynamic']}")
 
-    data_obj = PublishedObj(filename, metadata)
+    data_obj = PublishedObj(key, metadata=metadata, filepath=filepath)
+    data_obj.get_embedded_link()
     return data_obj
 
 
@@ -1144,10 +1237,6 @@ def reproducible(var_assignment_func):
         return result
     return wrapper
 
-@reproducible
-def publish_variable(value, var_name, metadata={}):
-    globals()[var_name] = value
-
 
 @requires_config
 def register_notebook(notebook_name, notebook_dir='nbs', quiet=False):
@@ -1191,3 +1280,193 @@ def register_notebook(notebook_name, notebook_dir='nbs', quiet=False):
         printrw(f"Registered notebook {notebook_new_val} in {reproduce_dir}/config.toml")
     #return True
 
+
+# %% ../nbs/01_core.ipynb 17
+def find_pubdata_links():
+    base_config = read_base_config()
+    dynamic_file = base_config['repro']['files']['dynamic']
+    with open(dynamic_file, 'r') as f:
+        content = f.read()
+    
+    # Adjusted pattern to capture optional #hash
+    pattern_old = r"['\"]?(\w+)['\"]?\s*[:=]\s*['\"]?([^'\"]*pubdata\.toml(?:#([\w\d_\-]+))?)[\"']?"
+    pattern = r"['\"]?(\w+)['\"]?\s*[:=]\s*(?:\[\s*)?['\"]?([^'\"]*pubdata\.toml(?:#([\w\d_\-]+))?)[\"']?"
+
+    
+    results = []
+    lines = content.splitlines()
+    for match in re.finditer(pattern, content):
+        # Extract matched data
+        var_name = match.group(1)
+        path = match.group(2)
+        hash_name = match.group(3)
+        
+        # For captured hash, identify line number of the corresponding [var] table
+        #hash_line_number = None
+        if hash_name:
+            for i, line in enumerate(lines):
+                if line.strip() == f"[{hash_name}]":
+                    hash_line_number = i + 1  # +1 because line numbers are 1-indexed
+                    break
+        
+        # Extract matched path details
+        start_pos = match.start(2)
+        end_pos = match.end(2)
+        line_number = content.count('\n', 0, start_pos) + 1  # +1 because line numbers are 1-indexed
+
+        # Identify contiguous lines before the matched line
+        start_line = line_number
+        for i in range(line_number - 1, 0, -1):  # Start from the line before the match
+            line = lines[i - 1].strip()  # -1 because list indices are 0-indexed
+            if not line and "'''" not in line and '"""' not in line:
+                break
+            start_line = i
+        
+        # Identify contiguous lines after the matched line
+        end_line = line_number
+        for i in range(line_number, len(lines)):
+            line = lines[i].strip()
+            if not line and "'''" not in line and '"""' not in line:
+                break
+            end_line = i + 1  # +1 because line numbers are 1-indexed
+
+        # Extract the first line of the chunk
+        toml_header = lines[start_line - 1].strip()  # -1 because list indices are 0-indexed
+        
+        result_data = {
+            "variable": var_name,
+            "path": path,
+            "start_pos": start_pos,
+            "end_pos": end_pos,
+            "line_range": (start_line, end_line),
+            "toml_header": toml_header,
+            "on_line": line_number,
+            'at_char': start_pos - content.rfind('\n', 0, start_pos),
+        }
+        
+        if hash_name:
+            result_data["hash"] = hash_name
+        else:
+            result_data["hash"] = None
+        
+        
+        results.append(result_data)
+    
+    final_results = []
+    for r in results:
+        if 'variable' in r.keys() and 'path' in r.keys():
+            if r['variable'] + r['path'][:2] in ['https//','http//']:
+                continue
+        
+        # if r['hash'] resembles 'L{DIGITS}(\-L{DIGITS})?', then continue
+        #if 'hash' in r.keys() and r['hash']:
+        #    if re.match(r'L\d+(\-L\d+)?', r['hash']):
+        #        continue
+            
+        final_results.append(r)              
+    
+    return final_results
+
+# Testing the function might not work directly here due to the undefined `read_base_config` function and missing `base_config`.
+# However, the function's logic should be applicable to your requirements.
+
+
+# %% ../nbs/01_core.ipynb 19
+def modify_links(linenum, link_str, newlink):
+
+    base_config = read_base_config()
+    pubdata_loc = Path(base_config['repro']['files']['dynamic'])
+
+    with open(pubdata_loc, 'r') as f:
+        content = f.read()
+
+    lines = content.splitlines()
+    content_line = lines[linenum-1]
+
+    # Define a replacement function that retains the original hash (if present) and appends the linehash
+    def replacement(match):
+        # Determine the type of quote used based on the first character of the matched link
+        quote_type = match.group(1)[0]
+        
+        return f'{quote_type}{newlink}{quote_type}'  # Construct the replacement string
+
+    # Patterns to match the link (double or single quoted) and capture the hash if present
+    double_quoted_pattern = rf'("{link_str})(#.*?)?"'
+    single_quoted_pattern = rf'(\'{link_str})(#.*?)?\''
+
+    # Apply the replacement for both double and single quoted links
+    new_content_line = re.sub(double_quoted_pattern, replacement, content_line)
+    new_content_line = re.sub(single_quoted_pattern, replacement, new_content_line)
+
+    lines[linenum-1] = new_content_line
+    new_content = '\n'.join(lines)
+
+    with open(pubdata_loc, 'w') as f:
+        f.write(new_content)
+
+    return content_line
+
+
+
+def process_pubdata_links(verbose=False):
+    #base_config = read_base_config()
+    #verbose = base_config['repro']['verbose']
+    publinks = find_pubdata_links()
+    pldf = pd.DataFrame(publinks)
+
+    pldf_og = pldf.copy
+
+    # iterate through find the self-referenential links first,
+    # i.e., those for which the "variable" of the link is "published_url"
+    vars = (pldf.variable=='published_url')
+    top_level_vars = pldf.loc[vars,'toml_header'].str.slice(1,-1).tolist()
+    for var in top_level_vars:
+        # find the linkdata for this variable
+        linkdata = pldf.query(f"toml_header=='[{var}]' and variable=='published_url'")
+        linkdata = linkdata.iloc[0]
+
+        #if end of linkpath already ends with pattern like `#L[numbers]` or `#L[numbers]-L[numbers]`, continue
+        if re.match(r'.*#L\d+(\-L\d+)?', linkdata.path):
+            continue
+
+        llo, lhi = (linkdata.line_range)
+        newlink = linkdata.path + f'#L{llo}-L{lhi}'
+        if verbose:
+            printrw(f'modify_links({linkdata.on_line}, {linkdata.path}, {newlink})')
+        modify_links(linkdata.on_line, linkdata.path, newlink)
+        
+    publinks = find_pubdata_links()
+    pldf = pd.DataFrame(publinks)
+    top_var_links = dict(zip(
+        pldf.loc[vars,'toml_header'].str.slice(1,-1).tolist(), 
+        pldf.loc[vars,'path'].tolist()
+    ))
+
+    nontop_vars = pldf.loc[~vars,].index.tolist()
+
+    for linktext_idx in nontop_vars:
+        linkdata = pldf.loc[linktext_idx]
+
+        #print(linktext_idx, linkdata)
+
+        if re.match(r'.*#L\d+(\-L\d+)?', linkdata.path):
+            continue
+        
+        if (
+            ('hash' in linkdata and linkdata['hash'] in top_var_links.keys()) or \
+            ('variable' in linkdata and linkdata['variable'] in top_var_links.keys())
+        ):
+            
+            target_var = linkdata['hash'] if ('hash' in linkdata and linkdata['hash']) else linkdata['variable']
+            newlink = top_var_links[target_var]
+
+            if verbose:
+                printrw(f'modify_links({linkdata.on_line}, {linkdata.path}, {newlink})')
+                modify_links(linkdata.on_line, linkdata.path, newlink)
+
+        else:
+            raise Exception(f"Could not find link target for {linkdata['path']}")
+
+
+
+    return pldf_og
