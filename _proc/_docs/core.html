@@ -529,262 +529,263 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>            project_abstract <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter project abstract (optional): "</span>) <span class="kw">or</span> <span class="st">"Abstract goes here."</span></span>
 <span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>            document_dir <span class="op">=</span> <span class="bu">input</span>(<span class="ss">f"Enter directory to ensure exists (Default: 'document'): "</span>) <span class="kw">or</span> <span class="st">"document"</span></span>
 <span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>        author1_email <span class="op">=</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>][<span class="st">'email'</span>]</span>
-<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'name'</span> <span class="kw">in</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>]:</span>
-<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a>            author1_name <span class="op">=</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>][<span class="st">'name'</span>]</span>
-<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>            author1_name <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'affiliation'</span> <span class="kw">in</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>]:</span>
-<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>            author1_affiliation <span class="op">=</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>][<span class="st">'affiliation'</span>]</span>
-<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a>            author1_affiliation <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>        dev_image_tag <span class="op">=</span> inputs[<span class="st">'dev_image_tag'</span>]</span>
-<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>        github_repo <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>        project_base_url <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>        project_full_title <span class="op">=</span> <span class="st">'Title goes here'</span></span>
-<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>        project_abstract <span class="op">=</span> <span class="st">'Abstract goes here.'</span></span>
-<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'project'</span> <span class="kw">in</span> inputs:</span>
-<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'full_title'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
-<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>                project_full_title <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'full_title'</span>]</span>
-<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'abstract'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
-<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>                project_abstract <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'abstract'</span>]</span>
-<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'github_repo'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
-<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>                github_repo <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'github_repo'</span>]</span>
-<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'project_base_url'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
-<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>                project_base_url <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'base_url'</span>]</span>
-<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'repro'</span> <span class="kw">in</span> inputs <span class="kw">and</span> <span class="bu">type</span>(inputs[<span class="st">'repro'</span>]<span class="op">==</span><span class="bu">str</span>) <span class="kw">and</span> inputs[<span class="st">'repro'</span>] <span class="op">==</span> <span class="st">'default'</span>:</span>
-<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>            default_repro_settings <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>            nbdev_project <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>            repro_version <span class="op">=</span> <span class="st">"reproduce.work/v1/default"</span></span>
-<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>            repro_version <span class="op">=</span> <span class="st">"reproduce.work/v1/default"</span></span>
-<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'repro'</span> <span class="kw">in</span> inputs <span class="kw">and</span> <span class="st">'version'</span> <span class="kw">in</span> inputs[<span class="st">'repro'</span>]:</span>
-<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>                repro_version <span class="op">=</span> inputs[<span class="st">'repro'</span>][<span class="st">'version'</span>]</span>
-<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>            nbdev_project <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'nbdev_project'</span> <span class="kw">in</span> inputs:</span>
-<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>                nbdev_project <span class="op">=</span> inputs[<span class="st">'nbdev_project'</span>]</span>
-<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'document_dir'</span> <span class="kw">in</span> inputs:</span>
-<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>                document_dir <span class="op">=</span> inputs[<span class="st">'document_dir'</span>]</span>
-<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a>                document_dir <span class="op">=</span> <span class="st">'document'</span></span>
-<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>        verbose <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'verbose'</span> <span class="kw">in</span> inputs:</span>
-<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>            verbose <span class="op">=</span> inputs[<span class="st">'verbose'</span>]</span>
-<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>        verbose_str <span class="op">=</span> <span class="st">"true"</span> <span class="cf">if</span> verbose <span class="cf">else</span> <span class="st">"false"</span></span>
-<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> default_repro_settings:</span>
-<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>        <span class="co"># version reproduce.work/v1/default</span></span>
-<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a>        document_dir <span class="op">=</span> <span class="st">"document"</span></span>
-<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>        input_file <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/main.md"</span></span>
-<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a>        dynamic_file <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>reproduce_dir<span class="sc">}</span><span class="ss">/pubdata.toml"</span></span>
-<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>        latex_template <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex/template.tex"</span></span>
-<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a>        bibfile <span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex/bibliography.bib"</span></span>
-<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>        output_linefile <span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex/report.tex"</span></span>
-<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a>        output_file <span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/report.pdf"</span></span>
-<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>        watch_files <span class="op">=</span> [input_file, dynamic_file, latex_template, bibfile]</span>
-<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure existence of reproduce_dir and latex subdirectory</span></span>
-<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure existence of document_dir and latex subdirectory</span></span>
-<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>    Path(document_dir).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>    Path(<span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex"</span>).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure existence of main.md</span></span>
-<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>    Path(input_file).touch()</span>
-<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check for critical fields</span></span>
-<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> dev_image_tag:</span>
-<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>        printrw(<span class="st">"Error: Missing required key 'dev_image_tag'."</span>)</span>
-<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>    nbdev_project_cmd <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> nbdev_project:</span>
-<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a>        nbdev_project_cmd <span class="op">=</span> <span class="st">'</span><span class="ch">\n</span><span class="st">nbdev_install_hooks &amp;&amp; nbdev_export'</span></span>
-<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a>    github_repo_str <span class="op">=</span> <span class="st">''</span></span>
-<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> github_repo:</span>
-<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a>        github_repo_str <span class="op">=</span> <span class="ss">f'</span><span class="ch">\n</span><span class="ss">github_repo = "</span><span class="sc">{</span>github_repo<span class="sc">}</span><span class="ss">"'</span></span>
-<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> project_base_url <span class="kw">and</span> github_repo:</span>
-<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>        project_base_url <span class="op">=</span> <span class="ss">f"https://github.com/</span><span class="sc">{</span>github_repo<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> project_base_url:</span>
-<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a>        base_url_str <span class="op">=</span> <span class="ss">f'</span><span class="ch">\n</span><span class="ss">base_url = "</span><span class="sc">{</span>project_base_url<span class="sc">}</span><span class="ss">"'</span></span>
-<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>        base_url_str <span class="op">=</span> <span class="st">''</span></span>
-<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a>    <span class="co">#reproduce_dir_default = f"{reproduce_dir}"  # this can be changed if needed</span></span>
-<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a>    <span class="co">#reproduce_dir = input(f"Enter reproduce directory (Default: {reproduce_dir_default}): ") or reproduce_dir_default</span></span>
-<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a>    repro_init_script <span class="op">=</span> <span class="ss">f'''docker build -t </span><span class="sc">{</span>dev_image_tag<span class="sc">}</span><span class="ss"> .</span></span>
-<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a><span class="ss">docker build -t tex-prepare https://github.com/reproduce-work/tex-prepare.git</span></span>
-<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a><span class="ss">docker build -t tex-compile https://github.com/reproduce-work/tex-compile.git</span></span>
-<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="ss">docker build -t watcher https://github.com/reproduce-work/rwatch.git</span></span>
-<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a><span class="ss">'''</span></span>
-<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure reproduce_dir exists</span></span>
-<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a>    Path(reproduce_dir).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {</span>
-<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1_email'</span>: author1_email,</span>
-<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1_name'</span>: author1_name,</span>
-<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1_affiliation'</span>: author1_affiliation,</span>
-<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a>        <span class="st">'project_full_title'</span>: project_full_title,</span>
-<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a>        <span class="st">'project_abstract'</span>: project_abstract,</span>
-<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a>        <span class="st">'github_repo_str'</span>: github_repo_str,</span>
-<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a>        <span class="st">'base_url_str'</span>: base_url_str,</span>
-<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro_version'</span>: repro_version,</span>
-<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a>        <span class="st">'verbose_str'</span>: verbose_str,</span>
-<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>        <span class="st">'input_file'</span>: input_file,</span>
-<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dynamic_file'</span>: dynamic_file,</span>
-<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>        <span class="st">'latex_template'</span>: latex_template,</span>
-<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>        <span class="st">'bibfile'</span>: bibfile,</span>
-<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>        <span class="st">'watch_files'</span>: watch_files,</span>
-<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro_init_script'</span>: repro_init_script,</span>
-<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dev_image_tag'</span>: dev_image_tag,</span>
-<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>        <span class="st">'reproduce_dir'</span>: reproduce_dir,</span>
-<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>        <span class="st">'output_linefile'</span>: output_linefile,</span>
-<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>        <span class="st">'output_file'</span>: output_file,</span>
-<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>        <span class="st">'document_dir'</span>: document_dir,</span>
-<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>        <span class="st">'nbdev_project_cmd'</span>: nbdev_project_cmd</span>
-<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>    config_str <span class="op">=</span> construct_config(options)</span>
-<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check for existing config.toml</span></span>
-<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(Path(reproduce_dir, <span class="st">'config.toml'</span>)):</span>
-<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>        <span class="co"># read in existing data</span></span>
-<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>            existing_config <span class="op">=</span> toml.load(f)</span>
-<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>        existing_config <span class="op">=</span> {}</span>
-<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'w+'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>        f.write(config_str)</span>
-<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a>    <span class="co"># By default, TOML files cannot reference variables defined earlier in the file</span></span>
-<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is a hack to get around that which allows me to read in the TOML data,</span></span>
-<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and then backfill the watch command with the files listed in the TOML file itself.</span></span>
-<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'\INSERT</span><span class="sc">{watch_cmd_here}</span><span class="st">'</span> <span class="kw">in</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>).read():</span>
-<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a>            base_config_str <span class="op">=</span> f.read()</span>
-<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>        replaced_config <span class="op">=</span> base_config_str.replace(</span>
-<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>            <span class="st">'\INSERT</span><span class="sc">{watch_cmd_here}</span><span class="st">'</span>, </span>
-<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"""docker run watcher "</span><span class="sc">{</span><span class="st">','</span><span class="sc">.</span>join(watch_files)<span class="sc">}</span><span class="ss">" "echo </span><span class="ch">\"</span><span class="ss">File has changed!</span><span class="ch">\"</span><span class="ss"> &amp;&amp; build_cmd" """</span></span>
-<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a>            f.write(replaced_config)</span>
-<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>        printrw(<span class="st">'did not replace watch command'</span>)</span>
-<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>            nbdev_project <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>        author1_email <span class="op">=</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>][<span class="st">'email'</span>]</span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'name'</span> <span class="kw">in</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>]:</span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a>            author1_name <span class="op">=</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>][<span class="st">'name'</span>]</span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a>            author1_name <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'affiliation'</span> <span class="kw">in</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>]:</span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>            author1_affiliation <span class="op">=</span> inputs[<span class="st">'authors'</span>][<span class="st">'author1'</span>][<span class="st">'affiliation'</span>]</span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>            author1_affiliation <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>        dev_image_tag <span class="op">=</span> inputs[<span class="st">'dev_image_tag'</span>]</span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>        github_repo <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>        project_base_url <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>        project_full_title <span class="op">=</span> <span class="st">'Title goes here'</span></span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>        project_abstract <span class="op">=</span> <span class="st">'Abstract goes here.'</span></span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'project'</span> <span class="kw">in</span> inputs:</span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'full_title'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>                project_full_title <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'full_title'</span>]</span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'abstract'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>                project_abstract <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'abstract'</span>]</span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'github_repo'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>                github_repo <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'github_repo'</span>]</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'project_base_url'</span> <span class="kw">in</span> inputs[<span class="st">'project'</span>]:</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>                project_base_url <span class="op">=</span> inputs[<span class="st">'project'</span>][<span class="st">'base_url'</span>]</span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'repro'</span> <span class="kw">in</span> inputs <span class="kw">and</span> <span class="bu">type</span>(inputs[<span class="st">'repro'</span>]<span class="op">==</span><span class="bu">str</span>) <span class="kw">and</span> inputs[<span class="st">'repro'</span>] <span class="op">==</span> <span class="st">'default'</span>:</span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>            default_repro_settings <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>            nbdev_project <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>            repro_version <span class="op">=</span> <span class="st">"reproduce.work/v1/default"</span></span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>            repro_version <span class="op">=</span> <span class="st">"reproduce.work/v1/default"</span></span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'repro'</span> <span class="kw">in</span> inputs <span class="kw">and</span> <span class="st">'version'</span> <span class="kw">in</span> inputs[<span class="st">'repro'</span>]:</span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>                repro_version <span class="op">=</span> inputs[<span class="st">'repro'</span>][<span class="st">'version'</span>]</span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>            nbdev_project <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'nbdev_project'</span> <span class="kw">in</span> inputs:</span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>                nbdev_project <span class="op">=</span> inputs[<span class="st">'nbdev_project'</span>]</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'document_dir'</span> <span class="kw">in</span> inputs:</span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a>                document_dir <span class="op">=</span> inputs[<span class="st">'document_dir'</span>]</span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a>                document_dir <span class="op">=</span> <span class="st">'document'</span></span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a>        verbose <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'verbose'</span> <span class="kw">in</span> inputs:</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>            verbose <span class="op">=</span> inputs[<span class="st">'verbose'</span>]</span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>        verbose_str <span class="op">=</span> <span class="st">"true"</span> <span class="cf">if</span> verbose <span class="cf">else</span> <span class="st">"false"</span></span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> default_repro_settings:</span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a>        <span class="co"># version reproduce.work/v1/default</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>        document_dir <span class="op">=</span> <span class="st">"document"</span></span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a>        input_file <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/main.md"</span></span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>        dynamic_file <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>reproduce_dir<span class="sc">}</span><span class="ss">/pubdata.toml"</span></span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a>        latex_template <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex/template.tex"</span></span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>        bibfile <span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex/bibliography.bib"</span></span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a>        output_linefile <span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex/report.tex"</span></span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>        output_file <span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/report.pdf"</span></span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>        watch_files <span class="op">=</span> [input_file, dynamic_file, latex_template, bibfile]</span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure existence of reproduce_dir and latex subdirectory</span></span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure existence of document_dir and latex subdirectory</span></span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>    Path(document_dir).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a>    Path(<span class="ss">f"</span><span class="sc">{</span>document_dir<span class="sc">}</span><span class="ss">/latex"</span>).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure existence of main.md</span></span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>    Path(input_file).touch()</span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check for critical fields</span></span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> dev_image_tag:</span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>        printrw(<span class="st">"Error: Missing required key 'dev_image_tag'."</span>)</span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>    nbdev_project_cmd <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> nbdev_project:</span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a>        nbdev_project_cmd <span class="op">=</span> <span class="st">'</span><span class="ch">\n</span><span class="st">nbdev_install_hooks &amp;&amp; nbdev_export'</span></span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a>    github_repo_str <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> github_repo:</span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a>        github_repo_str <span class="op">=</span> <span class="ss">f'</span><span class="ch">\n</span><span class="ss">github_repo = "</span><span class="sc">{</span>github_repo<span class="sc">}</span><span class="ss">"'</span></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> project_base_url <span class="kw">and</span> github_repo:</span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>        project_base_url <span class="op">=</span> <span class="ss">f"https://github.com/</span><span class="sc">{</span>github_repo<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> project_base_url:</span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>        base_url_str <span class="op">=</span> <span class="ss">f'</span><span class="ch">\n</span><span class="ss">base_url = "</span><span class="sc">{</span>project_base_url<span class="sc">}</span><span class="ss">"'</span></span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a>        base_url_str <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a>    <span class="co">#reproduce_dir_default = f"{reproduce_dir}"  # this can be changed if needed</span></span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>    <span class="co">#reproduce_dir = input(f"Enter reproduce directory (Default: {reproduce_dir_default}): ") or reproduce_dir_default</span></span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a>    repro_init_script <span class="op">=</span> <span class="ss">f'''docker build -t </span><span class="sc">{</span>dev_image_tag<span class="sc">}</span><span class="ss"> .</span></span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a><span class="ss">docker build -t tex-prepare https://github.com/reproduce-work/tex-prepare.git</span></span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="ss">docker build -t tex-compile https://github.com/reproduce-work/tex-compile.git</span></span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a><span class="ss">docker build -t watcher https://github.com/reproduce-work/rwatch.git</span></span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a><span class="ss">'''</span></span>
+<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure reproduce_dir exists</span></span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a>    Path(reproduce_dir).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {</span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1_email'</span>: author1_email,</span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1_name'</span>: author1_name,</span>
+<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1_affiliation'</span>: author1_affiliation,</span>
+<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a>        <span class="st">'project_full_title'</span>: project_full_title,</span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a>        <span class="st">'project_abstract'</span>: project_abstract,</span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a>        <span class="st">'github_repo_str'</span>: github_repo_str,</span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a>        <span class="st">'base_url_str'</span>: base_url_str,</span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro_version'</span>: repro_version,</span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>        <span class="st">'verbose_str'</span>: verbose_str,</span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>        <span class="st">'input_file'</span>: input_file,</span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dynamic_file'</span>: dynamic_file,</span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>        <span class="st">'latex_template'</span>: latex_template,</span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>        <span class="st">'bibfile'</span>: bibfile,</span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>        <span class="st">'watch_files'</span>: watch_files,</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro_init_script'</span>: repro_init_script,</span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dev_image_tag'</span>: dev_image_tag,</span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>        <span class="st">'reproduce_dir'</span>: reproduce_dir,</span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>        <span class="st">'output_linefile'</span>: output_linefile,</span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>        <span class="st">'output_file'</span>: output_file,</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>        <span class="st">'document_dir'</span>: document_dir,</span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>        <span class="st">'nbdev_project_cmd'</span>: nbdev_project_cmd</span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>    config_str <span class="op">=</span> construct_config(options)</span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check for existing config.toml</span></span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(Path(reproduce_dir, <span class="st">'config.toml'</span>)):</span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>        <span class="co"># read in existing data</span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>            existing_config <span class="op">=</span> toml.load(f)</span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>        existing_config <span class="op">=</span> {}</span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'w+'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a>        f.write(config_str)</span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>    <span class="co"># By default, TOML files cannot reference variables defined earlier in the file</span></span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is a hack to get around that which allows me to read in the TOML data,</span></span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and then backfill the watch command with the files listed in the TOML file itself.</span></span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'\INSERT</span><span class="sc">{watch_cmd_here}</span><span class="st">'</span> <span class="kw">in</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>).read():</span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>            base_config_str <span class="op">=</span> f.read()</span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>        replaced_config <span class="op">=</span> base_config_str.replace(</span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>            <span class="st">'\INSERT</span><span class="sc">{watch_cmd_here}</span><span class="st">'</span>, </span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"""docker run watcher "</span><span class="sc">{</span><span class="st">','</span><span class="sc">.</span>join(watch_files)<span class="sc">}</span><span class="ss">" "echo </span><span class="ch">\"</span><span class="ss">File has changed!</span><span class="ch">\"</span><span class="ss"> &amp;&amp; build_cmd" """</span></span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'w'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>            f.write(replaced_config)</span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>        printrw(<span class="st">'did not replace watch command'</span>)</span>
 <span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a>        config_data <span class="op">=</span> toml.load(f)</span>
-<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check config_data against existing_config; if any keys overlap, use config_data;</span></span>
-<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a>    <span class="co"># otherwise keep all unique keys between the two</span></span>
-<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a>    config_data_tmp <span class="op">=</span> config_data.copy()</span>
-<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>    config_data <span class="op">=</span> {</span>
-<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>{k:v <span class="cf">for</span> k,v <span class="kw">in</span> config_data_tmp.items() <span class="cf">if</span> k <span class="kw">not</span> <span class="kw">in</span> existing_config},</span>
-<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>{k:v <span class="cf">for</span> k,v <span class="kw">in</span> existing_config.items() <span class="cf">if</span> k <span class="kw">not</span> <span class="kw">in</span> config_data_tmp}</span>
-<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>        toml.dump(config_data, f, encoder<span class="op">=</span>ReproduceWorkEncoder())</span>
-<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>    printrw(<span class="ss">f"Successfully generated reproduce.work configuration at </span><span class="sc">{</span>reproduce_dir<span class="sc">}</span><span class="ss">/config.toml"</span>)</span>
-<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if input file exists</span></span>
-<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(input_file):</span>
-<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(input_file, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>            f.write(<span class="st">''</span>)</span>
-<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>        printrw(<span class="ss">f"Successfully generated input file at </span><span class="sc">{</span>input_file<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if latex template exists</span></span>
-<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(latex_template):</span>
-<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fill in with package default</span></span>
-<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>        Path(latex_template).parent.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>        latex_template_default_str <span class="op">=</span> <span class="vs">r'\documentclass[12pt]</span><span class="sc">{article}</span><span class="vs">\usepackage[english]</span><span class="sc">{babel}</span><span class="vs">\usepackage</span><span class="sc">{xcolor}</span><span class="vs">\usepackage[hmargin=1in,vmargin=1in]</span><span class="sc">{geometry}</span><span class="vs">\usepackage</span><span class="sc">{amsmath}</span><span class="vs">\usepackage{unicode-math}\usepackage[round,sort,comma]</span><span class="sc">{natbib}</span><span class="vs">\bibliographystyle</span><span class="sc">{apa}</span><span class="vs">\usepackage</span><span class="sc">{setspace}</span><span class="vs">\usepackage</span><span class="sc">{graphicx}</span><span class="vs">\usepackage</span><span class="sc">{caption}</span><span class="vs">\usepackage</span><span class="sc">{subcaption}</span><span class="vs">\usepackage[colorlinks=true, allcolors=blue]</span><span class="sc">{hyperref}</span><span class="vs">\usepackage</span><span class="sc">{float}</span><span class="vs">\usepackage</span><span class="sc">{booktabs}</span><span class="vs">\usepackage</span><span class="sc">{titlesec}</span><span class="vs">\newcommand{\addperiod}[1]{#1.$\;$}\titlespacing{\section}</span><span class="sc">{0pt}</span><span class="vs">{\parskip}{-\parskip}\titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}</span><span class="sc">{1em}</span><span class="vs">{\addperiod}\titleformat{\subsubsection}[runin]{\normalfont\normalsize\itshape}{\thesubsubsection}</span><span class="sc">{1em}</span><span class="vs">{\addperiod}\titlespacing{\subsubsection}{14pt plus 4pt minus 2pt}</span><span class="sc">{0pt}</span><span class="vs">{0pt plus 2pt minus 2pt}\setlength{\parindent}</span><span class="sc">{1em}</span><span class="vs">\makeatletter\g@addto@macro \normalsize {\setlength\abovedisplayskip{3pt plus 5pt minus 2pt}\setlength\belowdisplayskip{3pt plus 5pt minus 2pt</span><span class="sc">}}</span><span class="vs">\makeatother\newcommand{\comment}[1]</span><span class="sc">{}</span><span class="vs">\begin</span><span class="sc">{document}</span><span class="vs">\pagenumbering</span><span class="sc">{gobble}</span><span class="vs">\begin</span><span class="sc">{center}</span><span class="vs">{\fontsize</span><span class="sc">{16}{16}</span><span class="vs">\selectfont\bfseries \INSERT</span><span class="sc">{config.project.full_title}</span><span class="vs">}\vspace</span><span class="sc">{5mm}</span><span class="vs">\begin</span><span class="sc">{table}</span><span class="vs">[!ht]\begin</span><span class="sc">{center}</span><span class="vs">\begin</span><span class="sc">{tabular}</span><span class="vs">{c c }\shortstack{ \INSERT</span><span class="sc">{config.authors.author1.name}</span><span class="vs"> \\\INSERT</span><span class="sc">{config.authors.author1.affiliation}</span><span class="vs"> \\\INSERT</span><span class="sc">{config.authors.author1.email}</span><span class="vs"> }\end</span><span class="sc">{tabular}</span><span class="vs">\end</span><span class="sc">{center}</span><span class="vs">\end</span><span class="sc">{table}</span><span class="vs">\vspace</span><span class="sc">{5mm}</span><span class="vs">\emph{Last updated: \today}\vspace</span><span class="sc">{4mm}</span><span class="vs">\abstract{\INSERT</span><span class="sc">{config.project.abstract}</span><span class="vs">}\vspace</span><span class="sc">{2cm}</span><span class="vs">{\scriptsize \noindent Notes: }\vspace</span><span class="sc">{10mm}</span><span class="vs">\end</span><span class="sc">{center}</span><span class="vs">\newpage\doublespacing\pagenumbering</span><span class="sc">{arabic}</span><span class="vs">\setcounter</span><span class="sc">{page}{1}%%</span><span class="vs">@@LOWDOWN_CONTENT@@</span><span class="sc">%%</span><span class="vs">\bibliography{latex/bibliography}\end</span><span class="sc">{document}</span><span class="vs">'</span></span>
-<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(latex_template, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>            f.write(latex_template_default_str)</span>
-<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> config_data[<span class="st">'repro'</span>][<span class="st">'verbose'</span>]:</span>
-<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a>            printrw(<span class="ss">f"╔ω: Successfully generated latex template at </span><span class="sc">{</span>latex_template<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a>        config_data <span class="op">=</span> toml.load(f)</span>
+<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check config_data against existing_config; if any keys overlap, use config_data;</span></span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a>    <span class="co"># otherwise keep all unique keys between the two</span></span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>    config_data_tmp <span class="op">=</span> config_data.copy()</span>
+<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a>    config_data <span class="op">=</span> {</span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>{k:v <span class="cf">for</span> k,v <span class="kw">in</span> config_data_tmp.items() <span class="cf">if</span> k <span class="kw">not</span> <span class="kw">in</span> existing_config},</span>
+<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>{k:v <span class="cf">for</span> k,v <span class="kw">in</span> existing_config.items() <span class="cf">if</span> k <span class="kw">not</span> <span class="kw">in</span> config_data_tmp}</span>
+<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(Path(reproduce_dir, <span class="st">'config.toml'</span>), <span class="st">'w'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a>        toml.dump(config_data, f, encoder<span class="op">=</span>ReproduceWorkEncoder())</span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>    printrw(<span class="ss">f"Successfully generated reproduce.work configuration at </span><span class="sc">{</span>reproduce_dir<span class="sc">}</span><span class="ss">/config.toml"</span>)</span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if input file exists</span></span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(input_file):</span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(input_file, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>            f.write(<span class="st">''</span>)</span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>        printrw(<span class="ss">f"Successfully generated input file at </span><span class="sc">{</span>input_file<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if latex template exists</span></span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(latex_template):</span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fill in with package default</span></span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>        Path(latex_template).parent.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>        latex_template_default_str <span class="op">=</span> <span class="vs">r'\documentclass[12pt]</span><span class="sc">{article}</span><span class="vs">\usepackage[english]</span><span class="sc">{babel}</span><span class="vs">\usepackage</span><span class="sc">{xcolor}</span><span class="vs">\usepackage[hmargin=1in,vmargin=1in]</span><span class="sc">{geometry}</span><span class="vs">\usepackage</span><span class="sc">{amsmath}</span><span class="vs">\usepackage{unicode-math}\usepackage[round,sort,comma]</span><span class="sc">{natbib}</span><span class="vs">\bibliographystyle</span><span class="sc">{apa}</span><span class="vs">\usepackage</span><span class="sc">{setspace}</span><span class="vs">\usepackage</span><span class="sc">{graphicx}</span><span class="vs">\usepackage</span><span class="sc">{caption}</span><span class="vs">\usepackage</span><span class="sc">{subcaption}</span><span class="vs">\usepackage[colorlinks=true, allcolors=blue]</span><span class="sc">{hyperref}</span><span class="vs">\usepackage</span><span class="sc">{float}</span><span class="vs">\usepackage</span><span class="sc">{booktabs}</span><span class="vs">\usepackage</span><span class="sc">{titlesec}</span><span class="vs">\newcommand{\addperiod}[1]{#1.$\;$}\titlespacing{\section}</span><span class="sc">{0pt}</span><span class="vs">{\parskip}{-\parskip}\titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}</span><span class="sc">{1em}</span><span class="vs">{\addperiod}\titleformat{\subsubsection}[runin]{\normalfont\normalsize\itshape}{\thesubsubsection}</span><span class="sc">{1em}</span><span class="vs">{\addperiod}\titlespacing{\subsubsection}{14pt plus 4pt minus 2pt}</span><span class="sc">{0pt}</span><span class="vs">{0pt plus 2pt minus 2pt}\setlength{\parindent}</span><span class="sc">{1em}</span><span class="vs">\makeatletter\g@addto@macro \normalsize {\setlength\abovedisplayskip{3pt plus 5pt minus 2pt}\setlength\belowdisplayskip{3pt plus 5pt minus 2pt</span><span class="sc">}}</span><span class="vs">\makeatother\newcommand{\comment}[1]</span><span class="sc">{}</span><span class="vs">\begin</span><span class="sc">{document}</span><span class="vs">\pagenumbering</span><span class="sc">{gobble}</span><span class="vs">\begin</span><span class="sc">{center}</span><span class="vs">{\fontsize</span><span class="sc">{16}{16}</span><span class="vs">\selectfont\bfseries \INSERT</span><span class="sc">{config.project.full_title}</span><span class="vs">}\vspace</span><span class="sc">{5mm}</span><span class="vs">\begin</span><span class="sc">{table}</span><span class="vs">[!ht]\begin</span><span class="sc">{center}</span><span class="vs">\begin</span><span class="sc">{tabular}</span><span class="vs">{c c }\shortstack{ \INSERT</span><span class="sc">{config.authors.author1.name}</span><span class="vs"> \\\INSERT</span><span class="sc">{config.authors.author1.affiliation}</span><span class="vs"> \\\INSERT</span><span class="sc">{config.authors.author1.email}</span><span class="vs"> }\end</span><span class="sc">{tabular}</span><span class="vs">\end</span><span class="sc">{center}</span><span class="vs">\end</span><span class="sc">{table}</span><span class="vs">\vspace</span><span class="sc">{5mm}</span><span class="vs">\emph{Last updated: \today}\vspace</span><span class="sc">{4mm}</span><span class="vs">\abstract{\INSERT</span><span class="sc">{config.project.abstract}</span><span class="vs">}\vspace</span><span class="sc">{2cm}</span><span class="vs">{\scriptsize \noindent Notes: }\vspace</span><span class="sc">{10mm}</span><span class="vs">\end</span><span class="sc">{center}</span><span class="vs">\newpage\doublespacing\pagenumbering</span><span class="sc">{arabic}</span><span class="vs">\setcounter</span><span class="sc">{page}{1}%%</span><span class="vs">@@LOWDOWN_CONTENT@@</span><span class="sc">%%</span><span class="vs">\bibliography{latex/bibliography}\end</span><span class="sc">{document}</span><span class="vs">'</span></span>
+<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(latex_template, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>            f.write(latex_template_default_str)</span>
+<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> config_data[<span class="st">'repro'</span>][<span class="st">'verbose'</span>]:</span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a>            printrw(<span class="ss">f"╔ω: Successfully generated latex template at </span><span class="sc">{</span>latex_template<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a><span class="co"># Write some basic tests</span></span>
-<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_validate_base_config():</span>
-<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test a valid base_config</span></span>
-<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a>    base_config <span class="op">=</span> {</span>
-<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a>        <span class="st">'authors'</span>: {</span>
-<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
-<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.affiliation'</span>: <span class="st">'USC Marshall School of Business'</span>,</span>
-<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span></span>
-<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro'</span>: {</span>
-<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>            <span class="st">'version'</span>: <span class="st">'reproduce.work/v1/default'</span>,</span>
-<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>            <span class="st">'stages'</span>: [<span class="st">'init'</span>, <span class="st">'develop'</span>, <span class="st">'build'</span>]</span>
-<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.files'</span>: {</span>
-<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a>            <span class="st">'input'</span>: <span class="st">'document/main.md'</span>,</span>
-<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>            <span class="st">'dynamic'</span>: <span class="st">'document/pubdata.toml'</span>,</span>
-<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a>            <span class="st">'latex_template'</span>: <span class="st">'document/latex/template.tex'</span>,</span>
-<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a>            <span class="st">'output_linefile'</span>: <span class="st">'document/latex/compiled.tex'</span>,</span>
-<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a>            <span class="st">'output_file'</span>: <span class="st">'document/latex/compiled.pdf'</span>,</span>
-<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a>            <span class="st">'watch'</span>: [<span class="st">'document/main.md'</span>, <span class="st">'document/pubdata.toml'</span>, <span class="st">'document/latex/template.tex'</span>]</span>
-<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.init'</span>: {</span>
-<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker build -t </span><span class="sc">{dev_image_tag}</span><span class="st"> .</span><span class="ch">\n</span><span class="st">docker build -t tinytex </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.tinytex</span><span class="ch">\n</span><span class="st">docker build -t watcher </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.watch</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.develop'</span>: {</span>
-<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> start.sh jupyter lab --LabApp.token=</span><span class="ch">\'\'\n\\</span><span class="st">INSERT</span><span class="sc">{watch_cmd_here}</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.build'</span>: {</span>
-<span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> python reproduce_work.build() # this replaces instances of </span><span class="ch">\\</span><span class="st">INSERT</span><span class="sc">{var}</span><span class="st"> in `input` file</span><span class="ch">\n</span><span class="st">docker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex</span><span class="ch">\n</span><span class="st">docker run --rm -i --net=none -v $(pwd):/home tinytex sh -c "cd /home/document/latex &amp;&amp; xelatex compiled.tex" # this compiles the latex</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> validate_base_config(base_config) <span class="op">==</span> <span class="va">True</span></span>
-<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a><span class="co"># Test an invalid base_config</span></span>
-<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> {</span>
-<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a>    <span class="st">'auhors'</span>: {</span>
-<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1.name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
-<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1.affiliation'</span>: <span class="st">'USC Marshall School of Business'</span>,</span>
-<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1.email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span></span>
-<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro'</span>: {</span>
-<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a>        <span class="st">'version'</span>: <span class="st">'reproduce.work/v1/default'</span>,</span>
-<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a>        <span class="st">'stages'</span>: [<span class="st">'init'</span>, <span class="st">'develop'</span>, <span class="st">'build'</span>]</span>
-<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.files'</span>: {</span>
-<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a>        <span class="st">'input'</span>: <span class="st">'document/main.md'</span>,</span>
-<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dynamic'</span>: <span class="st">'document/pubdata.toml'</span>,</span>
-<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a>        <span class="st">'latex_template'</span>: <span class="st">'document/latex/template.tex'</span>,</span>
-<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a>        <span class="st">'output'</span>: <span class="st">'document/latex/compiled.tex'</span></span>
-<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.stage.init'</span>: {</span>
-<span id="cb10-346"><a href="#cb10-346" aria-hidden="true" tabindex="-1"></a>        <span class="st">'script'</span>: <span class="st">'docker build -t </span><span class="sc">{dev_image_tag}</span><span class="st"> .</span><span class="ch">\n</span><span class="st">docker build -t tinytex </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.tinytex</span><span class="ch">\n</span><span class="st">docker build -t watcher </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.watch</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.stage.develop'</span>: {</span>
-<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a>        <span class="st">'script'</span>: <span class="st">'docker run -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> start.sh jupyter lab --LabApp.token=</span><span class="ch">\'\'\n\\</span><span class="st">INSERT</span><span class="sc">{watch_cmd_here}</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.stage.build'</span>: {</span>
-<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a>        <span class="st">'script'</span>: <span class="st">'docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> python reproduce_work.build() # this replaces instances of </span><span class="ch">\\</span><span class="st">INSERT</span><span class="sc">{var}</span><span class="st"> in `input` file</span><span class="ch">\n</span><span class="st">docker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex</span><span class="ch">\n</span><span class="st">docker run --rm -i --net=none -v $(pwd):/home tinytex sh -c "cd /home/document/latex &amp;&amp; xelatex compiled.tex" # this compiles the latex</span><span class="ch">\n</span><span class="st">'</span></span>
-<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> validate_base_config(base_config, quiet<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="va">False</span></span>
-<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a><span class="co">#printrw("All tests passed!")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a><span class="co"># Write some basic tests</span></span>
+<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_validate_base_config():</span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test a valid base_config</span></span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a>    base_config <span class="op">=</span> {</span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a>        <span class="st">'authors'</span>: {</span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
+<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.affiliation'</span>: <span class="st">'USC Marshall School of Business'</span>,</span>
+<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>            <span class="st">'author1.email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span></span>
+<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro'</span>: {</span>
+<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>            <span class="st">'version'</span>: <span class="st">'reproduce.work/v1/default'</span>,</span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a>            <span class="st">'stages'</span>: [<span class="st">'init'</span>, <span class="st">'develop'</span>, <span class="st">'build'</span>]</span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.files'</span>: {</span>
+<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>            <span class="st">'input'</span>: <span class="st">'document/main.md'</span>,</span>
+<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a>            <span class="st">'dynamic'</span>: <span class="st">'document/pubdata.toml'</span>,</span>
+<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a>            <span class="st">'latex_template'</span>: <span class="st">'document/latex/template.tex'</span>,</span>
+<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a>            <span class="st">'output_linefile'</span>: <span class="st">'document/latex/compiled.tex'</span>,</span>
+<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a>            <span class="st">'output_file'</span>: <span class="st">'document/latex/compiled.pdf'</span>,</span>
+<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a>            <span class="st">'watch'</span>: [<span class="st">'document/main.md'</span>, <span class="st">'document/pubdata.toml'</span>, <span class="st">'document/latex/template.tex'</span>]</span>
+<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.init'</span>: {</span>
+<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker build -t </span><span class="sc">{dev_image_tag}</span><span class="st"> .</span><span class="ch">\n</span><span class="st">docker build -t tinytex </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.tinytex</span><span class="ch">\n</span><span class="st">docker build -t watcher </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.watch</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.develop'</span>: {</span>
+<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> start.sh jupyter lab --LabApp.token=</span><span class="ch">\'\'\n\\</span><span class="st">INSERT</span><span class="sc">{watch_cmd_here}</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a>        <span class="st">'repro.stage.build'</span>: {</span>
+<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a>            <span class="st">'script'</span>: <span class="st">'docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> python reproduce_work.build() # this replaces instances of </span><span class="ch">\\</span><span class="st">INSERT</span><span class="sc">{var}</span><span class="st"> in `input` file</span><span class="ch">\n</span><span class="st">docker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex</span><span class="ch">\n</span><span class="st">docker run --rm -i --net=none -v $(pwd):/home tinytex sh -c "cd /home/document/latex &amp;&amp; xelatex compiled.tex" # this compiles the latex</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> validate_base_config(base_config) <span class="op">==</span> <span class="va">True</span></span>
+<span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a><span class="co"># Test an invalid base_config</span></span>
+<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a>base_config <span class="op">=</span> {</span>
+<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a>    <span class="st">'auhors'</span>: {</span>
+<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1.name'</span>: <span class="st">'Alex P. Miller'</span>,</span>
+<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1.affiliation'</span>: <span class="st">'USC Marshall School of Business'</span>,</span>
+<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a>        <span class="st">'author1.email'</span>: <span class="st">'alex.miller@marshall.usc.edu'</span></span>
+<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro'</span>: {</span>
+<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a>        <span class="st">'version'</span>: <span class="st">'reproduce.work/v1/default'</span>,</span>
+<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a>        <span class="st">'stages'</span>: [<span class="st">'init'</span>, <span class="st">'develop'</span>, <span class="st">'build'</span>]</span>
+<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.files'</span>: {</span>
+<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a>        <span class="st">'input'</span>: <span class="st">'document/main.md'</span>,</span>
+<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dynamic'</span>: <span class="st">'document/pubdata.toml'</span>,</span>
+<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a>        <span class="st">'latex_template'</span>: <span class="st">'document/latex/template.tex'</span>,</span>
+<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a>        <span class="st">'output'</span>: <span class="st">'document/latex/compiled.tex'</span></span>
+<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-346"><a href="#cb10-346" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.stage.init'</span>: {</span>
+<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a>        <span class="st">'script'</span>: <span class="st">'docker build -t </span><span class="sc">{dev_image_tag}</span><span class="st"> .</span><span class="ch">\n</span><span class="st">docker build -t tinytex </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.tinytex</span><span class="ch">\n</span><span class="st">docker build -t watcher </span><span class="sc">{reproduce_dir}</span><span class="st">/Dockerfile.watch</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.stage.develop'</span>: {</span>
+<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a>        <span class="st">'script'</span>: <span class="st">'docker run -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> start.sh jupyter lab --LabApp.token=</span><span class="ch">\'\'\n\\</span><span class="st">INSERT</span><span class="sc">{watch_cmd_here}</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a>    <span class="st">'repro.stage.build'</span>: {</span>
+<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a>        <span class="st">'script'</span>: <span class="st">'docker run --rm -i -v $(pwd):/home/jovyan -p 8888:8888 </span><span class="sc">{dev_image_tag}</span><span class="st"> python reproduce_work.build() # this replaces instances of </span><span class="ch">\\</span><span class="st">INSERT</span><span class="sc">{var}</span><span class="st"> in `input` file</span><span class="ch">\n</span><span class="st">docker run --rm -i -v $(pwd):/home lowdown # this converts the markdown to latex</span><span class="ch">\n</span><span class="st">docker run --rm -i --net=none -v $(pwd):/home tinytex sh -c "cd /home/document/latex &amp;&amp; xelatex compiled.tex" # this compiles the latex</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> validate_base_config(base_config, quiet<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="va">False</span></span>
+<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a><span class="co">#printrw("All tests passed!")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
