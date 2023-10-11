@@ -618,7 +618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a>        github_repo_str <span class="op">=</span> <span class="ss">f'</span><span class="ch">\n</span><span class="ss">github_repo = "</span><span class="sc">{</span>github_repo<span class="sc">}</span><span class="ss">"'</span></span>
 <span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> project_base_url <span class="kw">and</span> github_repo:</span>
-<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>        project_base_url <span class="op">=</span> <span class="ss">f"https://github.com</span><span class="sc">{</span>github_repo<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>        project_base_url <span class="op">=</span> <span class="ss">f"https://github.com/</span><span class="sc">{</span>github_repo<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> project_base_url:</span>
 <span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a>        base_url_str <span class="op">=</span> <span class="ss">f'</span><span class="ch">\n</span><span class="ss">base_url = "</span><span class="sc">{</span>project_base_url<span class="sc">}</span><span class="ss">"'</span></span>
 <span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
@@ -1878,70 +1878,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   'toml_header': '[simple_string]',
   'on_line': 53,
   'at_char': 18,
-  'hash': None},
- {'variable': 'x',
-  'path': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L13-L23',
-  'start_pos': 7837,
-  'end_pos': 7926,
-  'line_range': (63, 77),
-  'toml_header': '[scatter_plot_1749877b]',
-  'on_line': 67,
-  'at_char': 21,
-  'hash': 'L13-L23'},
- {'variable': 'y',
-  'path': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L13-L23',
-  'start_pos': 7935,
-  'end_pos': 8024,
-  'line_range': (63, 77),
-  'toml_header': '[scatter_plot_1749877b]',
-  'on_line': 67,
-  'at_char': 119,
-  'hash': 'L13-L23'},
- {'variable': 'published_url',
-  'path': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L61-L75',
-  'start_pos': 8544,
-  'end_pos': 8633,
-  'line_range': (63, 77),
-  'toml_header': '[scatter_plot_1749877b]',
-  'on_line': 75,
-  'at_char': 18,
-  'hash': 'L61-L75'},
- {'variable': 'plots',
-  'path': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L61-L75',
-  'start_pos': 8953,
-  'end_pos': 9042,
-  'line_range': (79, 91),
-  'toml_header': '[ols_model_summary]',
-  'on_line': 82,
-  'at_char': 12,
-  'hash': 'L61-L75'},
- {'variable': 'published_url',
-  'path': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L77-L89',
-  'start_pos': 9063,
-  'end_pos': 9152,
-  'line_range': (79, 91),
-  'toml_header': '[ols_model_summary]',
-  'on_line': 83,
-  'at_char': 18,
-  'hash': 'L77-L89'},
- {'variable': 'x',
-  'path': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L13-L23',
-  'start_pos': 10140,
-  'end_pos': 10229,
-  'line_range': (93, 95),
-  'toml_header': '[ols_model_summary.model_data]',
-  'on_line': 94,
-  'at_char': 6,
-  'hash': 'L13-L23'},
- {'variable': 'y',
-  'path': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L25-L35',
-  'start_pos': 10236,
-  'end_pos': 10325,
-  'line_range': (93, 95),
-  'toml_header': '[ols_model_summary.model_data]',
-  'on_line': 95,
-  'at_char': 6,
-  'hash': 'L25-L35'}]</code></pre>
+  'hash': None}]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="14">
@@ -2064,7 +2001,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>register_notebook(<span class="st">'01_core.ipynb'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>╔ω: Registered notebook https://github.com/reproduce-work/reproduce-work/blob/main/nbs/01_core.ipynb in reproduce/config.toml</code></pre>
+<pre><code>╔ω: Notebook nbs/01_core.ipynb already registered in reproduce/config.toml
+╔ω: Registered notebook https://github.com/reproduce-work/reproduce-work/blob/main/nbs/01_core.ipynb in reproduce/config.toml</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="16">
@@ -2073,7 +2011,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>╔ω: loading embedded link: https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#simple_string</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>&lt;__main__.PublishedObj at 0xffff3e0e6a90&gt;</code></pre>
+<pre><code>&lt;__main__.PublishedObj at 0xffffac0f9850&gt;</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="17">
@@ -2192,90 +2130,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>18</td>
 <td>None</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>x</td>
-<td>https://github.com/reproduce-work/reproduce-wo...</td>
-<td>7837</td>
-<td>7926</td>
-<td>(63, 77)</td>
-<td>[scatter_plot_1749877b]</td>
-<td>67</td>
-<td>21</td>
-<td>L13-L23</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>y</td>
-<td>https://github.com/reproduce-work/reproduce-wo...</td>
-<td>7935</td>
-<td>8024</td>
-<td>(63, 77)</td>
-<td>[scatter_plot_1749877b]</td>
-<td>67</td>
-<td>119</td>
-<td>L13-L23</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>published_url</td>
-<td>https://github.com/reproduce-work/reproduce-wo...</td>
-<td>8544</td>
-<td>8633</td>
-<td>(63, 77)</td>
-<td>[scatter_plot_1749877b]</td>
-<td>75</td>
-<td>18</td>
-<td>L61-L75</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>plots</td>
-<td>https://github.com/reproduce-work/reproduce-wo...</td>
-<td>8953</td>
-<td>9042</td>
-<td>(79, 91)</td>
-<td>[ols_model_summary]</td>
-<td>82</td>
-<td>12</td>
-<td>L61-L75</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>published_url</td>
-<td>https://github.com/reproduce-work/reproduce-wo...</td>
-<td>9063</td>
-<td>9152</td>
-<td>(79, 91)</td>
-<td>[ols_model_summary]</td>
-<td>83</td>
-<td>18</td>
-<td>L77-L89</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
-<td>x</td>
-<td>https://github.com/reproduce-work/reproduce-wo...</td>
-<td>10140</td>
-<td>10229</td>
-<td>(93, 95)</td>
-<td>[ols_model_summary.model_data]</td>
-<td>94</td>
-<td>6</td>
-<td>L13-L23</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>y</td>
-<td>https://github.com/reproduce-work/reproduce-wo...</td>
-<td>10236</td>
-<td>10325</td>
-<td>(93, 95)</td>
-<td>[ols_model_summary.model_data]</td>
-<td>95</td>
-<td>6</td>
-<td>L25-L35</td>
-</tr>
 </tbody>
 </table>
 
@@ -2293,9 +2147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  'x': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml',
  'y': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml',
  'reproducible_plot_5073a37e': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml',
- 'simple_string': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml',
- 'scatter_plot_1749877b': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L61-L75',
- 'ols_model_summary': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml#L77-L89'}</code></pre>
+ 'simple_string': 'https://github.com/reproduce-work/reproduce-work/blob/main/reproduce/pubdata.toml'}</code></pre>
 </div>
 </div>
 
