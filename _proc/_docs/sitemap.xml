@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://reproduce-work.github.io/reproducework/core.html</loc>
-    <lastmod>2023-10-11T19:13:23.721Z</lastmod>
-  </url>
-  <url>
-    <loc>https://reproduce-work.github.io/reproducework/paper.html</loc>
-    <lastmod>2023-10-11T19:13:23.097Z</lastmod>
-  </url>
-  <url>
-    <loc>https://reproduce-work.github.io/reproducework/introduction.html</loc>
-    <lastmod>2023-10-11T19:13:22.862Z</lastmod>
-  </url>
-  <url>
-    <loc>https://reproduce-work.github.io/reproducework/standards.html</loc>
-    <lastmod>2023-10-11T05:21:35.368Z</lastmod>
-  </url>
-  <url>
     <loc>https://reproduce-work.github.io/reproducework/index.html</loc>
-    <lastmod>2023-10-11T19:13:23.921Z</lastmod>
+    <lastmod>2023-10-11T19:44:05.259Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/02_standards.html</loc>
+    <lastmod>2023-10-11T19:44:04.464Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/00_introduction.html</loc>
+    <lastmod>2023-10-11T19:44:03.882Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/03_paper.html</loc>
+    <lastmod>2023-10-11T19:44:04.222Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reproduce-work.github.io/reproducework/01_core.html</loc>
+    <lastmod>2023-10-11T19:44:05.058Z</lastmod>
   </url>
 </urlset>
