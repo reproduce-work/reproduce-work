@@ -1,6 +1,9 @@
 project:
   type: website
 
+resources:
+  - static/
+
 format:
   html:
     theme: cosmo
