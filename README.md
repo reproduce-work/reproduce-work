@@ -19,7 +19,7 @@
 
 <div style="flex:1;  text-align: center;">
 
-<a href="https://github.com/reproduce-work/reproduce-work/blob/main/document/report.pdf">
+<a href="https://github.com/reproduce-work/reproduce-work/raw/main/document/report.pdf">
 <h1>
 <span style="font-size:120px;">📃</span> <br/>
 <span style="font-size: 20px; margin-top:-10px;">reproduce.work paper
