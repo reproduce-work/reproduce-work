@@ -19,11 +19,11 @@
 
 <div style="flex:1;  text-align: center;">
 
-<a href="https://github.com/reproduce-work/reproduce-work/">
+<a href="https://github.com/reproduce-work/reproduce-work/blob/main/document/report.pdf">
 <h1>
 <span style="font-size:120px;">📃</span> <br/>
-<span style="font-size: 20px; margin-top:-10px;">reproduce.work
-paper</span>
+<span style="font-size: 20px; margin-top:-10px;">reproduce.work paper
+(.pdf)</span>
 </h1>
 
 </a>
