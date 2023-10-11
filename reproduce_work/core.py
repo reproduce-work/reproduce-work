@@ -334,7 +334,7 @@ def generate_config(options={}, version="reproduce.work/v1/default"):
         github_repo_str = f'\ngithub_repo = "{github_repo}"'
 
     if not project_base_url and github_repo:
-        project_base_url = f"https://github.com{github_repo}"
+        project_base_url = f"https://github.com/{github_repo}"
     if project_base_url:
         base_url_str = f'\nbase_url = "{project_base_url}"'
     else:

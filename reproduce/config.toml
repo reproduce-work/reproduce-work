@@ -15,7 +15,7 @@ image using the reproduce.work workflow. We conclude by discussing the potential
 and fidelity of computational science for both producers and consumers of published work.
 """
 github_repo = "reproduce-work/reproduce-work"
-base_url = "https://github.comreproduce-work/reproduce-work"
+base_url = "https://github.com/reproduce-work/reproduce-work"
 
 [repro]
 version = "reproduce.work/v1/default"
