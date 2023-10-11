@@ -3,44 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: report.aux
 The style file: apa.bst
 Database file #1: bibliography.bib
-You've used 18 entries,
+You've used 21 entries,
             1928 wiz_defined-function locations,
-            589 strings with 7030 characters,
-and the built_in function-call counts, 6449 in all, are:
-= -- 619
-> -- 285
+            608 strings with 7888 characters,
+and the built_in function-call counts, 8040 in all, are:
+= -- 759
+> -- 409
 < -- 15
-+ -- 102
-- -- 96
-* -- 574
-:= -- 1185
-add.period$ -- 55
-call.type$ -- 18
-change.case$ -- 119
-chr.to.int$ -- 18
-cite$ -- 18
-duplicate$ -- 233
-empty$ -- 405
-format.name$ -- 126
-if$ -- 1202
++ -- 150
+- -- 142
+* -- 742
+:= -- 1476
+add.period$ -- 63
+call.type$ -- 21
+change.case$ -- 153
+chr.to.int$ -- 21
+cite$ -- 21
+duplicate$ -- 271
+empty$ -- 478
+format.name$ -- 175
+if$ -- 1487
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 13
-newline$ -- 93
-num.names$ -- 54
-pop$ -- 94
+missing$ -- 15
+newline$ -- 107
+num.names$ -- 63
+pop$ -- 126
 preamble$ -- 1
-purify$ -- 137
+purify$ -- 174
 quote$ -- 0
-skip$ -- 187
+skip$ -- 216
 stack$ -- 0
-substring$ -- 383
-swap$ -- 31
+substring$ -- 470
+swap$ -- 36
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 108
+type$ -- 126
 warning$ -- 0
-while$ -- 47
+while$ -- 56
 width$ -- 0
-write$ -- 230
+write$ -- 266

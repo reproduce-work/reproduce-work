@@ -4,6 +4,7 @@
 .local/share/*
 *.DS_Store*
 .python_history
+reproduce/tmp*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

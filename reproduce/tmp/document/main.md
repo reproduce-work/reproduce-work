@@ -5,9 +5,10 @@ In its most dramatic form, high profile accusations of data fabrication have led
 
 
 
-A more mundane but pervasive manifestation of epistemological precarity is the fact that most scientific papers are not reproducible to even the lowest degree \citep{gomes2022don}. A low percentage of published papers claim to share their data and code; of those that do, many fail to follow through or even respond to inquiries \citep{tenopir2011data}. Even when good faith efforts are made to share data and code, the vagaries of software development and the complexity of scientific code make it difficult to reproduce results across time, space, and computing environments.
-Unfortunately for the incentives of honest scientists, \cite{serragarciagneezy2021} find that nonreplicable publications are cited about twice as much as replicable ones. The problem is exacerbated by the fact that many scientists do not understand the nature of statistical inference and human's innate tendency to search for patterns in data \citep{gelman2016statistical}.
-The low bar for publication in many scientific journals, has resulted in a literature that is rife with false positives and irreproducible results \citep{ioannidis2005most}.
+A more mundane but pervasive manifestation of epistemological precarity is the fact that most scientific papers are not reproducible to even the lowest degree \citep{gomes2022don,tenopir2020data}. A low percentage of published papers claim to share their data and code; of those that do, many fail to follow through or even respond to inquiries \citep{tenopir2011data}. Even when good faith efforts are made to share data and code, the vagaries of software development and the complexity of scientific code make it difficult to reproduce results across time, space, and computing environments.
+Unfortunately for the incentives of honest scientists, \cite{serragarciagneezy2021} find that nonreplicable publications are cited about twice as much as replicable ones. The problem is exacerbated by the fact that many scientists do not understand the nature of statistical inference and human's innate tendency to search for patterns in data \citep{gelman2016statistical,ioannidis2009repeatability}.
+The low bar for publication in many scientific journals, has resulted in a literature that is rife with false positives and irreproducible results \citep{ioannidis2005most,ioannidis2017power}.
+
 
 
 In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. On top of the outright fraud and misconduct that is apparently common, there are more subtle forms research malpractice and human error that are known to pervade the published scientific literature as well, in the form of selective publication and $p$-hacking described above. On top of all this, the complexity of scientific code and restrictiveness of many data sharing agreements means that most published scientific results are not reproducible to even the lowest degree. 
@@ -20,16 +21,16 @@ To this end, we introduce a simple framework for achieving and demonstrating com
 # Background
 
 
-Reproducability, in the context of the philosophy of science, metascience, and empiricism, refers to the ability of a scientific study or experiment to be independently repeated under the same conditions to verify the original results. It is a cornerstone of the scientific method, ensuring that findings are not anomalous or products of error or bias. The goal of reproduction is ensure that science is built on consistent and generalizable truths. The emphasis on reproducability underscores the importance of transparency, rigor, and skepticism in the pursuit of knowledge, as recent developments in the broader scientific community have prompted widespread introspection within about practices, methodologies, and the reliability of published findings.
+reproducibility, in the context of the philosophy of science, metascience, and empiricism, refers to the ability of a scientific study or experiment to be independently repeated under the same conditions to verify the original results. It is a cornerstone of the scientific method, ensuring that findings are not anomalous or products of error or bias. The goal of reproduction is ensure that science is built on consistent and generalizable truths. The emphasis on reproducibility underscores the importance of transparency, rigor, and skepticism in the pursuit of knowledge, as recent developments in the broader scientific community have prompted widespread introspection within about practices, methodologies, and the reliability of published findings.
 
-While a unified concept at its core, the concept of reproducability can manifest in various forms based on the specific domain or the nature of the scientific investigation. Here we theorize about the different dimensions of reproducability:
+While a unified concept at its core, the concept of reproducibility can manifest in various forms based on the specific domain or the nature of the scientific investigation. Here we theorize about the different dimensions of reproducibility:
 
-- Direct replicability (i.e., reproduceability):  The most straightforward form of replication; the aim is to determine if the same results emerge under virtually identical conditions. Depending on the research methodology, this may take one of several forms:
-  - Computational reproducability: This involves rerunning analyses with the original code and dataset.
-  - Procedural reproducability: where researchers attempt to recreate the original study as closely as possible using the same procedures, materials, and subjects or subject pool (if applicable).
+- Direct replicability (i.e., reproducibility):  The most straightforward form of replication; the aim is to determine if the same results emerge under virtually identical conditions. Depending on the research methodology, this may take one of several forms:
+  - Computational reproducibility: This involves rerunning analyses with the original code and dataset.
+  - Procedural reproducibility: where researchers attempt to recreate the original study as closely as possible using the same procedures, materials, and subjects or subject pool (if applicable).
 - Conceptual replicability (i.e., generalizability, mere "replicability"): Rather than mirroring the original study exactly, conceptual reproduction involves testing the same underlying hypothesis but with different methods or procedures. This type of reproduction examines the robustness of the original findings and whether they can be generalized across different contexts or approaches.
 
-While conceptual reproduction is obviously core to the scientific method, the focus of this project will be limited to computational reproducability. We believe that computational reproducability is a small but necessary first step toward a world where scientific results are verifiable. Given the low bars of existing standards in scientific practice, we beleive this project and the ideas put forward here have potential as the seed of a growing culture of scientific rigor and transparency.
+While conceptual reproduction is obviously core to the scientific method, the focus of this project will be limited to computational reproducibility. We believe that computational reproducibility is a small but necessary first step toward a world where scientific results are verifiable. Given the low bars of existing standards in scientific practice, we beleive this project and the ideas put forward here have potential as the seed of a growing culture of scientific rigor and transparency.
 
 ## Barriers to computational reproduction
 
@@ -118,7 +119,7 @@ Our project is no panacea for the problem of human error and fraud. As such, it 
 
 <!--%#md-->
 
-# Need for new software:   `reproduce.work`
+# Software: `reproduce.work`
 
 The preceding conversation highlights the need for a new paradigm for scientific computing in publishing. One that prioritizes both producers and consumers of scientific documents, with an aim specifically toward facilitating computational reproducibility. This allows us to introduce the alpha v0.0.1 version of the `reproduce.work` framework, which we do so briefly here.
 
@@ -128,7 +129,9 @@ The preceding conversation highlights the need for a new paradigm for scientific
 
 At the heart of the `reproduce.work` ecosystem is a commitment to value of structured metadata. The primary contribution of the reproduce.work standards framework is its ability to augment published scientific work with a static ledger of structured metadata that facilitates human traceability of results and computational reproducibility. This is a simple idea, but it has profound implications for the way that scientific reports are produced and published.
 
-The concept is visualized in Figure \ref{fig:comp}. In this diagram, we communicate several key aspects of the way the `reproduce.work` is envisioned to work. One key factor the software tools, starting with the `sci-dev-kit`, which facilitate  reproducible, self-documenting scientific reports. The mechanism for verifying reproducibility consists of a set of standards that can be checked and cross referenced depending on aspects of the metadata embedded in the report. 
+The concept is visualized in Figure \ref{fig:comp}. In this diagram, we communicate several key aspects of the way the `reproduce.work` is envisioned to work. One key factor the software tools, starting with the `sci-dev-kit`, which facilitate  reproducible, self-documenting scientific reports. The mechanism for verifying reproducibility consists of a set of standards that can be checked and cross referenced depending on aspects of the metadata embedded in the report.
+
+The nature of the metadata is also represented in Figure \ref{fig:tracked}, which we compare to existing paradigms for scientific development. In the current paradigm, scientific computing and publishing are separate processes that some software allow to be integrated for users; however this seemlessness makes it difficult to exactly which data is important for publication and which is incidental.  In the `tracked` model, the data and code are tracked in a way that allows for easy verification and traceability of reported scientific results with structured metadata.
 
 <!--%#latex-->
 \begin{figure}[h]
@@ -136,6 +139,24 @@ The concept is visualized in Figure \ref{fig:comp}. In this diagram, we communic
 \caption{\texttt{reproduce.work} is a set of software and standards for scientific publishing}
 \label{fig:comp}
 \includegraphics[width=.85\textwidth]{../../../../img/reproduce_is.png}
+\end{figure}
+<!--%#/latex-->
+
+
+<!--%#latex-->
+\begin{figure}[h]
+\centering
+\caption{Comparison of linear vs. tracked models of scientific development}
+\label{fig:tracked}
+\hspace{2mm}\includegraphics[width=\textwidth]{../../../../img/comp.pdf}
+\vspace{2mm}
+\begin{minipage}{0.95\textwidth}
+%\centering
+\setstretch{1}
+\footnotesize{
+\emph{Note:} The \textbf{interweave} model is one in which computation and composition happen linearly within the flow of a single document. Of course, existing paradigms can be quite flexible and allow for a variety of workflows; however, we believe most existing software follows this model. This leads to our proposal of the \textbf{tracked model with structured interfacing}. In this model, the data and code are tracked in a way that allows for easy verification and traceability of reported scientific results with structured metadata.
+}
+\end{minipage}
 \end{figure}
 <!--%#/latex-->
 
@@ -169,6 +190,7 @@ We also include dynamic results from the output of statistical code as well, whi
 
 The reproduce.work framework is designed to facilitate the production of scientific reports that are both human-readable and computationally reproducible. The framework is designed to be as simple as possible while accommodating a wide variety of scientific output. As an alpha version 0.0.1 example of this framework, the source code for this paper and the full stack containerized environment used to produce it are open source and can be found here run in any modern computing environment.
 The aim of this paper is merely to present a proof-of-concept of the `reproduce.work` framework and demonstrate its potential for developing scientific reports. We leave the development of the framework required to reach wide adoption as an open problem for version 0.0.2 and beyond.
+
 
 # Conclusion
 

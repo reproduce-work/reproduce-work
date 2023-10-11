@@ -5,7 +5,7 @@ __all__ = ['reproduce_dir', 'dev_image_tag', 'VAR_REGISTRY', 'base_config', 'pri
            'toml_dump', 'ReproduceWorkEncoder', 'validate_base_config', 'requires_config', 'construct_config',
            'generate_config', 'test_validate_base_config', 'update_watched_files', 'get_cell_index',
            'check_for_defintion_in_context', 'serialize_to_toml', 'PublishedObj', 'check_for_embedded_objects',
-           'replace_with_embedded_links', 'publish_data', 'generate_readable_key', 'publish_file', 'reproducible',
+           'replace_with_embedded_links', 'publish_data', 'generate_filepath_key', 'publish_file', 'reproducible',
            'register_notebook', 'find_pubdata_links', 'modify_links', 'process_pubdata_links']
 
 # %% ../nbs/01_core.ipynb 4
@@ -996,7 +996,7 @@ def publish_data(content, name, metadata={}, watch=True):
     data_obj.get_embedded_link()
     return data_obj
 
-def generate_readable_key(path):
+def generate_filepath_key(path):
     # Extract the filename from the path
     filename = path.split("/")[-1]
     
@@ -1029,7 +1029,7 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     base_config = read_base_config()
 
     if key is None:
-        key = generate_readable_key(filepath)
+        key = generate_filepath_key(filepath)
 
 
     embedded_objects = check_for_embedded_objects(metadata)

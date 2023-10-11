@@ -61,6 +61,17 @@ Ioannidis, J.~P. (2005).
 \newblock Why most published research findings are false.
 \newblock {\em PLoS medicine}, 2(8):e124.
 
+\bibitem[\protect\astroncite{Ioannidis
+  et~al.}{2009}]{ioannidis2009repeatability}
+Ioannidis, J.~P., Allison, D.~B., Ball, C.~A., Coulibaly, I., Cui, X., Culhane,
+  A.~C., Falchi, M., Furlanello, C., Game, L., Jurman, G., et~al. (2009).
+\newblock Repeatability of published microarray gene expression analyses.
+\newblock {\em Nature genetics}, 41(2):149--155.
+
+\bibitem[\protect\astroncite{Ioannidis et~al.}{2017}]{ioannidis2017power}
+Ioannidis, J.~P., Stanley, T.~D., and Doucouliagos, H. (2017).
+\newblock The power of bias in economics research.
+
 \bibitem[\protect\astroncite{Lindsay}{2023}]{lindsay2023plea}
 Lindsay, D.~S. (2023).
 \newblock A Plea to Psychology Professional Societies that Publish Journals:
@@ -107,5 +118,12 @@ Tenopir, C., Allard, S., Douglass, K., Aydinoglu, A.~U., Wu, L., Read, E.,
   Manoff, M., and Frame, M. (2011).
 \newblock Data sharing by scientists: practices and perceptions.
 \newblock {\em PloS one}, 6(6):e21101.
+
+\bibitem[\protect\astroncite{Tenopir et~al.}{2020}]{tenopir2020data}
+Tenopir, C., Rice, N.~M., Allard, S., Baird, L., Borycz, J., Christian, L.,
+  Grant, B., Olendorf, R., and Sandusky, R.~J. (2020).
+\newblock Data sharing, management, use, and reuse: Practices and perceptions
+  of scientists worldwide.
+\newblock {\em PloS one}, 15(3):e0229003.
 
 \end{thebibliography}
