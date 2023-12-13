@@ -372,7 +372,8 @@ def publish_data(content, name, metadata={}, watch=True):
         if isinstance(v, dict):
             #printrw('Dumping dict w/ toml')
             metadata[k] = rf'{toml_dump(v)}'
-
+    
+    metadata['value'] = f'{toml_dump(content)}'
 
     """
     if metadata.get('type', '') == 'text/latex':
