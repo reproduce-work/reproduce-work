@@ -122,7 +122,7 @@ def validate_base_config(base_config, quiet=False):
             #    if not quiet:
             #        printrw(f"Error with ╔ω config:: Missing required field 'repro.stages' in reproduce.work configuration at {reproduce_dir}/config.toml")
             #    return False
-            stages = ['init', 'build', 'develop'] #base_config['repro']['stages']
+            stages = ['build', 'develop', 'run'] #base_config['repro']['stages']
             for stage in stages:
                 if (f'repro.stage.{stage}' not in base_config) and (stage not in base_config['repro']['stage']):
                     if not quiet:
