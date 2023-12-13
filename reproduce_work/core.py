@@ -358,7 +358,6 @@ def publish_data(content, name, metadata={}, watch=True):
     else:
         metadata['published_url'] = f"{Path(reproduce_dir, 'pubdata.toml').resolve().as_posix()}".replace('/home/jovyan/', '')
 
-
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
     else:
@@ -611,11 +610,16 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
         metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{base_config['repro']['files']['dynamic']}"
         metadata['content_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{filepath}"
+    else:
+        metadata['published_url'] = f"{base_config['repro']['files']['dynamic'].resolve().as_posix()}".replace('/home/jovyan/', '')
+        metadata['content_url'] = f"{Path(filepath).resolve().as_posix()}".replace('/home/jovyan/', '')
 
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
     else:
-        metadata['generating_script'] = inspect_filepath
+        metadata['generating_script'] = inspect_filename.replace('/home/jovyan/', '')
+
+
 
     dynamic_data[key] = metadata
 
@@ -663,7 +667,7 @@ def register_notebook(notebook_name, notebook_dir=None, quiet=False):
         notebook_new_val = f"{remote_url_val}/{notebook_path}"
     else:
         remote_url_val = ''
-        notebook_new_val = Path(notebook_path).resolve().as_posix()
+        notebook_new_val = Path(notebook_path).resolve().as_posix().replace('/home/jovyan/', '')
     
     if VAR_REGISTRY['REPROWORK_REMOTE_URL'] is None:
         printrw(f"Registered notebook {notebook_new_val} in {reproduce_dir}/config.toml")
