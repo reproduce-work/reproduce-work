@@ -660,8 +660,8 @@ def register_notebook(notebook_name, notebook_dir=None, quiet=False):
     notebook_path = notebook_dir + '/' + notebook_name
 
     
-    if 'github_repo' in base_config['project']:
-        remote_url_val = f"https://github.com/{base_config['project']['github_repo']}/blob/main"
+    if 'repository' in base_config['project']:
+        remote_url_val = f"{base_config['project']['repository']}/blob/main"
         notebook_new_val = f"{remote_url_val}/{notebook_path}"
     else:
         remote_url_val = ''
