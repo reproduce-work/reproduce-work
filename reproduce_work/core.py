@@ -115,11 +115,12 @@ def validate_base_config(base_config, quiet=False):
                 printrw(f"Error with ╔ω config: Missing required field '{key}' in config.toml")
             return False
         if key=='repro':
-            if 'stages' not in base_config['repro']:
-                if not quiet:
-                    printrw(f"Error with ╔ω config:: Missing required field 'repro.stages' in reproduce.work configuration at {reproduce_dir}/config.toml")
-                return False
-            for stage in base_config['repro']['stages']:
+            #if 'stages' not in base_config['repro']:
+            #    if not quiet:
+            #        printrw(f"Error with ╔ω config:: Missing required field 'repro.stages' in reproduce.work configuration at {reproduce_dir}/config.toml")
+            #    return False
+            stages = ['init', 'build', 'develop'] #base_config['repro']['stages']
+            for stage in stages:
                 if (f'repro.stage.{stage}' not in base_config) and (stage not in base_config['repro']['stage']):
                     if not quiet:
                         (toml.dumps(base_config, encoder=ReproduceWorkEncoder()))
@@ -712,10 +713,12 @@ def register_notebook(notebook_name, notebook_dir=None, quiet=False):
 
     notebook_path = notebook_dir + '/' + notebook_name
 
+    
     if 'github_repo' in base_config['project']:
         remote_url_val = f"https://github.com/{base_config['project']['github_repo']}/blob/main"
         notebook_new_val = f"{remote_url_val}/{notebook_path}"
     else:
+        remote_url_val = ''
         notebook_new_val = Path(notebook_path).resolve().as_posix()
     
     if VAR_REGISTRY['REPROWORK_REMOTE_URL'] is None:
