@@ -1,3 +1,16 @@
+<!-- Add citations:
+ - https://www.nature.com/articles/s42256-023-00726-1 
+ - https://link.springer.com/article/10.1140/epjc/s10052-023-11885-1
+ - https://www.sciencedirect.com/science/article/pii/S0749596X22000195?via%3Dihub
+ - https://journals.sagepub.com/doi/full/10.1177/09567976221140828
+ - https://statmodeling.stat.columbia.edu/2023/10/29/simulations-of-measurement-error-and-the-replication-crisis-maybe-loken-and-i-have-a-mistake-in-our-paper/
+ - https://twitter.com/lakens/status/1719019062565482715
+ - Relevant parties:
+  - Gwern
+  - Gelman
+  - Lakens
+-->
+
 # Introduction
 
 An increasing number of scientists across various disciplines are calling for heightened standards of reproducibility in published work   \citep{lindsay2023plea,mcnutt2014}. From biomedical research and computer science to management, psychology, and economics, the scientific community is grappling with the challenges of ensuring that published scientific work is verifiable and trustworthy \citep{cancer2021Reproducibility,christensen2018transparency,hutson2018artificial,davis2023replication}.  Several scholars have described the current state of affairs as an epistemological "crisis" in the core of science  \citep{dreber2019statistical,dougherty2008epistemological,earp2015replication,gelman2016statistical}. 
@@ -6,8 +19,6 @@ In its most dramatic form, high profile accusations of data fabrication have led
 A more mundane but pervasive manifestation of epistemological precarity is the fact that most scientific papers are not reproducible to even the lowest degree \citep{gomes2022don,tenopir2020data}. A low percentage of published papers claim to share their data and code; of those that do, many fail to follow through or even respond to inquiries \citep{tenopir2011data}. Even when good faith efforts are made to share data and code, the vagaries of software development and the complexity of scientific code make it difficult to reproduce results across time, space, and computing environments.
 Unfortunately for the incentives of honest scientists, \cite{serragarciagneezy2021} find that nonreplicable publications are cited about twice as much as replicable ones. The problem is exacerbated by the fact that many scientists do not understand the nature of statistical inference and human's innate tendency to search for patterns in data \citep{gelman2016statistical,ioannidis2009repeatability}.
 The low bar for publication in many scientific journals, has resulted in a literature that is rife with false positives and irreproducible results \citep{ioannidis2005most,ioannidis2017power}.
-
-
 
 In metascience, computational reproduction is the process of reproducing the results of a scientific paper using the data and code provided by the authors of the paper. This subject sits within the broader context of "reproducibility" in scientific  research, which is the idea that scientific results should be reproducible by other scientists (or anyone interested, for that matter). Concepts around reproducibility have been core to the philosophy of science for decades, but several aspects of the scientific method have been challenged by recent developments. On top of the outright fraud and misconduct that is apparently common, there are more subtle forms research malpractice and human error that are known to pervade the published scientific literature as well, in the form of selective publication and $p$-hacking described above. On top of all this, the complexity of scientific code and restrictiveness of many data sharing agreements means that most published scientific results are not reproducible to even the lowest degree. 
 Among those concerned about reproducibility on all fronts, this has led to a call for heightened standards of reproducibility in scientific research. 

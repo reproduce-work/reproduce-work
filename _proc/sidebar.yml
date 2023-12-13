@@ -1,8 +1,0 @@
-website:
-  sidebar:
-    contents:
-      - index.ipynb
-      - 00_introduction.ipynb
-      - 01_core.ipynb
-      - 02_standards.ipynb
-      - 03_paper.ipynb
