@@ -611,15 +611,13 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
         metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{base_config['repro']['files']['dynamic']}"
         metadata['content_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{filepath}"
     else:
-        metadata['published_url'] = f"{base_config['repro']['files']['dynamic'].resolve().as_posix()}".replace('/home/jovyan/', '')
-        metadata['content_url'] = f"{Path(filepath).resolve().as_posix()}".replace('/home/jovyan/', '')
+        metadata['published_url'] = base_config['repro']['files']['dynamic']
+        metadata['content_url'] = filepath
 
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
     else:
         metadata['generating_script'] = inspect_filename.replace('/home/jovyan/', '')
-
-
 
     dynamic_data[key] = metadata
 
