@@ -177,7 +177,7 @@ def update_watched_files(add=[], remove=[], quiet=False):
         with open(Path(reproduce_dir, 'config.toml'), 'w') as f:
             toml.dump(base_config, f, encoder=ReproduceWorkEncoder())
             
-        if base_config['repro']['verbose'] and not quiet:
+        if base_config['repro'].get('verbose', False) and not quiet:
             printrw(f"Updated watched files to {new_files}")
 
     return new_files
@@ -480,7 +480,7 @@ def publish_data(content, name, metadata={}, watch=True):
         with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
             toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
         
-        if base_config['repro']['verbose']:
+        if base_config['repro'].get('verbose', False):
             if len(which_changed)>1:
                 printrw(f"Updated {which_changed} in {base_config['repro']['files']['dynamic']}")
             else:
