@@ -355,11 +355,14 @@ def publish_data(content, name, metadata={}, watch=True):
     }
     if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
         metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/pubdata.toml"
+    else:
+        metadata['published_url'] = f"{Path(reproduce_dir, 'pubdata.toml').resolve().as_posix()}".replace('/home/jovyan/', '')
+
 
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
     else:
-        metadata['generating_script'] = inspect_filename
+        metadata['generating_script'] = inspect_filename.replace('/home/jovyan/', '')
 
 
     base_config = read_base_config()
