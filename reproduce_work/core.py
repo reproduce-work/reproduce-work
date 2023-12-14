@@ -151,7 +151,12 @@ def requires_config(func):
         if not validate_base_config(config):
             raise Exception("Your reproduce.work configuration is not valid.")
         if func.__name__ in ["publish_data","publish_file"] and VAR_REGISTRY['REPROWORK_REMOTE_URL'] is None:
-            raise Exception(f"register_notebook('code/<path to this notebook>.ipynb') to use this function: {func.__name__}")
+            msg = (
+                "When using publish_data or publish_file, you must first run register_notebook('code/<path to this notebook>.ipynb')" +
+                "to register this session with reproduce.work. If you have multiple notebooks open simultaneously, keep in mind that" +
+                "only the most recently registered notebook will be used as the generating script for any data published with publish_data or publish_file."
+            )
+            raise Exception(msg)
         return func(*args, **kwargs)
     return wrapper
 
@@ -327,7 +332,7 @@ def replace_with_embedded_links(obj):
 
 
 @requires_config
-def publish_data(content, name, metadata={}, watch=True):
+def publish_data(content, name, metadata={}, watch=True, force=False):
     """
     Save data to default pubdata.toml file and register metadata.
     # publishing the exact same data twice will NOT update the pubdata.toml file
@@ -489,18 +494,28 @@ def publish_data(content, name, metadata={}, watch=True):
     if value_changed:
         which_changed = value_changed + which_changed
         
-    if value_changed or non_timefield_changed:
+    if value_changed or non_timefield_changed or force:
         with open(pubdata_fullpath, 'w') as file:
             toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
+
+        print(f'Published data in {pubdata_relpath}')
+        print('    generating_script: ' + data_obj.metadata['generating_script'])
+        print('    timed_hash: ' + data_obj.metadata['timed_hash'])
         
-        if base_config['repro'].get('verbose', False):
-            if len(which_changed)>1:
-                printrw(f"Updated {which_changed} in {pubdata_relpath}")
-            else:
-                printrw(f"Updated {which_changed[0]} in {pubdata_relpath}")
+        #if base_config['repro'].get('verbose', False):
+        #    if len(which_changed)>1:
+        #        printrw(f"Updated {which_changed} in {pubdata_relpath}")
+        #    else:
+        #        printrw(f"Updated {which_changed[0]} in {pubdata_relpath}")
+
+    else:
+        print(f'Data already published in {pubdata_relpath} and value unchanged; use force=True to overwrite.')
+        print('    generating_script: ' + data_obj.metadata['generating_script'])
+        print('    timed_hash: ' + data_obj.metadata['timed_hash'])
 
     data_obj = PublishedObj(name, metadata)
     data_obj.get_embedded_link()
+
     return data_obj
 
 def generate_filepath_key(path):
@@ -639,11 +654,16 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     with open(pubdata_fullpath, 'w') as file:
         toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
 
-    if 'verbosity' in base_config['repro'] and base_config['repro']['verbose']:
-        printrw(f"Added metadata for file {filepath} to dynamic file {pubdata_relpath}")
+    #if 'verbosity' in base_config['repro'] and base_config['repro']['verbose']:
+    #    printrw(f"Added metadata for file {filepath} to dynamic file {pubdata_relpath}")
 
     data_obj = PublishedObj(key, metadata=metadata, filepath=filepath)
     data_obj.get_embedded_link()
+
+    print(f'Published metadata for file in {pubdata_relpath}')
+    print('    generating_script: ' + data_obj.metadata['generating_script'])
+    print('    timed_hash: ' + data_obj.metadata['timed_hash'])
+
     return data_obj
 
 
@@ -656,22 +676,6 @@ def register_notebook(notebook_path, notebook_dir=None, quiet=False):
     
     base_config = read_base_config()
     project_path = find_project_path()
-    
-    #if notebook_dir is None:
-    #    if 'files' in base_config['repro']:
-    #        if 'code_dir' in base_config['repro']['files']:
-    #            notebook_dir = base_config['repro']['files']['code_dir']
-    #        else:
-    #            notebook_dir = 'code'
-
-    # ensure notebook path exists
-    #if notebook_dir not in os.listdir(project_path):
-    #    raise Exception(f"Error: Notebook dir '{notebook_dir}' does not exist.")
-
-    #if notebook_name not in os.listdir(notebook_dir):
-    #    raise Exception(f"Error: Notebook '{notebook_name}' does not exist in '{notebook_dir}'. Ensure the notebook you are trying to register is in the '{notebook_dir}' directory and you are using the exact filename of your current notebook.")
-
-    #notebook_path = notebook_dir + '/' + notebook_name
 
     if not (project_path / notebook_path).exists():
         raise Exception(f"Error: Notebook '{notebook_path}' does not exist. Ensure the notebook you are trying to register is in the '{project_path}' directory and you are using the exact path to the current notebook.")
@@ -694,7 +698,11 @@ def register_notebook(notebook_path, notebook_dir=None, quiet=False):
         printrw(f"Warning: Notebook {VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']} is already registered. Overwriting with {notebook_new_val}")
     VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK'] = notebook_new_val
     
-    update_watched_files(add=[notebook_path], quiet=True)
+    #update_watched_files(add=[notebook_path], quiet=True)
+    if 'registered' not in base_config['repro']['files']:
+        base_config['repro']['files']['registered'] = [notebook_path]
+    elif notebook_path not in base_config['repro']['files']['registered']:
+        base_config['repro']['files']['registered'].append(notebook_path)
     
 
 
