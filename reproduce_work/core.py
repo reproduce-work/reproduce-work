@@ -64,11 +64,21 @@ reproduce_dir = os.getenv("REPROWORKDIR", set_default_dir(quiet=False))
 
 
 def read_base_config():
-    # current hack to pass tests in CI environment
-    if Path(os.getcwd()).name == 'nbs':
-        os.chdir('..')
+
+    current_dir = Path().resolve()
+
+    config_loc = None
+    for parent_dir in current_dir.parents:
+        config_file = parent_dir / reproduce_dir / 'config.toml'
+        if config_file.is_file():
+            config_loc = config_file
+            break
+
+    if not config_loc:
+        raise Exception(f"Could not find config.toml in any parent directory of {current_dir}; ensure you have run `rw init` in the root of your project and that you are running this command from within your project directory.")
     
-    with open(Path(reproduce_dir, 'config.toml'), 'r') as f:
+    
+    with open(config_loc, 'r') as f:
         base_config = toml.load(f)
     return base_config
 
