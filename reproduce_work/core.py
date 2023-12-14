@@ -493,6 +493,10 @@ def publish_data(content, name, metadata={}, watch=True, force=False):
 
     if value_changed:
         which_changed = value_changed + which_changed
+
+
+    data_obj = PublishedObj(name, metadata)
+    data_obj.get_embedded_link()
         
     if value_changed or non_timefield_changed or force:
         with open(pubdata_fullpath, 'w') as file:
@@ -512,9 +516,6 @@ def publish_data(content, name, metadata={}, watch=True, force=False):
         print(f'Data already published in {pubdata_relpath} and value unchanged; use force=True to overwrite.')
         print('    generating_script: ' + data_obj.metadata['generating_script'])
         print('    timed_hash: ' + data_obj.metadata['timed_hash'])
-
-    data_obj = PublishedObj(name, metadata)
-    data_obj.get_embedded_link()
 
     return data_obj
 
