@@ -230,10 +230,11 @@ class PublishedObj:
         return self.value
 
     def load_file_content(self):
+        project_path = find_project_path()
         # Check if file exists
-        if os.path.exists(self.filepath):
+        if (project_path / self.filepath).exists():
             try:
-                with open(self.filepath, 'rb') as f:
+                with open(project_path / self.filepath, 'rb') as f:
                     self._content = f.read()
             except Exception as e:
                 raise Exception(f"Error reading file: {e}")
@@ -509,9 +510,6 @@ def publish_data(content, name, metadata={}, watch=True, force=False):
         print(f'Published data in {pubdata_relpath}')
         print('    generating_script: ' + data_obj.metadata['generating_script'])
         print('    timed_hash: ' + data_obj.metadata['timed_hash'])
-        if len(which_changed)>0:
-            print('    Fields changed: ' + ', '.join([f'"{f}"' for f in which_changed]))
-        
 
         #if base_config['repro'].get('verbose', False):
         #    if len(which_changed)>1:
@@ -523,6 +521,8 @@ def publish_data(content, name, metadata={}, watch=True, force=False):
         print(f'Data already published in {pubdata_relpath} and value unchanged; use force=True to overwrite.')
         print('    generating_script: ' + data_obj.metadata['generating_script'])
         print('    timed_hash: ' + data_obj.metadata['timed_hash'])
+
+    process_pubdata_links(verbose=False)
 
     return data_obj
 
@@ -629,10 +629,10 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
         #"save_context": save_context,
         #"definition_context": definition_context
     }
-    cell_index = get_cell_index()
-    if cell_index:
-        new_metadata["cell_index"] = cell_index
-        
+    #cell_index = get_cell_index()
+    #if cell_index:
+    #    new_metadata["cell_index"] = cell_index
+    
     metadata.update(new_metadata)
 
     if watch:
@@ -675,6 +675,8 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     print(f'Published metadata for file in {pubdata_relpath}')
     print('    generating_script: ' + data_obj.metadata['generating_script'])
     print('    timed_hash: ' + data_obj.metadata['timed_hash'])
+
+    process_pubdata_links(verbose=False)
 
     return data_obj
 
@@ -721,9 +723,11 @@ def register_notebook(notebook_path, notebook_dir=None, quiet=False):
 
 # %% ../nbs/01_core.ipynb 12
 def find_pubdata_links():
+    project_path = find_project_path()
     base_config = read_base_config()
     dynamic_file = base_config['repro']['files']['dynamic']
-    with open(dynamic_file, 'r') as f:
+
+    with open(project_path / dynamic_file, 'r') as f:
         content = f.read()
     
     # Adjusted pattern to capture optional #hash
