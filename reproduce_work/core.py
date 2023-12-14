@@ -115,21 +115,17 @@ def validate_base_config(base_config, quiet=False):
         if key not in base_config:
             #printrw(toml.dumps(base_config))
             if not quiet:
-                printrw(f"Error with ╔ω config: Missing required field '{key}' in config.toml")
+                raise Exception(f"Error with ╔ω config: Missing required field '{key}' in config.toml")
             return False
         if key=='repro':
-            #if 'stages' not in base_config['repro']:
-            #    if not quiet:
-            #        printrw(f"Error with ╔ω config:: Missing required field 'repro.stages' in reproduce.work configuration at {reproduce_dir}/config.toml")
-            #    return False
-            stages = ['init', 'build', 'develop'] #base_config['repro']['stages']
+            stages = ['build', 'develop', 'run'] #base_config['repro']['stages']
             for stage in stages:
                 if (f'repro.stage.{stage}' not in base_config) and (stage not in base_config['repro']['stage']):
                     if not quiet:
                         (toml.dumps(base_config, encoder=ReproduceWorkEncoder()))
-                    printrw(f"Error with ╔ω config:: Missing required field repro.stage.{stage} in reproduce.work configuration at {reproduce_dir}/config.toml")
-                    return False
+                    raise Exception(f"Error with ╔ω config:: Missing required field repro.stage.{stage} in reproduce.work configuration at {reproduce_dir}/config.toml")
     return True
+
 
 def requires_config(func):
     def wrapper(*args, **kwargs):
@@ -177,7 +173,7 @@ def update_watched_files(add=[], remove=[], quiet=False):
         with open(Path(reproduce_dir, 'config.toml'), 'w') as f:
             toml.dump(base_config, f, encoder=ReproduceWorkEncoder())
             
-        if base_config['repro']['verbose'] and not quiet:
+        if base_config['repro'].get('verbose', False) and not quiet:
             printrw(f"Updated watched files to {new_files}")
 
     return new_files
@@ -355,11 +351,13 @@ def publish_data(content, name, metadata={}, watch=True):
     }
     if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
         metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{reproduce_dir}/pubdata.toml"
+    else:
+        metadata['published_url'] = f"{Path(reproduce_dir, 'pubdata.toml').resolve().as_posix()}".replace('/home/jovyan/', '')
 
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
     else:
-        metadata['generating_script'] = inspect_filename
+        metadata['generating_script'] = inspect_filename.replace('/home/jovyan/', '')
 
 
     base_config = read_base_config()
@@ -369,7 +367,8 @@ def publish_data(content, name, metadata={}, watch=True):
         if isinstance(v, dict):
             #printrw('Dumping dict w/ toml')
             metadata[k] = rf'{toml_dump(v)}'
-
+    
+    metadata['value'] = f'{toml_dump(content)}'
 
     """
     if metadata.get('type', '') == 'text/latex':
@@ -480,7 +479,7 @@ def publish_data(content, name, metadata={}, watch=True):
         with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
             toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
         
-        if base_config['repro']['verbose']:
+        if base_config['repro'].get('verbose', False):
             if len(which_changed)>1:
                 printrw(f"Updated {which_changed} in {base_config['repro']['files']['dynamic']}")
             else:
@@ -607,11 +606,14 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
         metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{base_config['repro']['files']['dynamic']}"
         metadata['content_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{filepath}"
+    else:
+        metadata['published_url'] = base_config['repro']['files']['dynamic']
+        metadata['content_url'] = filepath
 
     if VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']:
         metadata['generating_script'] = VAR_REGISTRY['REPROWORK_ACTIVE_NOTEBOOK']
     else:
-        metadata['generating_script'] = inspect_filepath
+        metadata['generating_script'] = inspect_filename.replace('/home/jovyan/', '')
 
     dynamic_data[key] = metadata
 
@@ -654,12 +656,12 @@ def register_notebook(notebook_name, notebook_dir=None, quiet=False):
     notebook_path = notebook_dir + '/' + notebook_name
 
     
-    if 'github_repo' in base_config['project']:
-        remote_url_val = f"https://github.com/{base_config['project']['github_repo']}/blob/main"
+    if 'repository' in base_config['project']:
+        remote_url_val = f"{base_config['project']['repository']}/blob/main"
         notebook_new_val = f"{remote_url_val}/{notebook_path}"
     else:
         remote_url_val = ''
-        notebook_new_val = Path(notebook_path).resolve().as_posix()
+        notebook_new_val = Path(notebook_path).resolve().as_posix().replace('/home/jovyan/', '')
     
     if VAR_REGISTRY['REPROWORK_REMOTE_URL'] is None:
         printrw(f"Registered notebook {notebook_new_val} in {reproduce_dir}/config.toml")
