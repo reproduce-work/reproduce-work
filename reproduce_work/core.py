@@ -333,6 +333,8 @@ def publish_data(content, name, metadata={}, watch=True):
     # publishing the exact same data twice will NOT update the pubdata.toml file
     """
     base_config = read_base_config()
+    pubdata_relpath = Path(base_config['repro']['files']['dynamic'])
+    pubdata_fullpath = find_project_path() / pubdata_relpath
 
     # handle any embedded objects:
     # recurse through metadata and find any objects that are of type PublishedObj
@@ -372,8 +374,6 @@ def publish_data(content, name, metadata={}, watch=True):
     else:
         metadata['generating_script'] = inspect_filename.replace('/home/jovyan/', '')
 
-
-    base_config = read_base_config()
     metadata.update(new_metadata)
 
     for k,v in metadata.items():
@@ -398,12 +398,13 @@ def publish_data(content, name, metadata={}, watch=True):
         update_watched_files(add=[Path(reproduce_dir, 'pubdata.toml').resolve().as_posix().replace('/home/jovyan/', '')])
 
     # check if dynamic file exists
-    if not os.path.exists(Path(base_config['repro']['files']['dynamic'])):
-        with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+    if not os.path.exists(pubdata_fullpath):
+        with open(pubdata_fullpath, 'w') as file:
             file.write(toml.dumps({}))
-
-    with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
-        existing_dynamic_data = toml.load(file)
+        existing_dynamic_data = {}
+    else:
+        with open(pubdata_fullpath, 'r') as file:
+            existing_dynamic_data = toml.load(file)
         
     dynamic_data = existing_dynamic_data.copy()
     dynamic_data[name] = metadata
@@ -489,14 +490,14 @@ def publish_data(content, name, metadata={}, watch=True):
         which_changed = value_changed + which_changed
         
     if value_changed or non_timefield_changed:
-        with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+        with open(pubdata_fullpath, 'w') as file:
             toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
         
         if base_config['repro'].get('verbose', False):
             if len(which_changed)>1:
-                printrw(f"Updated {which_changed} in {base_config['repro']['files']['dynamic']}")
+                printrw(f"Updated {which_changed} in {pubdata_relpath}")
             else:
-                printrw(f"Updated {which_changed[0]} in {base_config['repro']['files']['dynamic']}")
+                printrw(f"Updated {which_changed[0]} in {pubdata_relpath}")
 
     data_obj = PublishedObj(name, metadata)
     data_obj.get_embedded_link()
@@ -547,6 +548,8 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
         metadata = {}
     
     base_config = read_base_config()
+    pubdata_relpath = Path(base_config['repro']['files']['dynamic'])
+    pubdata_fullpath = find_project_path() / pubdata_relpath
 
     if key is None:
         key = generate_filepath_key(filepath)
@@ -609,15 +612,16 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
         update_watched_files(add=[filepath])
 
     # check if dynamic file exists
-    if not os.path.exists(Path(base_config['repro']['files']['dynamic'])):
-        with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
-            file.write(toml.dumps({}))
-
-    with open(Path(base_config['repro']['files']['dynamic']), 'r') as file:
-        dynamic_data = toml.load(file)
+    if not os.path.exists(pubdata_fullpath):
+        with open(Path(pubdata_fullpath), 'w') as file:
+            dynamic_data = {}
+            file.write(toml.dumps(dynamic_data))
+    else:
+        with open(pubdata_fullpath, 'r') as file:
+            dynamic_data = toml.load(file)
 
     if VAR_REGISTRY['REPROWORK_REMOTE_URL']:
-        metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{base_config['repro']['files']['dynamic']}"
+        metadata['published_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{pubdata_relpath}"
         metadata['content_url'] = f"{VAR_REGISTRY['REPROWORK_REMOTE_URL']}/{filepath}"
     else:
         metadata['published_url'] = base_config['repro']['files']['dynamic']
@@ -632,11 +636,11 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
 
     #printrw(dynamic_data)
 
-    with open(Path(base_config['repro']['files']['dynamic']), 'w') as file:
+    with open(pubdata_fullpath, 'w') as file:
         toml.dump(dynamic_data, file, encoder=ReproduceWorkEncoder())
 
     if 'verbosity' in base_config['repro'] and base_config['repro']['verbose']:
-        printrw(f"Added metadata for file {filepath} to dynamic file {base_config['repro']['files']['dynamic']}")
+        printrw(f"Added metadata for file {filepath} to dynamic file {pubdata_relpath}")
 
     data_obj = PublishedObj(key, metadata=metadata, filepath=filepath)
     data_obj.get_embedded_link()
@@ -776,7 +780,8 @@ def find_pubdata_links():
 def modify_links(linenum, link_str, newlink):
 
     base_config = read_base_config()
-    pubdata_loc = Path(base_config['repro']['files']['dynamic'])
+    pubdata_filename = Path(base_config['repro']['files']['dynamic'])
+    pubdata_loc = find_project_path() / pubdata_filename
 
     with open(pubdata_loc, 'r') as f:
         content = f.read()
