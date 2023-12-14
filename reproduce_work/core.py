@@ -71,7 +71,7 @@ def find_project_path():
             project_path = parent_dir
             break
 
-    if not config_loc:
+    if not project_path:
         raise Exception(f"Could not find config.toml in any parent directory of {current_dir}; ensure you have run `rw init` in the root of your project and that you are running this command from within your project directory.")
     
     return project_path
