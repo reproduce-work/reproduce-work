@@ -505,7 +505,10 @@ def publish_data(content, name, metadata={}, watch=True, force=False):
         print(f'Published data in {pubdata_relpath}')
         print('    generating_script: ' + data_obj.metadata['generating_script'])
         print('    timed_hash: ' + data_obj.metadata['timed_hash'])
+        if len(which_changed)>0:
+            print('    Fields changed: ' + ', '.join([f'"{f}"' for f in which_changed]))
         
+
         #if base_config['repro'].get('verbose', False):
         #    if len(which_changed)>1:
         #        printrw(f"Updated {which_changed} in {pubdata_relpath}")
@@ -563,9 +566,10 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     if metadata is None:
         metadata = {}
     
+    project_path = find_project_path()
     base_config = read_base_config()
     pubdata_relpath = Path(base_config['repro']['files']['dynamic'])
-    pubdata_fullpath = find_project_path() / pubdata_relpath
+    pubdata_fullpath = project_path / pubdata_relpath
 
     if key is None:
         key = generate_filepath_key(filepath)
@@ -597,8 +601,11 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     platform_info = platform.platform()
 
     # generate cryptographic hash of file contents
-
-    with open(filepath, 'rb') as file:
+    file_fullpath = project_path / filepath
+    if not file_fullpath.exists():
+        raise Exception(f'Could not find file {filepath}; ensure the file you are trying to publish is in the {project_path} directory and you are using the exact path from this location to the saved file.')
+    
+    with open(file_fullpath, 'rb') as file:
         content = file.read()
 
     content_hash = hashlib.md5(content).hexdigest()
