@@ -50,14 +50,15 @@ def printrw(*args, **kwargs):
 
   
 
-def set_default_dir(quiet=True):
+def set_default_dir():
     if not os.getenv("REPROWORKDIR", False):
-        dir = Path("./reproduce")
+        dir_ = Path("./reproduce")
     else:
-        dir = os.getenv("REPROWORKDIR")
-    return dir
+        dir_ = os.getenv("REPROWORKDIR")
+    return dir_
                 
-reproduce_dir = os.getenv("REPROWORKDIR", set_default_dir(quiet=False))
+reproduce_dir = set_default_dir()
+printrw(f'Setting reproduce.work config dir to {reproduce_dir}')
 
 def find_project_path():
     current_dir = Path().resolve()
@@ -76,7 +77,6 @@ def find_project_path():
 
 
 project_path = find_project_path()
-printrw(f'Setting reproduce.work config dir to {dir} within project {project_path}')
 
 
 
