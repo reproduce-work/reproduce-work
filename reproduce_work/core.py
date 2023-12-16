@@ -282,7 +282,7 @@ def check_for_embedded_objects(metadata, current_path=None, existing_results=Non
             # If item is an instance of PublishedObj, process it
             elif isinstance(item, PublishedObj):
                 key = ".".join(new_path)
-                # Process as per your original logic
+                # Process as per original logic
                 keys = key.split('.')
                 current_result = result
                 for k in keys[:-1]:
@@ -522,6 +522,7 @@ def publish_data(content, name, metadata={}, watch=True, force=False):
         print('    timed_hash: ' + data_obj.metadata['timed_hash'])
 
     process_pubdata_links(verbose=False)
+    process_pubdata_links(verbose=False)
 
     return data_obj
 
@@ -676,7 +677,8 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     print('    timed_hash: ' + data_obj.metadata['timed_hash'])
 
     process_pubdata_links(verbose=False)
-
+    process_pubdata_links(verbose=False)
+    
     return data_obj
 
 
