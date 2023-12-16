@@ -48,7 +48,6 @@ def printrw(*args, **kwargs):
     print(*args, **kwargs, flush=True)
 
 
-  
 
 def set_default_dir():
     if not os.getenv("REPROWORKDIR", False):
@@ -64,10 +63,10 @@ def find_project_path():
     current_dir = Path().resolve()
 
     project_path = None
-    for parent_dir in current_dir.parents:
-        config_file = parent_dir / reproduce_dir / 'config.toml'
+    for directory in [current_dir] + list(current_dir.parents):
+        config_file = directory / reproduce_dir / 'config.toml'
         if config_file.is_file():
-            project_path = parent_dir
+            project_path = directory
             break
 
     if not project_path:
@@ -607,7 +606,7 @@ def publish_file(filepath, key=None, metadata={}, watch=True):
     # generate cryptographic hash of file contents
     file_fullpath = project_path / filepath
     if not file_fullpath.exists():
-        raise Exception(f'Could not find file {filepath}; ensure the file you are trying to publish is in the {project_path} directory and you are using the exact path from this location to the saved file.')
+        raise Exception(f"Could not find file {filepath}; ensure the file is in your project's directory and you are using the exact path from the project root to the saved file.")
     
     with open(file_fullpath, 'rb') as file:
         content = file.read()
@@ -692,7 +691,7 @@ def register_notebook(notebook_path, notebook_dir=None, quiet=False):
     project_path = find_project_path()
 
     if not (project_path / notebook_path).exists():
-        raise Exception(f"Error: Notebook '{notebook_path}' does not exist. Ensure the notebook you are trying to register is in the '{project_path}' directory and you are using the exact path to the current notebook.")
+        raise Exception(f"Error: Notebook '{notebook_path}' does not exist. Ensure the notebook you are trying to register is in your project's directory and you are using the exact path to the current notebook (relative to your project's root fodler).")
     
     if 'repository' in base_config['project']:
         remote_url_val = f"{base_config['project']['repository']}/blob/main"
