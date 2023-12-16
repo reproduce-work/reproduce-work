@@ -845,7 +845,7 @@ def process_pubdata_links(verbose=False):
     publinks = find_pubdata_links()
     pldf = pd.DataFrame(publinks)
 
-    pldf_og = pldf.copy
+    pldf_og = pldf.copy()
 
     # iterate through find the self-referenential links first,
     # i.e., those for which the "variable" of the link is "published_url"
