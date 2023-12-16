@@ -134,7 +134,7 @@ def validate_base_config(base_config, quiet=False):
                 raise Exception(f"Error with ╔ω config: Missing required field '{key}' in config.toml")
             return False
         if key=='repro':
-            stages = ['build', 'develop', 'run'] #base_config['repro']['stages']
+            stages = ['build', 'develop', 'assemble'] #base_config['repro']['stages']
             for stage in stages:
                 if (f'repro.stage.{stage}' not in base_config) and (stage not in base_config['repro']['stage']):
                     if not quiet:
